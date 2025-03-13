@@ -92,6 +92,8 @@ Route::post('/updatecommunity/{community_name}', [CommunityController::class, 'u
 Route::post('/community/join/{community_name}', [CommunityController::class, 'joinCommunity'])->name('join.community');
 
 Route::post('/community/leave/{community_name}', [CommunityController::class, 'leaveCommunity'])->name('leave.community');
+
+
 /*-------------*\
   #USER
 \*--------------*/
