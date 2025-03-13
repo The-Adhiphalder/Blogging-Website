@@ -1548,9 +1548,9 @@ transition: all 0.3s ease;
 
 .username p{
   margin-left: 7px;
-  margin-top: -4px;
+  /* margin-top: -4px; */
   font-size: 12px;
-  padding-top: 2.5px;
+  padding-top: 3.5px;
 }
 
 .username a {
