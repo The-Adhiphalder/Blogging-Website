@@ -347,17 +347,21 @@
                     @endif
                 </form> --}}
 
-                <form action="{{ route('join.community', ['community_name' => $community->community_name]) }}" method="POST">
-                    @csrf
-                    @if($isMember)
-                        <form id="leave-form-{{ $community->community_name }}" action="{{ route('leave.community', ['community_name' => $community->community_name]) }}" method="POST" class="leave-form">
-                            @csrf
-                            <button type="button" class="joined" onclick="leaveCommunity('{{ $community->community_name }}')"><span>Joined</span></button>
-                        </form>
-                    @else
+
+                @if($isMember)
+                    <form id="leave-form-{{ $community->community_name }}" action="{{ route('leave.community', ['community_name' => $community->community_name]) }}" method="POST" class="leave-form">
+                        @csrf
+                        <button type="button" class="joined" onclick="leaveCommunity('{{ $community->community_name }}')">
+                            <span>Joined</span>
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('join.community', ['community_name' => $community->community_name]) }}" method="POST">
+                        @csrf
                         <button type="submit" class="join"><span>Join</span></button>
-                    @endif
-                </form>
+                    </form>
+                @endif
+
                 
             </div>
 
@@ -1283,15 +1287,17 @@
                 <!-- <h3 class="stats">PROFILE STATS</h3> -->
                 <div>
                     <span>Members</span>
-                    <span>300</span>
+                    {{-- <span>300</span> --}}
+                    <span>{{ $totalMembers }}</span>
                 </div>
                 <div>
                     <span>Posts</span>
-                    <span>50</span>
+                    {{-- <span>50</span> --}}
+                    <span>{{ $totalPosts }}</span>
                 </div>
                 <div>
                     <span>Active</span>
-                    <span>120</span>
+                    <span>0</span>
                 </div>
             </div>
 

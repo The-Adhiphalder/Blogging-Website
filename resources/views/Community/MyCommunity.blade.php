@@ -1855,7 +1855,8 @@
                 <!-- <h3 class="stats">PROFILE STATS</h3> -->
                 <div>
                     <span>Members</span>
-                    <span>300</span>
+                    {{-- <span>300</span> --}}
+                    <span>{{ $totalMembers }}</span>
                 </div>
                 <div>
                     <span>Posts</span>

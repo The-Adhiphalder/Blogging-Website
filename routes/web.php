@@ -12,6 +12,7 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Join; 
+use App\Models\Follow;
 
 
 
@@ -128,3 +129,5 @@ Route::get('/users/{userId}/likes', [UserController::class, 'getUserLikes']);
 Route::get('/viewmember', [UserController::class, 'viewmember']);
 
 Route::get('/viewmembercom', [UserController::class, 'viewmembercom']);
+
+Route::post('/follow/{user_id}', [UserController::class, 'follow'])->name('follow');

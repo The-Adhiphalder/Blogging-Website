@@ -356,7 +356,7 @@
                     </li>
                     
                 </ul>
-                    
+                   
             </div>
 
             <a href="/create">
@@ -394,13 +394,30 @@
                                     <span class="username-hover">{{ session('user')->user_name }}</span>
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     {{-- <span class="username-hover"> | Community Name</span> --}}
-                                    @if($post->community_id) 
+
+
+                                    {{-- @if($post->community_id) 
                                         @php
                                             $community = \App\Models\Communities::find($post->community_id);
                                         @endphp
                                         <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
                                             <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
                                         </a>
+                                    @endif --}}
+
+                                    @if($post->community_id) 
+                                        @php
+                                            $community = \App\Models\Communities::find($post->community_id);
+                                        @endphp
+                                        @if($community && $community->user_id == session('user_id'))
+                                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                            </a>
+                                        @endif
                                     @endif
 
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
@@ -542,13 +559,28 @@
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     {{-- <span class="username-hover"> | Community Name</span> --}}
 
-                                    @if($post->community_id) 
+                                    {{-- @if($post->community_id) 
                                         @php
                                             $community = \App\Models\Communities::find($post->community_id);
                                         @endphp
                                         <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
                                             <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
                                         </a>
+                                    @endif --}}
+
+                                    @if($post->community_id) 
+                                        @php
+                                            $community = \App\Models\Communities::find($post->community_id);
+                                        @endphp
+                                        @if($community && $community->user_id == session('user_id'))
+                                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                            </a>
+                                        @endif
                                     @endif
 
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
@@ -673,13 +705,28 @@
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     {{-- <span class="username-hover"> | Community Name</span> --}}
 
-                                    @if($post->community_id) 
+                                    {{-- @if($post->community_id) 
                                         @php
                                             $community = \App\Models\Communities::find($post->community_id);
                                         @endphp
                                         <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
                                             <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
                                         </a>
+                                    @endif --}}
+
+                                    @if($post->community_id) 
+                                        @php
+                                            $community = \App\Models\Communities::find($post->community_id);
+                                        @endphp
+                                        @if($community && $community->user_id == session('user_id'))
+                                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                            </a>
+                                        @endif
                                     @endif
 
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
@@ -813,13 +860,30 @@
                                     <span class="username-hover">{{ session('user')->user_name }}</span>
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     {{-- <span class="username-hover"> | Community Name</span> --}}
-                                    @if($post->community_id) 
+
+
+                                    {{-- @if($post->community_id) 
                                         @php
                                             $community = \App\Models\Communities::find($post->community_id);
                                         @endphp
                                         <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
                                             <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
                                         </a>
+                                    @endif --}}
+
+                                    @if($post->community_id) 
+                                        @php
+                                            $community = \App\Models\Communities::find($post->community_id);
+                                        @endphp
+                                        @if($community && $community->user_id == session('user_id'))
+                                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                            </a>
+                                        @endif
                                     @endif
 
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
@@ -961,13 +1025,28 @@
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     {{-- <span class="username-hover"> | Community Name</span> --}}
 
-                                    @if($post->community_id) 
+                                    {{-- @if($post->community_id) 
                                         @php
                                             $community = \App\Models\Communities::find($post->community_id);
                                         @endphp
                                         <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
                                             <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
                                         </a>
+                                    @endif --}}
+
+                                    @if($post->community_id) 
+                                        @php
+                                            $community = \App\Models\Communities::find($post->community_id);
+                                        @endphp
+                                        @if($community && $community->user_id == session('user_id'))
+                                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                            </a>
+                                        @endif
                                     @endif
 
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
@@ -1092,13 +1171,28 @@
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     {{-- <span class="username-hover"> | Community Name</span> --}}
 
-                                    @if($post->community_id) 
+                                    {{-- @if($post->community_id) 
                                         @php
                                             $community = \App\Models\Communities::find($post->community_id);
                                         @endphp
                                         <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
                                             <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
                                         </a>
+                                    @endif --}}
+
+                                    @if($post->community_id) 
+                                        @php
+                                            $community = \App\Models\Communities::find($post->community_id);
+                                        @endphp
+                                        @if($community && $community->user_id == session('user_id'))
+                                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                            </a>
+                                        @endif
                                     @endif
 
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>

@@ -30,4 +30,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'likes')->withTimestamps();
     }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
+    
+    public function isFollowing($userId)
+    {
+        return $this->following()->where('following_id', $userId)->exists();
+    }
+    
 }

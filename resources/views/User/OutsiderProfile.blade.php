@@ -320,7 +320,37 @@
                     {{-- <p>r/adhiphalder</p> --}}
                     <p>r/{{ $user->user_name }}</p>
                 </div>
-                <button onclick="toggleButton(this)" class="join" style="position: absolute; left: 900px; top: 48px;"><span>Join</span></button>
+                {{-- <button onclick="toggleButton(this)" class="join" style="position: absolute; left: 900px; top: 48px;"><span>Follow</span></button> --}}
+
+                {{-- @if(auth()->user()->isFollowing($user->user_id))
+                    <form id="unfollow-form-{{ $user->user_id }}" action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST" class="unfollow-form">
+                        @csrf
+                        <button type="button" class="joined" onclick="toggleFollow('{{ $user->user_id }}')">
+                            <span>Unfollow</span>
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="join"><span>Follow</span></button>
+                    </form>
+                @endif --}}
+
+                @if(auth()->user()->isFollowing($user->user_id))
+                    <form id="unfollow-form-{{ $user->user_id }}" action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST" class="unfollow-form">
+                        @csrf
+                        <button type="button" class="joined" data-user-id="{{ $user->user_id }}">
+                            <span>Unfollow</span>
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="join"><span>Follow</span></button>
+                    </form>
+                @endif
+
+
             </div>
 
 
@@ -1104,31 +1134,6 @@
                 @endif
 
 
-
-            </div>
-
-            <div class="identifier-body" id="identifier-body-save">
-                <div class="not-found">
-                    <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
-                    <h3>Looks like you haven't saved anything yet</h3>
-                </div>
-            </div>
-
-            <div class="identifier-body" id="identifier-body-upvoted">
-
-                <div class="not-found">
-                    <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
-                    <h3>Looks like you haven't upvoted anything yet</h3>
-                </div>
-
-            </div>
-
-            <div class="identifier-body" id="identifier-body-downvoted">
-
-                <div class="not-found">
-                    <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
-                    <h3>Looks like you haven't downvoted anything yet</h3>
-                </div>
 
             </div>
 

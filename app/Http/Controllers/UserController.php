@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
 use App\Models\Join; 
+use App\Models\Follow;
 use App\Models\Communities;
 use Illuminate\Support\Facades\Auth;
 
@@ -185,18 +186,6 @@ class UserController extends Controller
 
     public function showProfile()
     {
-        // $user = auth()->user(); 
-        // return view('profile', compact('user'));
-
-        // $userId = session('user_id'); 
-
-        // if (!$userId) {
-        //     return redirect()->route('login')->with('error', 'Please log in to view your profile.');
-        // }
-
-        // $user = User::findOrFail($userId); 
-
-        // return view('User.Profile', compact('user'));
 
         $user = User::find($user_id);
 
@@ -275,5 +264,26 @@ class UserController extends Controller
     public function viewmembercom(){
         return view('User.ViewMemberCom');
     }
+
+    public function follow($user_id)
+    {
+        $followerId = Auth::id();
+
+        if ($followerId == $user_id) {
+            return redirect()->back()->with('error', 'You cannot follow yourself.');
+        }
+
+        if (Follow::where('follower_id', $followerId)->where('following_id', $user_id)->exists()) {
+            return redirect()->back()->with('error', 'Already following this user.');
+        }
+
+        Follow::create([
+            'follower_id' => $followerId,
+            'following_id' => $user_id,
+        ]);
+
+        return redirect()->back()->with('success', 'User followed successfully!');
+    }
+
 
 }

@@ -128,7 +128,25 @@ buttons.forEach(button => {
 // JOIN & JOINED BUTTON \\
 // ------------------------------------------\\
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".join").forEach(button => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            const form = this.closest("form");
+            if (confirm("Do you want to join this community?")) {
+                form.submit();
+                showToast("You're successfully joined this community");
+            }
+        });
+    });
+});
+
 function leaveCommunity(communityName) {
+    if (!confirm("Are you sure you want to leave this community?")) {
+        return;
+    }
+
     const form = document.getElementById(`leave-form-${communityName}`);
     const formData = new FormData(form);
 
@@ -143,10 +161,21 @@ function leaveCommunity(communityName) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            const button = form.querySelector('.joined');
-            button.classList.remove('joined');
-            button.classList.add('join');
-            button.querySelector('span').textContent = 'Join';
+            const button = document.createElement("button");
+            button.classList.add("join");
+            button.setAttribute("type", "submit");
+            button.innerHTML = "<span>Join</span>";
+
+            button.addEventListener("click", function(event) {
+                event.preventDefault();
+                if (confirm("Do you want to join this community?")) {
+                    this.closest("form").submit();
+                    showToast("You're successfully joined this community");
+                }
+            });
+
+            form.replaceWith(button);
+            showToast("You're successfully left this community");
         } else {
             alert(data.error);
         }
@@ -155,6 +184,26 @@ function leaveCommunity(communityName) {
         console.error('Error:', error);
     });
 }
+
+function showToast(message) {
+    let toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => {
+            toast.remove();
+        }, 500);
+    }, 3000);
+}
+
+
 
 // -----------------------------------------------------\\
 // UP VOTE & DOWN VOTE EFFECT \\
@@ -228,6 +277,15 @@ document.addEventListener('click', (event) => {
        #POPUP
 \*-----------------*/
 
-document.querySelector(".join").addEventListener("click", function() {
-    alert("You're successfully joined this community");
-  });
+// document.querySelector(".join").addEventListener("click", function() {
+//     alert("Do you want to join this community?");
+//   });
+
+
+
+// document.querySelector(".join").addEventListener("click", function(event) {
+//     event.preventDefault();
+//     if (confirm("Do you want to join this community?")) {
+//         this.closest("form").submit();
+//     }
+// });

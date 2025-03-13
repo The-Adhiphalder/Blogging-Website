@@ -250,17 +250,46 @@ function copyCurrentLink() {
 
 
 // ---------------------------------------\\
-// JOIN & JOINED BUTTON \\
+// FOLLOW & UNFOLLOW BUTTON \\
 // ------------------------------------------\\
 
-function toggleButton(button) {
-    if (button.classList.contains("join")) {
-        button.classList.remove("join");
-        button.classList.add("joined");
-        button.querySelector("span").textContent = "Joined";
-    } else {
-        button.classList.remove("joined");
-        button.classList.add("join");
-        button.querySelector("span").textContent = "Join";
-    }
-}   
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".join").forEach(button => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            const form = this.closest("form");
+            if (confirm("Do you want to follow this person?")) {
+                form.submit();
+                showToast("You have successfully followed this person!");
+            }
+        });
+    });
+
+    document.querySelectorAll(".joined").forEach(button => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            const userId = this.getAttribute("data-user-id");
+            unfollowUser(userId);
+        });
+    });
+});
+
+
+function showToast(message) {
+    let toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => {
+            toast.remove();
+        }, 500);
+    }, 3000);
+}
