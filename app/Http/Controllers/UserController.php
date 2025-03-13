@@ -203,12 +203,14 @@ class UserController extends Controller
         $user = User::where('user_name', $username)->first();
 
         if (!$user) {
-            return redirect()->route('home')->with('error', 'User  not found.');
+            return redirect()->route('home')->with('error', 'User not found.');
         }
-    
+
         $posts = Post::where('user_id', $user->user_id)->latest()->get();
-    
-        return view('User.OutsiderProfile', compact('user', 'posts'));
+        $totalPosts = $posts->count();
+        $totalFollowers = Follow::where('following_id', $user->user_id)->count();
+
+        return view('User.OutsiderProfile', compact('user', 'posts', 'totalPosts', 'totalFollowers'));
         
     }
 

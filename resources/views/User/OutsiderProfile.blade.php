@@ -322,20 +322,6 @@
                 </div>
                 {{-- <button onclick="toggleButton(this)" class="join" style="position: absolute; left: 900px; top: 48px;"><span>Follow</span></button> --}}
 
-                {{-- @if(auth()->user()->isFollowing($user->user_id))
-                    <form id="unfollow-form-{{ $user->user_id }}" action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST" class="unfollow-form">
-                        @csrf
-                        <button type="button" class="joined" onclick="toggleFollow('{{ $user->user_id }}')">
-                            <span>Unfollow</span>
-                        </button>
-                    </form>
-                @else
-                    <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="join"><span>Follow</span></button>
-                    </form>
-                @endif --}}
-
                 @if(auth()->user()->isFollowing($user->user_id))
                 <form id="unfollow-form-{{ $user->user_id }}" action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST" class="unfollow-form">
                     @csrf
@@ -1192,13 +1178,22 @@
                     <span>Karma</span>
                     <span>1.2k</span>
                 </div>
-                <div>
+                {{-- <div>
                     <span>Followers</span>
                     <span>300</span>
                 </div>
                 <div>
                     <span>Posts</span>
                     <span>50</span>
+                </div> --}}
+
+                <div>
+                    <span>Followers</span>
+                    <span>{{ $totalFollowers }}</span>
+                </div>
+                <div>
+                    <span>Posts</span>
+                    <span>{{ $totalPosts }}</span>
                 </div>
                 <div>
                     <span>Comments</span>
