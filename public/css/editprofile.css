@@ -1351,3 +1351,15 @@ body.dark-theme {
   color: rgb(255, 77, 0);
   border: 1px solid rgb(255, 77, 0);
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0); /* Keeps it dark for contrast */
+}
+
+input{
+  color-scheme: dark;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}

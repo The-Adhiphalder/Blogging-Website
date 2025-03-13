@@ -328,10 +328,24 @@
                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile">
                         @endif
                     </div>
+
+                    @php
+                        $categoryMappings = [
+                            'games' => 'Games',
+                            'technologies' => 'Technology',
+                            'movies' => 'Movies',
+                            'travel' => 'Travel',
+                            'music' => 'Music',
+                            'education' => 'Education',
+                            'sport' => 'Sport',
+                            'news_politics' => 'News & Politics',
+                            'business_finance' => 'Business & Finance',
+                        ];
+                    @endphp
                 
                     <div class="profile-info1">
                         <h1>r/{{ $community->community_name }}</h1> 
-                        <p class="profile-info1-p">{{ $community->category }}</p>
+                        <p class="profile-info1-p">{{ $categoryMappings[$community->category] ?? $community->category }}</p>
                     </div>
                 </div>
 

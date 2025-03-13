@@ -332,7 +332,7 @@
             @else
                 <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
                     @csrf
-                    <button type="submit" class="join"><span>Follow</span></button>
+                    <button type="submit" class="join" style="width :87px;"><span>Follow</span></button>
                 </form>
             @endif
 

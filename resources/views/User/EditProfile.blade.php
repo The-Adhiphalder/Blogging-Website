@@ -342,7 +342,7 @@
     
                     <div>
                         <label for="phone_no">Phone Number :</label>
-                        <input type="number" name="phone" class="main-form-input" id="phone_no" placeholder="Phone Number" value="{{ $user->phone }}">
+                        <input type="number" name="phone" class="main-form-input" id="phone_no" placeholder="Phone Number" value="{{ $user->phone }}" oninput="validatePhone(this)">
                     </div>
     
                     <div class="main-input-gender">
@@ -366,7 +366,7 @@
     
                     <div>
                         <label for="date_of_birth">Date of Birth :</label>
-                        <input type="date" name="dob" class="main-form-input" id="date_of_birth" style="padding-right: 7px;" class="" value="{{ old('dob', $user->DOB) }}">
+                        <input type="date" name="dob" class="main-form-input" id="date_of_birth" style="padding-right: 7px;" max="{{ date('Y-m-d') }}" class="" value="{{ old('dob', $user->DOB) }}">
                     </div>
     
                     <div>

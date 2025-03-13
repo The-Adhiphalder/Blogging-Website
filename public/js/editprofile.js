@@ -204,3 +204,22 @@ document.addEventListener('DOMContentLoaded', function () {
         fileInput.click();
     });
 });
+
+
+
+/*-----------------*\
+    DATE PICKER
+\*-----------------*/
+
+document.addEventListener("DOMContentLoaded", function () {
+    let today = new Date().toISOString().split("T")[0];
+    document.getElementById("dateInput").setAttribute("max", today);
+});
+
+
+
+function validatePhone(input) {
+    if (input.value.length > 10) {
+        input.value = input.value.slice(0, 10);
+    }
+}
