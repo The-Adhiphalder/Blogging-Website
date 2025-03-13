@@ -337,18 +337,18 @@
                 @endif --}}
 
                 @if(auth()->user()->isFollowing($user->user_id))
-                    <form id="unfollow-form-{{ $user->user_id }}" action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST" class="unfollow-form">
-                        @csrf
-                        <button type="button" class="joined" data-user-id="{{ $user->user_id }}">
-                            <span>Unfollow</span>
-                        </button>
-                    </form>
-                @else
-                    <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="join"><span>Follow</span></button>
-                    </form>
-                @endif
+                <form id="unfollow-form-{{ $user->user_id }}" action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST" class="unfollow-form">
+                    @csrf
+                    <button type="button" class="joined" onclick="unfollowUser ('{{ $user->user_id }}')">
+                        <span>Unfollow</span>
+                    </button>
+                </form>
+            @else
+                <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="join"><span>Follow</span></button>
+                </form>
+            @endif
 
 
             </div>

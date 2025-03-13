@@ -253,7 +253,6 @@ function copyCurrentLink() {
 // FOLLOW & UNFOLLOW BUTTON \\
 // ------------------------------------------\\
 
-
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".join").forEach(button => {
         button.addEventListener("click", function(event) {
@@ -265,16 +264,45 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
-    document.querySelectorAll(".joined").forEach(button => {
-        button.addEventListener("click", function(event) {
-            event.preventDefault();
-            const userId = this.getAttribute("data-user-id");
-            unfollowUser(userId);
-        });
-    });
 });
 
+function unfollowUser (userId) {
+    if (!confirm("Are you sure you want to unfollow this person?")) {
+        return;
+    }
+
+    const form = document.getElementById(`unfollow-form-${userId}`);
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': formData.get('_token')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const newForm = document.createElement("form");
+            newForm.action = `/follow/${userId}`;
+            newForm.method = "POST";
+            newForm.innerHTML = `
+                <input type="hidden" name="_token" value="${formData.get('_token')}">
+                <button type="submit" class="join"><span>Follow</span></button>
+            `;
+
+            form.replaceWith(newForm);
+            showToast("You have successfully unfollowed this user!");
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 function showToast(message) {
     let toast = document.createElement("div");

@@ -285,5 +285,22 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User followed successfully!');
     }
 
+    public function unfollow($user_id)
+    {
+        $followerId = Auth::id();
+    
+        $follow = Follow::where('follower_id', $followerId)
+                        ->where('following_id', $user_id)
+                        ->first();
+    
+        if ($follow) {
+            $follow->delete();
+            return response()->json(['success' => true]);
+        }
+    
+        return response()->json(['success' => false]);
+    }
+
+
 
 }
