@@ -265,20 +265,13 @@
             </div>
          </nav>
    
-         <main class="main container" id="main">
+         <main class="main container" id="main"> 
 
-            <a href="">
-                <button class="main-back-button" style="margin-top: 53px;">
-                    <svg rpl="" fill="white" height="16" icon-name="back-outline" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                    <!--?lit$799404106$--><!--?lit$799404106$--><path d="M19 9.375H2.51l7.932-7.933-.884-.884-9 9a.625.625 0 0 0 0 .884l9 9 .884-.884-7.933-7.933H19v-1.25Z"></path><!--?-->
-                    </svg>
-                </button>
-            </a>
 
             <div class="main-user-profile">
                 <img src="/Pictures/userlogo.png" alt="">
                 <div>
-                    <p>@r/Username</p>
+                    <p>r/Username</p>
                     <p>Just saying</p>
                 </div>
             </div>
@@ -288,7 +281,9 @@
             </div>
 
             <div class="main-user-img">
-                <img src="/Pictures/midpic.jpg" alt="">
+                <div class="main-user-img-inner">
+                    <img class="main-user-img-inner-img" id="main-img" src="https://scontent.fbom3-1.fna.fbcdn.net/v/t39.30808-6/474934134_1255689052167509_2545385852172680867_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=AT1uI4ReFE4Q7kNvgGhr6ad&_nc_oc=AdgfGPc_Bwxm_xROCu30CkFwef6Y_uaKEVq9UWgAjPVfzdFi28A9txjJlx3ZCmHeoKBUUqn7oRZZRS8dZ4OAZp5m&_nc_zt=23&_nc_ht=scontent.fbom3-1.fna&_nc_gid=Z35UsTZhNS2n7Ghajdj0Mw&oh=00_AYEWhUe6Ey973moF9mMBkk5-b_qR8aUIadRUuENK7BB4_Q&oe=67DA2682" alt="">
+                </div>
             </div>
 
             <div class="main-user-comments-zero-div">
@@ -296,55 +291,15 @@
             </div>
 
             <div class="main-user-comments">
-
-                <div class="main-user-comments-first-div">
-                    <img src="/Pictures/userlogo.webp" alt="">
-                    <div>@Username</div>
-                    <div>• 5 hour ago</div>
-                </div>
-                <div class="main-user-comments-second-div">
-                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
-                </div>
-
+                <button onclick="toggleCommentBox()" class="main-user-comments-button">Add a comment</button>
             </div>
 
-            <div class="main-user-comments">
-
-                <div class="main-user-comments-first-div">
-                    <img src="/Pictures/userlogo.webp" alt="">
-                    <div>@Username</div>
-                    <div>• 5 hour ago</div>
-                </div>
-                <div class="main-user-comments-second-div">
-                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
-                </div>
-
-            </div>
-
-            <div class="main-user-comments">
-
-                <div class="main-user-comments-first-div">
-                    <img src="/Pictures/userlogo.webp" alt="">
-                    <div>@Username</div>
-                    <div>• 5 hour ago</div>
-                </div>
-                <div class="main-user-comments-second-div">
-                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
-                </div>
-
-            </div>
-
-            <div class="main-user-comments">
-
-                <div class="main-user-comments-first-div">
-                    <img src="/Pictures/userlogo.webp" alt="">
-                    <div>@Username</div>
-                    <div>• 5 hour ago</div>
-                </div>
-                <div class="main-user-comments-second-div">
-                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
-                </div>
-
+            <div class="user-comment" id="commentBox">
+                <form action="">
+                    <textarea name="" class="user-comments" id="" cols="30" rows="10" placeholder="Write you comment"></textarea>
+                    <button type="submit" class="user-comment-submit">Comment</button>
+                    <button type="button" class="user-comment-submit cancel" onclick="hideCommentBox()">Cancel</button>
+                </form>
             </div>
 
          </main>

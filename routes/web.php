@@ -142,3 +142,5 @@ Route::get('/user/{username}', [UserController::class, 'outprofile'])->name('use
 Route::post('/follow/{user_id}', [UserController::class, 'follow'])->name('follow');
 
 Route::post('/unfollow/{user_id}', [UserController::class, 'unfollow'])->name('unfollow');
+
+Route::get('/viewpost', [UserController::class, 'userviewpost']);

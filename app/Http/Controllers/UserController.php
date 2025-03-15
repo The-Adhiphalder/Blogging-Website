@@ -289,6 +289,8 @@ class UserController extends Controller
 
     }
 
-
-
+    public function userviewpost(){
+        return view('User.UserViewPost');
+    }
+    
 }
