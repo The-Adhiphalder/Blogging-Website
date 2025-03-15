@@ -289,3 +289,13 @@ document.addEventListener('click', (event) => {
 //         this.closest("form").submit();
 //     }
 // });
+
+
+
+function mouseover() {
+    document.getElementById("gfg").style.color = "#878ed8";
+}
+
+function mouseout() {
+    document.getElementById("gfg").style.color = " #9fa5b5";
+}

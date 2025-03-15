@@ -258,3 +258,14 @@ function showToast(message) {
         }, 500);
     }, 3000);
 }
+
+
+// /----------- HOVER ------------\
+
+function mouseover() {
+    document.getElementById("gfg").style.color = "#878ed8";
+}
+
+function mouseout() {
+    document.getElementById("gfg").style.color = " #9fa5b5";
+}

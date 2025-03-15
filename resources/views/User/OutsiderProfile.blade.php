@@ -1301,9 +1301,9 @@
                 </div> --}}
 
                 <div>
-                    <a href="{{ route('viewmember', ['user_id' => $user->user_id]) }}">
-                        <span>Followers</span>
-                        <span>{{ $totalFollowers }}</span>
+                    <a href="{{ route('viewmember', ['user_id' => $user->user_id]) }}" style=" width:100%; display: flex; justify-content: space-between;">
+                        <span style="color: #868998">Followers</span>
+                        <span style="color: #868998">{{ $totalFollowers }}</span>
                     </a>
                 </div>
                 <div>
