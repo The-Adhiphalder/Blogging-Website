@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id("comment_id");
             $table->unsignedBigInteger('user_id'); 
-            $table->unsignedBigInteger('post_id');            
-            $table->unique(['follower_id', 'following_id']);
+            $table->unsignedBigInteger('post_id'); 
+            $table->string('comment')->nullable();
             $table->timestamps(); 
         });
     }
