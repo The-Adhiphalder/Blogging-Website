@@ -303,6 +303,8 @@ class UserController extends Controller
         return response()->json(['success' => false]);
     }
 
-
-
+    public function userviewpost(){
+        return view('User.UserViewPost');
+    }
+    
 }

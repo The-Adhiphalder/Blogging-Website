@@ -133,3 +133,5 @@ Route::get('/viewmembercom', [UserController::class, 'viewmembercom']);
 Route::post('/follow/{user_id}', [UserController::class, 'follow'])->name('follow');
 
 Route::post('/unfollow/{user_id}', [UserController::class, 'unfollow'])->name('unfollow');
+
+Route::get('/viewpost', [UserController::class, 'userviewpost']);
