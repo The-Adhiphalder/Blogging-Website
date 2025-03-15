@@ -330,7 +330,7 @@
                                 {{-- <h1>r/adhiphalder</h1> 
                                 <p class="profile-info1-p">Priya is my love</p> --}}
                                 <h1>r/{{ $community->community_name }}</h1> 
-                                <p class="profile-info1-p">{{ $community->community_description }}</p>
+                                <p class="profile-info1-p" style="margin-top: 4px">{{ $community->community_description }}</p>
                             </div>
                         </div>
 
@@ -492,11 +492,11 @@
                                         {{-- <a href="{{ route('user.outsiderProfile', ['username' => $member->user_name]) }}"><span>r/{{ $member->user_name }}</span></a> --}}
                                         @if($member->user_id === auth()->user()->user_id)
                                             <a href="{{ route('profile') }}">
-                                                <span>r/{{ $member->user_name }}</span>
+                                                <span class="com-follower-profile-text-inner-span">r/{{ $member->user_name }}</span>
                                             </a>
                                         @else
                                             <a href="{{ route('user.outsiderProfile', ['username' => $member->user_name]) }}">
-                                                <span>r/{{ $member->user_name }}</span>
+                                                <span class="com-follower-profile-text-inner-span">r/{{ $member->user_name }}</span>
                                             </a>
                                         @endif
                                         

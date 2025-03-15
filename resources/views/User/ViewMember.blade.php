@@ -334,7 +334,7 @@
                             <h1>r/{{ $user->user_name }}</h1> 
                             {{-- <p class="profile-info1-p">Priya is my love</p> --}}
                             @if($user->bio)
-                                <p class="profile-info1-p">{{ $user->bio }}</p>
+                                <p class="profile-info1-p" style="margin-top: 4px">{{ $user->bio }}</p>
                             @endif
                         </div>
                     </div>
@@ -472,11 +472,11 @@
                                     <div class="com-follower-profile-text-inner">
                                         @if(Auth::check() && Auth::user()->user_name == $follow->follower->user_name)
                                             <a href="{{ route('profile') }}">
-                                                <span>{{ $follow->follower->user_name }}</span>
+                                                <span class="com-follower-profile-text-inner-span">{{ $follow->follower->user_name }}</span>
                                             </a>
                                         @else
                                             <a href="{{ route('user.outsiderProfile', ['username' => $follow->follower->user_name]) }}">
-                                                <span>{{ $follow->follower->user_name }}</span>
+                                                <span class="com-follower-profile-text-inner-span">{{ $follow->follower->user_name }}</span>
                                             </a>
                                         @endif
                                     </div>

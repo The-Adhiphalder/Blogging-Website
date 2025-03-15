@@ -1878,8 +1878,8 @@
             <div class="profile-stats">
                 <!-- <h3 class="stats">PROFILE STATS</h3> -->
                 <div>
-                    <a href="{{ route('viewmembercom', ['community_name' => $community->community_name]) }}">
-                        <span style="color: #9fa5b5">Members</span>
+                    <a href="{{ route('viewmembercom', ['community_name' => $community->community_name]) }}" style=" width:100%; display: flex; justify-content: space-between;">
+                        <span class="profile-stats-span" style="color: #9fa5b5">Members</span>
                         {{-- <span>300</span> --}}
                         <span style="color: #9fa5b5">{{ $totalMembers }}</span>
                     </a>
