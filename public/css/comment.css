@@ -1172,6 +1172,7 @@ transition: all 0.3s ease;
   gap: 20px;
   border: 0.5px solid #5c5c5e;
   border-radius: 13px;
+  margin-bottom: 4rem;
 }
   
   .main-back-button{
@@ -1272,6 +1273,7 @@ transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 7px;
+    margin-top: 8px;
   }
 
   .main-user-comments-button{
@@ -1290,7 +1292,6 @@ transition: all 0.3s ease;
     margin-bottom: 8px;
   }
 
-  /* 
   .main-user-comments-first-div{
     display: flex;
     align-items: center;
@@ -1312,8 +1313,21 @@ transition: all 0.3s ease;
   .main-user-comments-second-div{
     font-size: 14px;
     color: #868998;
-    margin-left: 33px;
-  } */
+    /* margin-left: 33px; */
+  }
+
+
+  .not-found {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+  }
+  
+  .not-found h3{
+      margin-top: -6px;
+  }
 
 
   .user-comment{
