@@ -269,24 +269,84 @@
 
 
             <div class="main-user-profile">
-                <img src="/Pictures/userlogo.png" alt="">
-                <div>
-                    <p>r/Username</p>
-                    <p>Just saying</p>
+                {{-- <img src="/Pictures/userlogo.png" alt=""> --}}
+
+                @if($post->user->profile_pic)
+                    <img src="{{ asset('storage/' . $post->user->profile_pic) }}" alt="Profile Picture" >
+                @else
+                    <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile Picture">
+                @endif
+                <div class="username">
+                    {{-- <p>r/Username</p>
+                    <p>Just saying</p> --}}
+
+                    {{-- <p>r/{{ $post->user->user_name }}</p> --}}
+                    @if(auth()->id() == $post->user->user_id)
+                        <a href="{{ route('profile') }}">
+                            <span class="username-hover">r/{{ $post->user->user_name }}</span>
+                        </a>
+                    @else
+                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                            <span class="username-hover">r/{{ $post->user->user_name }}</span>
+                        </a>
+                    @endif
+                    @if($post->community_id) 
+                        @php
+                            $community = \App\Models\Communities::find($post->community_id);
+                        @endphp
+                        @if($community && $community->user_id == session('user_id'))
+                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                            </a>
+                        @else
+                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                            </a>
+                        @endif
+                    @endif
                 </div>
+                <p>{{ $post->created_at->diffForHumans() }}</p>
             </div>
 
-            <div class="main-user-topic">
-                Chirag Paswan and Vishal are cousins. Here is an old video (6yrs back) of them celebrating Ganesh festival. It is sad people speculated them to be a couple ...
-            </div>
-
-            <div class="main-user-img">
-                <div class="main-user-img-inner">
-                    <img class="main-user-img-inner-img" id="main-img" src="https://scontent.fbom3-1.fna.fbcdn.net/v/t39.30808-6/474934134_1255689052167509_2545385852172680867_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=AT1uI4ReFE4Q7kNvgGhr6ad&_nc_oc=AdgfGPc_Bwxm_xROCu30CkFwef6Y_uaKEVq9UWgAjPVfzdFi28A9txjJlx3ZCmHeoKBUUqn7oRZZRS8dZ4OAZp5m&_nc_zt=23&_nc_ht=scontent.fbom3-1.fna&_nc_gid=Z35UsTZhNS2n7Ghajdj0Mw&oh=00_AYEWhUe6Ey973moF9mMBkk5-b_qR8aUIadRUuENK7BB4_Q&oe=67DA2682" alt="">
+            @if($post->post_caption && $post->post_img)
+                {{-- <div class="main-user-topic">
+                    Chirag Paswan and Vishal are cousins. Here is an old video (6yrs back) of them celebrating Ganesh festival. It is sad people speculated them to be a couple ...
+                </div> --}}
+                <div class="main-user-topic">
+                    {{ $post->post_caption }}
                 </div>
-            </div>
 
-            <p class="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years. I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it. Never thought a sequel would come out. Finally got to try the new one and I am BLOWN AWAY at how absolutely creative and visually appealing this game is. I felt like I was a kid playing an all time classic for the first time. It’s bringing me so much joy! Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p>
+                <div class="main-user-img">
+                    <div class="main-user-img-inner">
+                        {{-- <img class="main-user-img-inner-img" id="main-img" src="https://scontent.fbom3-1.fna.fbcdn.net/v/t39.30808-6/474934134_1255689052167509_2545385852172680867_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=AT1uI4ReFE4Q7kNvgGhr6ad&_nc_oc=AdgfGPc_Bwxm_xROCu30CkFwef6Y_uaKEVq9UWgAjPVfzdFi28A9txjJlx3ZCmHeoKBUUqn7oRZZRS8dZ4OAZp5m&_nc_zt=23&_nc_ht=scontent.fbom3-1.fna&_nc_gid=Z35UsTZhNS2n7Ghajdj0Mw&oh=00_AYEWhUe6Ey973moF9mMBkk5-b_qR8aUIadRUuENK7BB4_Q&oe=67DA2682" alt=""> --}}
+                        <img class="main-user-img-inner-img" id="main-img" src="{{ asset('storage/' . $post->post_img) }}" alt="">
+
+                    </div>
+                </div>
+
+            @elseif($post->post_caption && $post->post_desc )
+
+                {{-- <div class="main-user-topic">
+                    Chirag Paswan and Vishal are cousins. Here is an old video (6yrs back) of them celebrating Ganesh festival. It is sad people speculated them to be a couple ...
+                </div> --}}
+
+                <div class="main-user-topic">
+                    {{ $post->post_caption }}
+                </div>
+
+                {{-- <p class="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years. I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it. Never thought a sequel would come out. Finally got to try the new one and I am BLOWN AWAY at how absolutely creative and visually appealing this game is. I felt like I was a kid playing an all time classic for the first time. It’s bringing me so much joy! Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p> --}}
+                <p class="post-para">{{ $post->post_desc }}</p>
+
+
+            @elseif($post->post_caption )
+                {{-- <div class="main-user-topic">
+                    Chirag Paswan and Vishal are cousins. Here is an old video (6yrs back) of them celebrating Ganesh festival. It is sad people speculated them to be a couple ...
+                </div> --}}
+                <div class="main-user-topic">
+                    {{ $post->post_caption }}
+                </div>
+            @endif 
+            
 
             <div class="main-user-comments-zero-div">
                 Comments
@@ -297,8 +357,14 @@
             </div>
 
             <div class="user-comment" id="commentBox">
-                <form action="">
+                {{-- <form action="">
                     <textarea name="" class="user-comments" id="" cols="30" rows="10" placeholder="Write you comment"></textarea>
+                    <button type="submit" class="user-comment-submit">Comment</button>
+                    <button type="button" class="user-comment-submit cancel" onclick="hideCommentBox()">Cancel</button>
+                </form> --}}
+                <form action="{{ route('store.comment', ['post_id' => $post->post_id]) }}" method="POST">
+                    @csrf
+                    <textarea name="comment" class="user-comments" id="comment" cols="30" rows="10" placeholder="Write your comment" required></textarea>
                     <button type="submit" class="user-comment-submit">Comment</button>
                     <button type="button" class="user-comment-submit cancel" onclick="hideCommentBox()">Cancel</button>
                 </form>
@@ -306,7 +372,7 @@
 
             <div class="main-user-comments">
 
-                <div class="main-user-comments-first-div">
+                {{-- <div class="main-user-comments-first-div">
                     <img src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_0.png" alt="">
                     <div>Username</div>
                     <div>• 5 hour ago</div>
@@ -343,12 +409,40 @@
                     You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
                 </div>
 
-            </div>
+            </div> --}}
 
-            <div class="not-found">
+            @if ($comments->isEmpty())
+                <div class="not-found">
+                    <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
+                    <h3>Looks like there is no comment yet</h3> 
+                </div>
+            @else
+                @foreach ($comments as $comment)
+                    <div class="main-user-comments">
+                        <div class="main-user-comments-first-div">
+                            <img src="{{ $comment->user->profile_pic ? asset('storage/' . $comment->user->profile_pic) : 'https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}" alt="Profile Picture">
+                            @if(auth()->id() == $comment->user->user_id)
+                                <a href="{{ route('profile') }}">
+                                    <div>{{ $comment->user->user_name }}</div>
+                                </a>
+                            @else
+                                <a href="{{ route('outprofile', ['username' => $comment->user->user_name]) }}">
+                                    <div>{{ $comment->user->user_name }}</div>
+                                </a>
+                            @endif
+                            <div>• {{ $comment->created_at->diffForHumans() }}</div>
+                        </div>
+                        <div class="main-user-comments-second-div">
+                            {{ $comment->comment }}
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
+            {{-- <div class="not-found">
                 <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
                 <h3>Looks like there is no comment yet</h3> 
-            </div>
+            </div> --}}
 
          </main>
 

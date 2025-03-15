@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Like;
 use App\Models\Join; 
 use App\Models\Follow;
+use App\Models\Comment;
 use App\Models\Communities;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +18,32 @@ class UserController extends Controller
 {
 
 
-    public function comment() 
+    public function comment($post_id) 
     {
-        return view('User.Comment');
+        // return view('User.Comment');
+
+        $post = Post::with('user')->findOrFail($post_id);
+        
+        $comments = Comment::where('post_id', $post_id)->with('user')->get();
+
+        return view('User.Comment', compact('post', 'comments'));
     }
+
+    public function storeComment(Request $request, $post_id)
+    {
+        $request->validate([
+            'comment' => 'required|string|max:500',
+        ]);
+    
+        Comment::create([
+            'user_id' => Auth::id(), 
+            'post_id' => $post_id,   
+            'comment' => $request->comment, 
+        ]);
+    
+        return redirect()->back()->with('success', 'Comment added successfully!');
+    }
+
 
     public function create() 
     {
@@ -87,10 +110,10 @@ class UserController extends Controller
             'post_img' => $postImagePath,
             'user_id' => $user_id,
             'community_id' => $community_id,
-            'up_votes' => 0,
-            'down_votes' => 0,
-            'comments' => 0,
-            'share' => 0,
+            // 'up_votes' => 0,
+            // 'down_votes' => 0,
+            // 'comments' => 0,
+            // 'share' => 0,
         ]);
     
         return ($redirectRoute === 'mycommunity') 

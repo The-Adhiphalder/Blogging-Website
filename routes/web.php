@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Communities;
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\User;
 use App\Models\Join; 
 use App\Models\Follow;
@@ -103,7 +104,11 @@ Route::get('/viewmembercom/{community_name}', [CommunityController::class, 'view
   #USER
 \*--------------*/
 
-Route::get('/comment', [UserController::class, 'comment']);
+// Route::get('/comment', [UserController::class, 'comment']);
+
+Route::get('/comment/{post_id}', [UserController::class, 'comment'])->name('comment');
+
+Route::post('/comment/{post_id}', [UserController::class, 'storeComment'])->name('store.comment');
 
 Route::get('/create', [UserController::class, 'create'])->name('create');
 
@@ -126,6 +131,8 @@ Route::post('/profile', [UserController::class, 'profile'])->name('profile');
 Route::get('/viewprofile', [UserController::class, 'outprofile'])->name('viewprofile');
 
 Route::get('/viewprofile/{username}', [UserController::class, 'outprofile'])->name('viewprofile');
+
+Route::get('/viewprofile/{username}', [UserController::class, 'outprofile'])->name('outprofile');
 
 Route::post('/posts/{postId}/like', [UserController::class, 'likePost']);
 

@@ -11,16 +11,17 @@ class Post extends Model
     use HasFactory;
 
     protected $table = "posts";
-    protected $primarykey = "post_id";
+    // protected $primarykey = "post_id";
+    protected $primaryKey = "post_id";
     protected $fillable = [
         'post_caption',
         'post_desc',
         'post_img',
         'user_id',
         'community_id',
-        'up_votes',
-        'down_votes',
-        'comments',
+        // 'up_votes',
+        // 'down_votes',
+        // 'comments',
         'share',
     ];
 
