@@ -111,8 +111,10 @@ class UserController extends Controller
 
         $user = User::findOrFail($userId); 
         $posts = Post::where('user_id', $userId)->latest()->get(); 
+        $totalPosts = $posts->count();
+        $totalFollowers = Follow::where('following_id', $userId)->count();
 
-        return view('User.Profile', compact('user', 'posts')); 
+        return view('User.Profile', compact('user', 'posts', 'totalPosts', 'totalFollowers'));
     }
 
     public function editprofile()
@@ -199,11 +201,10 @@ class UserController extends Controller
     public function outprofile($username){
 
         // return view('User.OutsiderProfile'); 
-
         $user = User::where('user_name', $username)->first();
 
         if (!$user) {
-            return redirect()->route('home')->with('error', 'User not found.');
+            return redirect()->route('home')->with('error', 'User  not found.');
         }
 
         $posts = Post::where('user_id', $user->user_id)->latest()->get();
@@ -214,60 +215,42 @@ class UserController extends Controller
         
     }
 
-    public function likePost(Request $request, $postId)
-    {
-        $user = Auth::user(); 
-
-        $post = Post::find($postId);
-        if (!$post) {
-            return response()->json(['message' => 'Post not found.'], 404);
-        }
-
-        if ($user->likes()->where('post_id', $postId)->exists()) {
-            return response()->json(['message' => 'You already liked this post.'], 400);
-        }
-
-        $user->likes()->attach($postId);
-
-        return response()->json(['message' => 'Post liked successfully!']);
-    }
-
-    public function getPostLikes($postId)
-    {
-        $post = Post::with('likes')->find($postId);
-
-        if (!$post) {
-            return response()->json(['message' => 'Post not found.'], 404);
-        }
-
-        return response()->json($post->likes);
-    }
-
-    public function getUserLikes($userId)
-    {
-        $user = User::with('likes')->find($userId);
-
-        if (!$user) {
-            return response()->json(['message' => 'User  not found.'], 404);
-        }
-
-        return response()->json($user->likes);
-    }
-
-
     public function welcome() {
         return view('welcome');
     }
 
-    public function viewmember(){
-        return view('User.ViewMember');
+    public function viewmember($user_id){
+        // return view('User.ViewMember');
+
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return redirect()->route('home')->with('error', 'User not found.');
+        }
+
+        $followers = Follow::where('following_id', $user_id)
+            ->with('follower') 
+            ->get();
+
+        return view('User.ViewMember', compact('user', 'followers'));
     }
 
-    public function viewmembercom(){
-        return view('User.ViewMemberCom');
+    public function showFollowers($user_id)
+    {
+        $user = User::find($user_id);
+    
+        if (!$user) {
+            return redirect()->route('home')->with('error', 'User  not found.');
+        }
+    
+        $followers = Follow::where('following_id', $user_id)
+            ->with('follower') 
+            ->get();
+    
+        return view('User .Followers', compact('user', 'followers'));
     }
 
-    public function follow($user_id)
+    public function follow(Request $request, $user_id)
     {
         $followerId = Auth::id();
 
@@ -285,9 +268,10 @@ class UserController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'User followed successfully!');
+
     }
 
-    public function unfollow($user_id)
+    public function unfollow(Request $request, $user_id)
     {
         $followerId = Auth::id();
     
@@ -301,6 +285,8 @@ class UserController extends Controller
         }
     
         return response()->json(['success' => false]);
+
+
     }
 
 

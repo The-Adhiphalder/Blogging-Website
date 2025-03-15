@@ -1868,9 +1868,11 @@
             <div class="profile-stats">
                 <!-- <h3 class="stats">PROFILE STATS</h3> -->
                 <div>
-                    <span>Members</span>
-                    {{-- <span>300</span> --}}
-                    <span>{{ $totalMembers }}</span>
+                    <a href="{{ route('viewmembercom', ['community_name' => $community->community_name]) }}">
+                        <span>Members</span>
+                        {{-- <span>300</span> --}}
+                        <span>{{ $totalMembers }}</span>
+                    </a>
                 </div>
                 <div>
                     <span>Posts</span>

@@ -1375,12 +1375,16 @@
                     <span>1.2k</span>
                 </div>
                 <div>
-                    <span>Followers</span>
-                    <span>300</span>
+                    <a href="{{ url('/viewmember/' . $user->user_id) }}">
+                        <span>Followers</span>
+                        {{-- <span>300</span> --}}
+                        <span>{{ $totalFollowers }}</span>
+                    </a>
                 </div>
                 <div>
                     <span>Posts</span>
-                    <span>50</span>
+                    {{-- <span>50</span> --}}
+                    <span>{{ $totalPosts }}</span>
                 </div>
                 <div>
                     <span>Comments</span>

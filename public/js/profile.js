@@ -294,7 +294,7 @@ function unfollowUser (userId) {
             `;
 
             form.replaceWith(newForm);
-            showToast("You have successfully unfollowed this user!");
+            showToast("You have successfully unfollowed this person!");
         } else {
             alert("Something went wrong. Please try again.");
         }

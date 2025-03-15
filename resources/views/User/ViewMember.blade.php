@@ -301,37 +301,54 @@
             
             <div>
                 <div class="comm-info">
-                    <div class="info-cover">
+                    {{-- <div class="info-cover">
                         <div class="info-cover-inner">
-                            <img class="info-cover-img" id="infoImage" src="https://scontent.fbom3-2.fna.fbcdn.net/v/t39.30808-6/473520811_1603997017176109_3745395201098748496_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=o1EHH0VOjlwQ7kNvgEqSwMp&_nc_oc=AdjfWUqY1SCG_rxfCqGNPpVBYTFzsMNCFcAeOZp4PF52GkJbcRy-yag8Zn3uCk1Nd5JY3iENvPNNHELL6ZgZlfrx&_nc_zt=23&_nc_ht=scontent.fbom3-2.fna&_nc_gid=AU1uNft2LhX8NQe9edD_ATA&oh=00_AYB7f5F_3IK8l6x1uLQjs1JAcCQcZz521iNOCTO0oURQXw&oe=67C9E870" alt="Image">
+                            @if($user->cover_img)
+                                <img class="info-cover-img" id="infoImage" src="{{ asset('storage/' . $user->cover_img) }}" alt="Cover Image">
+                            @else
+                                <img class="info-cover-img" id="infoImage" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Cover Image">
+                            @endif
                         </div>
-                    </div>                                                        
+                    </div> --}}
+
+                    @if($user->cover_img)
+                        <div class="info-cover">
+                            <div class="info-cover-inner">
+                                <img class="info-cover-img" id="infoImage" src="{{ asset('storage/' . $user->cover_img) }}" alt="Cover Image">
+                            </div>
+                        </div>
+                    @endif
                     
                     <div class="text-info">
                         <div class="profile-img3">
-                            <img src="https://scontent.fbom3-2.fna.fbcdn.net/v/t39.30808-6/480525767_1632728957636248_5958768589424689080_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=XCeTvmHZ6N4Q7kNvgEPjapS&_nc_oc=Adg56cYE2RdVHuwafxoTGp-IBB1LhhFJ4W0S8vowDcYjd7e2bVEfNktYvcpfkrf9GhEOx2XaVtz191glHNBqq5uB&_nc_zt=23&_nc_ht=scontent.fbom3-2.fna&_nc_gid=ADF1W5uK1JhoiN7W7GPTtxO&oh=00_AYAE0tLDMwT0MLzUU2yl1_nuk4Y25Wp6KUBWdhhNXDD8hA&oe=67C9EA59" alt="Default Profile">
+                            {{-- <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile"> --}}
+                            @if($user->profile_pic)
+                                <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture">
+                            @else
+                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile">
+                            @endif
                         </div>
                     
                         <div class="profile-info1">
-                            <h1>r/adhiphalder</h1> 
-                            <p class="profile-info1-p">Priya is my love</p>
+                            {{-- <h1>r/adhiphalder</h1>  --}}
+                            <h1>r/{{ $user->user_name }}</h1> 
+                            {{-- <p class="profile-info1-p">Priya is my love</p> --}}
+                            @if($user->bio)
+                                <p class="profile-info1-p">{{ $user->bio }}</p>
+                            @endif
                         </div>
                     </div>
 
-                    <p class="comm-info-span">Members</p>
                 </div>
+                {{-- <p class="comm-info-span">Members</p> --}}
 
-                <div class="com-follower">
+                {{-- <div class="com-follower">
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-1.fna.fbcdn.net/v/t39.30808-6/469482361_595596076295701_6491366342971268904_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=NXHjU4QQ_DkQ7kNvgGLgmPn&_nc_oc=Adg-NBCkkcH1b0gGTg8Sjsqv5A1SJy-3Sn9NodonUTG8hHaCuE2MVSdgklp2Mi6W9_OqWPa7STyAb4gUDgRjacxI&_nc_zt=23&_nc_ht=scontent.fbom3-1.fna&_nc_gid=AI8rq6-4HiMGjaTBlb5i_hl&oh=00_AYBxFYl7-9gP1Qnz43a9i9g6jQ6VPdXOazvtjfIgv3bBpA&oe=67C9EE8D" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/koyelmallick</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button" onclick="toggleFollow(this)">Follow</button></a>
@@ -339,13 +356,9 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-3.fna.fbcdn.net/v/t39.30808-6/433440060_1406068050302341_6532232917088331687_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=GkIurff9F0AQ7kNvgGDf1Aj&_nc_oc=AdiT60xQmbz2kmk5SE9DRzmRQKpR8hujGNLc-xV_I_gBRaLQOHkvcs7InemL1fng8lW43Q0LlaroKQnSAVKjoHgR&_nc_zt=23&_nc_ht=scontent.fbom3-3.fna&_nc_gid=ATax5DAue6L2L8RGBy_EioG&oh=00_AYDKrIifj9Xxjeh_6pheRXx96wHiAByREQT6raRkHknzTQ&oe=67C9DF57" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/adhiphalder</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button">Follow</button></a>
@@ -353,13 +366,9 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-3.fna.fbcdn.net/v/t39.30808-6/473011954_1243999570003124_9081676659386860349_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=uoJCahC5cRwQ7kNvgHHCLwE&_nc_oc=AdhKWssvketgm_PSVDOzuUQ_tcDOqrnJL5gfciNHyK-ZOhlpvNbNpna8GaRC_xbv2ciLHn_HEUlKJ6MU9JJaxPGt&_nc_zt=23&_nc_ht=scontent.fbom3-3.fna&_nc_gid=A4LwAu15h7dum0FVYxuxsyj&oh=00_AYD2lJ24G4MBykd7VIJpnV-deZFEm1DSQkAlbkzuJTIV1w&oe=67C9E13A" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/mrigankaadhikary</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button">Follow</button></a>
@@ -367,13 +376,9 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-3.fna.fbcdn.net/v/t39.30808-6/469588691_603152458950090_1031539102696606817_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=lpTmSAuA6j4Q7kNvgEOz9-z&_nc_oc=Adg7KZB1JaRepnOyMcWwB2XB3dIaD3khnbcrik7hQHE6z1XHU0pUs3SYzv0Ru87PlOsIyej8w7tcWzh-GEorERtG&_nc_zt=23&_nc_ht=scontent.fbom3-3.fna&_nc_gid=A2eSg2QF1bk2hR6GEkvL0R4&oh=00_AYA9xRaKsI3o2zpUQ7xEGZsrH-F2rksR_hnp7gZ0I6NY3Q&oe=67CA040F" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/toushikmehmood</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button">Follow</button></a>
@@ -381,13 +386,9 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-1.fna.fbcdn.net/v/t39.30808-6/469482361_595596076295701_6491366342971268904_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=NXHjU4QQ_DkQ7kNvgGLgmPn&_nc_oc=Adg-NBCkkcH1b0gGTg8Sjsqv5A1SJy-3Sn9NodonUTG8hHaCuE2MVSdgklp2Mi6W9_OqWPa7STyAb4gUDgRjacxI&_nc_zt=23&_nc_ht=scontent.fbom3-1.fna&_nc_gid=AI8rq6-4HiMGjaTBlb5i_hl&oh=00_AYBxFYl7-9gP1Qnz43a9i9g6jQ6VPdXOazvtjfIgv3bBpA&oe=67C9EE8D" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/koyelmallick</span></a>
-                                <div>
-                                    <!-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> -->
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button">Follow</button></a>
@@ -395,13 +396,9 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-3.fna.fbcdn.net/v/t39.30808-6/433440060_1406068050302341_6532232917088331687_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=GkIurff9F0AQ7kNvgGDf1Aj&_nc_oc=AdiT60xQmbz2kmk5SE9DRzmRQKpR8hujGNLc-xV_I_gBRaLQOHkvcs7InemL1fng8lW43Q0LlaroKQnSAVKjoHgR&_nc_zt=23&_nc_ht=scontent.fbom3-3.fna&_nc_gid=ATax5DAue6L2L8RGBy_EioG&oh=00_AYDKrIifj9Xxjeh_6pheRXx96wHiAByREQT6raRkHknzTQ&oe=67C9DF57" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/adhiphalder</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button">Follow</button></a>
@@ -409,13 +406,9 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-3.fna.fbcdn.net/v/t39.30808-6/473011954_1243999570003124_9081676659386860349_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=uoJCahC5cRwQ7kNvgHHCLwE&_nc_oc=AdhKWssvketgm_PSVDOzuUQ_tcDOqrnJL5gfciNHyK-ZOhlpvNbNpna8GaRC_xbv2ciLHn_HEUlKJ6MU9JJaxPGt&_nc_zt=23&_nc_ht=scontent.fbom3-3.fna&_nc_gid=A4LwAu15h7dum0FVYxuxsyj&oh=00_AYD2lJ24G4MBykd7VIJpnV-deZFEm1DSQkAlbkzuJTIV1w&oe=67C9E13A" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/mrigankaadhikary</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button onclick="toggleButton(this)" class="com-follower-profile-button">Follow</button></a>
@@ -423,19 +416,96 @@
 
                     <div class="com-follower-profile">
                         <div class="com-follower-profile-text">
-                            <img class="com-follower-profile-img" src="https://scontent.fbom3-3.fna.fbcdn.net/v/t39.30808-6/469588691_603152458950090_1031539102696606817_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=lpTmSAuA6j4Q7kNvgEOz9-z&_nc_oc=Adg7KZB1JaRepnOyMcWwB2XB3dIaD3khnbcrik7hQHE6z1XHU0pUs3SYzv0Ru87PlOsIyej8w7tcWzh-GEorERtG&_nc_zt=23&_nc_ht=scontent.fbom3-3.fna&_nc_gid=A2eSg2QF1bk2hR6GEkvL0R4&oh=00_AYA9xRaKsI3o2zpUQ7xEGZsrH-F2rksR_hnp7gZ0I6NY3Q&oe=67CA040F" alt="">
+                            <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                             <div class="com-follower-profile-text-inner">
                                 <a href="#"><span>r/toushikmehmood</span></a>
-                                <div>
-                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                                </div>
                             </div>
                         </div>
                         <a href="#"><button class="com-follower-profile-button">Follow</button></a>
                     </div>
 
+                </div> --}}
+
+
+                {{-- <div class="com-follower">
+                    @foreach($followers as $follow)
+                        <div class="com-follower-profile">
+                            <div class="com-follower-profile-text">
+                                @if($follow->follower->profile_pic)
+                                    <img class="com-follower-profile-img" src="{{ $follow->follower->profile_pic }}" alt="Profile Picture">
+                                @else
+                                    <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile Picture">
+                                @endif
+                                <div class="com-follower-profile-text-inner">
+                                    <a href="#"><span>{{ $follow->follower->user_name }}</span></a>
+                                </div>
+                            </div>
+                            @if(Auth::check() && !Auth::user()->isFollowing($follow->follower->user_id))
+                                <a href="#">
+                                    <button class="com-follower-profile-button" onclick="toggleFollow(this, '{{ route('follow', $follow->follower->user_id) }}')">Follow</button>
+                                </a>
+                            @else
+                                <button class="com-follower-profile-button" disabled>Following</button>
+                            @endif
+                        </div>
+                    @endforeach
+                        
                 </div>
+                <div class="not-found">
+                    <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
+                    <h3>Looks like you haven't do anything yet</h3> 
+                </div> --}}
+
+                @if(!$followers->isEmpty())
+                    <p class="comm-info-span">Followers</p>
+                
+                    <div class="com-follower">
+                        @foreach($followers as $follow)
+                            <div class="com-follower-profile">
+                                <div class="com-follower-profile-text">
+                                    @if($follow->follower->profile_pic)
+                                        <img class="com-follower-profile-img" src="{{ $follow->follower->profile_pic }}" alt="Profile Picture">
+                                    @else
+                                        <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile Picture">
+                                    @endif
+                                    <div class="com-follower-profile-text-inner">
+                                        @if(Auth::check() && Auth::user()->user_name == $follow->follower->user_name)
+                                            <a href="{{ route('profile') }}">
+                                                <span>{{ $follow->follower->user_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('user.outsiderProfile', ['username' => $follow->follower->user_name]) }}">
+                                                <span>{{ $follow->follower->user_name }}</span>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                
+                                @if(Auth::check() && Auth::id() != $follow->follower->user_id)
+                                    @if(!Auth::user()->isFollowing($follow->follower->user_id))
+                                        <form action="{{ route('follow', ['user_id' => $follow->follower->user_id]) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="com-follower-profile-button">Follow</button>
+                                        </form>
+                                    @else
+                                        <form id="unfollow-form-{{ $follow->follower->user_id }}" action="{{ route('unfollow', ['user_id' => $follow->follower->user_id]) }}" method="POST" class="unfollow-form">
+                                            @csrf
+                                            <button type="button" class="com-follower-profile-button" onclick="unfollowUser('{{ $follow->follower->user_id }}')">Unfollow</button>
+                                        </form>
+                                    @endif
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="not-found">
+                        <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="Not Found">
+                        <h3>Looks like there is no followers yet</h3> 
+                    </div>
+                @endif
+            
+
+
             </div>
 
         </main>

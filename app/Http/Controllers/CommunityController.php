@@ -9,6 +9,7 @@ use App\Models\Communities;
 use App\Models\User;
 use App\Models\Join;
 use App\Models\Post; 
+use App\Models\Follow; 
 
 
 class CommunityController extends Controller
@@ -231,6 +232,27 @@ class CommunityController extends Controller
         \DB::table('join')->where('user_id', $userId)->where('community_id', $community->community_id)->delete();
 
         return response()->json(['success' => "You've left the community successfully!"]);
+    }
+
+    public function viewmembercom($community_name){
+        // return view('User.ViewMemberCom');
+
+        $community = Communities::where('community_name', $community_name)->first();
+
+        if (!$community) {
+            return redirect()->route('home')->with('error', 'Community not found.');
+        }
+    
+        $members = \DB::table('join')
+            ->join('users', 'join.user_id', '=', 'users.user_id')
+            ->where('join.community_id', $community->community_id)
+            ->select('users.user_id', 'users.user_name', 'users.profile_pic')
+            ->get();
+    
+        $user = User::find($community->user_id);
+    
+        return view('User.ViewMemberCom', compact('community', 'members', 'user'));
+    
     }
 
 

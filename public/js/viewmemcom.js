@@ -34,22 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// -----------------------\\
-// COPY PROFILE \\
-// ---------------------------\\
-
-
-
-
-/*-----------------*\
-  #MAIN
-\*-----------------*/
-
-
-
-/*-----------------*\
-     BACKGROUND
-\*-----------------*/
+// /-----------------\
+//      BACKGROUND
+// \-----------------/
 
 
 const infoImage = document.getElementById("infoImage");
@@ -57,7 +44,7 @@ const infoCover = document.querySelector(".info-cover");
 
 function updateBackground() {
     const newSrc = infoImage.src;
-    infoCover.style.setProperty("--bg-url", `url('${newSrc}')`);
+    infoCover.style.setProperty("--bg-url", url('${newSrc}'));
 }
 
 updateBackground();
@@ -66,32 +53,57 @@ const observer = new MutationObserver(updateBackground);
 observer.observe(infoImage, { attributes: true, attributeFilter: ["src"] });
 
 
-/*-----------------------*\
-   BUTTON TOGGLE & POPUP
-\*-----------------------*/
+// /-----------------------\
+//    BUTTON TOGGLE & POPUP
+// \-----------------------/
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     document.querySelectorAll(".join").forEach(button => {
+//         button.addEventListener("click", function(event) {
+//             event.preventDefault();
+//             const form = this.closest("form");
+//             if (confirm("Do you want to follow this person?")) {
+//                 form.submit();
+//                 showToast("You have successfully followed this person!");
+//             }
+//         });
+//     });
+// });
+
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".com-follower-profile-button").forEach(button => {
+    document.querySelectorAll(".join").forEach(button => {
         button.addEventListener("click", function(event) {
-            if (this.innerText === "Follow") {
-                const form = this.closest("form");
-                if (confirm("Do you want to follow this person?")) {
-                    form.submit();
-                    showToast("You have successfully followed this person!");
-                }
+            event.preventDefault();
+            const form = this.closest("form");
+            if (confirm("Do you want to follow this person?")) {
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': formData.get('_token')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast(data.message);
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             }
-        });
-    });
-
-    document.querySelectorAll(".unfollow-form button").forEach(button => {
-        button.addEventListener("click", function(event) {
-            const userId = this.closest("form").id.split('-')[2]; 
-            unfollowUser (userId);
         });
     });
 });
 
-function unfollowUser (userId) {
+
+function unfollowUser(userId) {
     if (!confirm("Are you sure you want to unfollow this person?")) {
         return;
     }
@@ -115,7 +127,7 @@ function unfollowUser (userId) {
             newForm.method = "POST";
             newForm.innerHTML = `
                 <input type="hidden" name="_token" value="${formData.get('_token')}">
-                <button type="submit" class="com-follower-profile-button">Follow</button>
+                <button type="submit" class="join"><span>Follow</span></button>
             `;
 
             form.replaceWith(newForm);

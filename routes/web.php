@@ -93,6 +93,11 @@ Route::post('/community/join/{community_name}', [CommunityController::class, 'jo
 
 Route::post('/community/leave/{community_name}', [CommunityController::class, 'leaveCommunity'])->name('leave.community');
 
+// Route::get('/viewmembercom', [CommunityController::class, 'viewmembercom']);
+
+Route::get('/viewmembercom/{community_name}', [CommunityController::class, 'viewmembercom'])->name('viewmembercom');
+
+
 
 /*-------------*\
   #USER
@@ -128,9 +133,11 @@ Route::get('/posts/{postId}/likes', [UserController::class, 'getPostLikes']);
 
 Route::get('/users/{userId}/likes', [UserController::class, 'getUserLikes']);
 
-Route::get('/viewmember', [UserController::class, 'viewmember']);
+Route::get('/viewmember/{user_id}', [UserController::class, 'viewmember'])->name('viewmember');
 
-Route::get('/viewmembercom', [UserController::class, 'viewmembercom']);
+Route::get('/user/{user_id}/followers', [UserController::class, 'showFollowers'])->name('user.followers');
+
+Route::get('/user/{username}', [UserController::class, 'outprofile'])->name('user.outsiderProfile');
 
 Route::post('/follow/{user_id}', [UserController::class, 'follow'])->name('follow');
 
