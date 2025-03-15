@@ -304,6 +304,52 @@
                 </form>
             </div>
 
+            <div class="main-user-comments">
+
+                <div class="main-user-comments-first-div">
+                    <img src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_0.png" alt="">
+                    <div>@Username</div>
+                    <div>• 5 hour ago</div>
+                </div>
+                <div class="main-user-comments-second-div">
+                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
+                </div>
+
+            </div>
+
+
+            <div class="main-user-comments">
+
+                <div class="main-user-comments-first-div">
+                    <img src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_0.png" alt="">
+                    <div>@Username</div>
+                    <div>• 5 hour ago</div>
+                </div>
+                <div class="main-user-comments-second-div">
+                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
+                </div>
+
+            </div>
+
+
+            <div class="main-user-comments">
+
+                <div class="main-user-comments-first-div">
+                    <img src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_0.png" alt="">
+                    <div>@Username</div>
+                    <div>• 5 hour ago</div>
+                </div>
+                <div class="main-user-comments-second-div">
+                    You are so trustworthy; I always believe what you say. Everything seems brighter when you are around. Even the things you don't like about yourself make you interesting. I know that you will always have my back, because that is the kind of person you are.
+                </div>
+
+            </div>
+
+            <div class="not-found">
+                <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
+                <h3>Looks like there is no comment yet</h3> 
+            </div>
+
          </main>
 
 

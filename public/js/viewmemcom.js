@@ -43,14 +43,18 @@ const infoImage = document.getElementById("infoImage");
 const infoCover = document.querySelector(".info-cover");
 
 function updateBackground() {
+    if (!infoImage || !infoCover) return;  // Prevent errors if elements are missing
+
     const newSrc = infoImage.src;
-    infoCover.style.setProperty("--bg-url", url('${newSrc}'));
+    infoCover.style.setProperty("--bg-url", `url('${newSrc}')`);
 }
 
 updateBackground();
 
+// Watch for image changes and update the background
 const observer = new MutationObserver(updateBackground);
 observer.observe(infoImage, { attributes: true, attributeFilter: ["src"] });
+
 
 
 // /-----------------------\
