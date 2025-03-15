@@ -344,14 +344,14 @@
                             @elseif($isMember)
                                 <form id="leave-form-{{ $community->community_id }}" action="{{ route('leave.community', ['community_name' => $community->community_name]) }}" method="POST" class="leave-form">
                                     @csrf
-                                    <button type="button" class="com-follower-profile-button" onclick="leaveCommunity('{{ $community->community_id }}')">
+                                    <button style="margin-right: 8rem" type="button" class="com-follower-profile-button" onclick="leaveCommunity('{{ $community->community_id }}')">
                                         <span>Joined</span>
                                     </button>
                                 </form>
                             @else
                                 <form action="{{ route('join.community', ['community_name' => $community->community_name]) }}" method="POST" class="join-form">
                                     @csrf
-                                    <button type="submit" class="com-follower-profile-button">
+                                    <button style="margin-right: 8rem" type="submit" class="com-follower-profile-button">
                                         <span>Join</span>
                                     </button>
                                 </form>

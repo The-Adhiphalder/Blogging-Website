@@ -97,6 +97,26 @@ class CommunityController extends Controller
 
     public function showCommunity($community_name){
 
+        // $community = Communities::where('community_name', $community_name)->first();
+
+        // if (!$community) {
+        //     return redirect()->route('home')->with('error', 'Community not found.');
+        // }
+
+        // $posts = Post::with('user')
+        //     ->where('community_id', $community->community_id)
+        //     ->latest()
+        //     ->get();
+
+        // $totalPosts = $posts->count();
+        
+        // $userId = session('user_id');
+        // $isMember = \DB::table('join')->where('user_id', $userId)->where('community_id', $community->community_id)->exists();
+
+        // $totalMembers = \DB::table('join')->where('community_id', $community->community_id)->count();
+
+        // return view('Community.Community', compact('community', 'posts', 'isMember', 'totalPosts', 'totalMembers'));
+
         $community = Communities::where('community_name', $community_name)->first();
 
         if (!$community) {
@@ -116,7 +136,6 @@ class CommunityController extends Controller
         $totalMembers = \DB::table('join')->where('community_id', $community->community_id)->count();
 
         return view('Community.Community', compact('community', 'posts', 'isMember', 'totalPosts', 'totalMembers'));
-
 
     }
 
