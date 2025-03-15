@@ -341,6 +341,7 @@
                             @endphp
 
                             @if(Auth::id() === $community->user_id)
+                                {{-- Community owner logic can go here --}}
                             @elseif($isMember)
                                 <form id="leave-form-{{ $community->community_id }}" action="{{ route('leave.community', ['community_name' => $community->community_name]) }}" method="POST" class="leave-form">
                                     @csrf
@@ -488,7 +489,17 @@
                                 <div class="com-follower-profile-text">
                                     <img class="com-follower-profile-img" src="{{ $member->profile_pic ? asset('storage/' . $member->profile_pic) : 'https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}" alt="Profile Image">
                                     <div class="com-follower-profile-text-inner">
-                                        <a href="{{ route('user.outsiderProfile', ['username' => $member->user_name]) }}"><span>r/{{ $member->user_name }}</span></a>
+                                        {{-- <a href="{{ route('user.outsiderProfile', ['username' => $member->user_name]) }}"><span>r/{{ $member->user_name }}</span></a> --}}
+                                        @if($member->user_id === auth()->user()->user_id)
+                                            <a href="{{ route('profile') }}">
+                                                <span>r/{{ $member->user_name }}</span>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('user.outsiderProfile', ['username' => $member->user_name]) }}">
+                                                <span>r/{{ $member->user_name }}</span>
+                                            </a>
+                                        @endif
+                                        
                                         <div>
                                             @if($community->user_id == $member->user_id) 
                                                 <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -500,20 +511,22 @@
                                 </div>
                                 {{-- <a href="#"><button class="com-follower-profile-button">Follow</button></a> --}}
 
-                                @if(auth()->user()->isFollowing($member->user_id))
-                                    <form id="unfollow-form-{{ $member->user_id }}" action="{{ route('unfollow', ['user_id' => $member->user_id]) }}" method="POST" class="unfollow-form">
-                                        @csrf
-                                        <button type="button" class="joined" onclick="unfollowUser('{{ $member->user_id }}')">
-                                            <span>Unfollow</span>
-                                        </button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('follow', ['user_id' => $member->user_id]) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="join" style="width: 87px;">
-                                            <span>Follow</span>
-                                        </button>
-                                    </form>
+                                @if($member->user_id !== auth()->user()->user_id)
+                                    @if(auth()->user()->isFollowing($member->user_id))
+                                        <form id="unfollow-form-{{ $member->user_id }}" action="{{ route('unfollow', ['user_id' => $member->user_id]) }}" method="POST" class="unfollow-form">
+                                            @csrf
+                                            <button type="button" class="joined" onclick="unfollowUser('{{ $member->user_id }}')">
+                                                <span>Unfollow</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow', ['user_id' => $member->user_id]) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="join" style="width: 87px;">
+                                                <span>Follow</span>
+                                            </button>
+                                        </form>
+                                    @endif
                                 @endif
 
                             </div>
@@ -522,7 +535,7 @@
                 @else
                     <div class="not-found">
                         <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="Not Found">
-                        <h3>Looks like there is no followers yet</h3> 
+                        <h3>Looks like there is no members yet</h3> 
                     </div>
                 @endif
             </div>

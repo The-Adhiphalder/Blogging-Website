@@ -54,22 +54,8 @@ observer.observe(infoImage, { attributes: true, attributeFilter: ["src"] });
 
 
 // /-----------------------\
-//    BUTTON TOGGLE & POPUP
+//   FOLLOW & UNFOLLOW BUTTON
 // \-----------------------/
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     document.querySelectorAll(".join").forEach(button => {
-//         button.addEventListener("click", function(event) {
-//             event.preventDefault();
-//             const form = this.closest("form");
-//             if (confirm("Do you want to follow this person?")) {
-//                 form.submit();
-//                 showToast("You have successfully followed this person!");
-//             }
-//         });
-//     });
-// });
-
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".join").forEach(button => {
@@ -141,6 +127,116 @@ function unfollowUser(userId) {
     });
 }
 
+function showToast(message) {
+    let toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => {
+            toast.remove();
+        }, 500);
+    }, 3000);
+}
+
+
+
+// /-----------------------\
+//   JOIN & JOINED BUTTON
+// \-----------------------/
+
+// Join Button Logic
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".join").forEach(button => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            const form = this.closest("form");
+            if (confirm("Do you want to join this community?")) {
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': formData.get('_token')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast("You're successfully joined this community");
+                        // Optionally, you can change the button to "Joined"
+                        const button = document.createElement("button");
+                        button.classList.add("joined");
+                        button.setAttribute("type", "button");
+                        button.innerHTML = "<span>Joined</span>";
+                        button.onclick = function() {
+                            leaveCommunity('{{ $community->community_id }}');
+                        };
+                        form.replaceWith(button);
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    });
+});
+
+// Leave Button Logic
+function leaveCommunity(communityId) {
+    if (!confirm("Are you sure you want to leave this community?")) {
+        return;
+    }
+
+    const form = document.getElementById(`leave-form-${communityId}`);
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': formData.get('_token')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const button = document.createElement("button");
+            button.classList.add("join");
+            button.setAttribute("type", "submit");
+            button.innerHTML = "<span>Join</span>";
+            button.onclick = function() {
+                const joinForm = document.createElement("form");
+                joinForm.action = "{{ route('join.community', ['community_name' => $community->community_name]) }}";
+                joinForm.method = "POST";
+                joinForm.innerHTML = `@csrf <button type="submit" class="join"><span>Join</span></button>`;
+                document.body.appendChild(joinForm);
+                joinForm.submit();
+            };
+
+            form.replaceWith(button);
+            showToast("You've left this community successfully!");
+        } else {
+            alert(data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Toast Function
 function showToast(message) {
     let toast = document.createElement("div");
     toast.className = "toast";
