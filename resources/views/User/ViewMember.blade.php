@@ -463,8 +463,9 @@
                         @foreach($followers as $follow)
                             <div class="com-follower-profile">
                                 <div class="com-follower-profile-text">
+
                                     @if($follow->follower->profile_pic)
-                                        <img class="com-follower-profile-img" src="{{ $follow->follower->profile_pic }}" alt="Profile Picture">
+                                        <img class="com-follower-profile-img" src="{{ asset('storage/' . $follow->follower->profile_pic) }}" alt="Profile Picture">
                                     @else
                                         <img class="com-follower-profile-img" src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile Picture">
                                     @endif
