@@ -1318,6 +1318,7 @@ main{
   padding-top: 10px;
   padding-bottom: 1px;
   border-radius: 10px;
+  margin-bottom: 35px;
 }
 
 .com-follower-profile{
@@ -1356,6 +1357,17 @@ main{
   color: #878a8c;
   font-weight: 600;
 }
+
+
+.com-follower-profile-text-inner-span {
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+a:hover .com-follower-profile-text-inner-span {
+  color: #878ed8; /* Change to your preferred hover color */
+  /* text-decoration: underline; */
+}
+
 
 .post-wall-admin{
   font-size: 12px;

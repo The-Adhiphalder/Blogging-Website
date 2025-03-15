@@ -1375,10 +1375,10 @@
                     <span>1.2k</span>
                 </div>
                 <div>
-                    <a href="{{ url('/viewmember/' . $user->user_id) }}">
-                        <span>Followers</span>
+                    <a href="{{ url('/viewmember/' . $user->user_id) }}" style=" width:100%; display: flex; justify-content: space-between;">
+                        <span style="color: #868998">Followers</span>
                         {{-- <span>300</span> --}}
-                        <span>{{ $totalFollowers }}</span>
+                        <span style="color: #868998">{{ $totalFollowers }}</span>
                     </a>
                 </div>
                 <div>
