@@ -1705,6 +1705,7 @@ transition: all 0.3s ease;
   font-weight: 700;
   border: none;
   border-radius: 50px;
+  color: #9fa5b5;
 }
 
 .cmt:hover{
