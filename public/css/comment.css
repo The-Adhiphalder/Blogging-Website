@@ -1320,6 +1320,14 @@ transition: all 0.3s ease;
     font-weight: 600;
     color: #868998;
   }
+
+  .main-user-comments-first-div-user-name{
+    transition: all 0.5s ease-out;
+  }
+
+  .main-user-comments-first-div-user-name:hover{
+    color: #878ed8;
+  }
   
   .main-user-comments-second-div{
     font-size: 14px;

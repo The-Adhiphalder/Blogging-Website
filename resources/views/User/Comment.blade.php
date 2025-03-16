@@ -276,36 +276,39 @@
                 @else
                     <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile Picture">
                 @endif
-                <div class="username">
-                    {{-- <p>r/Username</p>
-                    <p>Just saying</p> --}}
 
-                    {{-- <p>r/{{ $post->user->user_name }}</p> --}}
-                    @if(auth()->id() == $post->user->user_id)
-                        <a href="{{ route('profile') }}">
-                            <span class="username-hover">r/{{ $post->user->user_name }}</span>
-                        </a>
-                    @else
-                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
-                            <span class="username-hover">r/{{ $post->user->user_name }}</span>
-                        </a>
-                    @endif
-                    @if($post->community_id) 
-                        @php
-                            $community = \App\Models\Communities::find($post->community_id);
-                        @endphp
-                        @if($community && $community->user_id == session('user_id'))
-                            <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
-                                <span class="username-hover"> | {{ $community->community_name }}</span>
+                <div>
+                    <div class="username">
+                        {{-- <p>r/Username</p>
+                        <p>Just saying</p> --}}
+    
+                        {{-- <p>r/{{ $post->user->user_name }}</p> --}}
+                        @if(auth()->id() == $post->user->user_id)
+                            <a href="{{ route('profile') }}">
+                                <span class="username-hover">r/{{ $post->user->user_name }}</span>
                             </a>
                         @else
-                            <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
-                                <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                            <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                <span class="username-hover">r/{{ $post->user->user_name }}</span>
                             </a>
                         @endif
-                    @endif
+                        @if($post->community_id) 
+                            @php
+                                $community = \App\Models\Communities::find($post->community_id);
+                            @endphp
+                            @if($community && $community->user_id == session('user_id'))
+                                <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                    <span class="username-hover"> | {{ $community->community_name }}</span>
+                                </a>
+                            @else
+                                <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                    <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                </a>
+                            @endif
+                        @endif
+                    </div>
+                    <p style=" font-weight: 600; font-size: 15px; margin-left: 6px; margin-top: 3px;">{{ $post->created_at->diffForHumans() }}</p>
                 </div>
-                <p>{{ $post->created_at->diffForHumans() }}</p>
             </div>
 
             @if($post->post_caption && $post->post_img)
@@ -423,7 +426,7 @@
                             <img src="{{ $comment->user->profile_pic ? asset('storage/' . $comment->user->profile_pic) : 'https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}" alt="Profile Picture">
                             @if(auth()->id() == $comment->user->user_id)
                                 <a href="{{ route('profile') }}">
-                                    <div>{{ $comment->user->user_name }}</div>
+                                    <div class="main-user-comments-first-div-user-name">{{ $comment->user->user_name }}</div>
                                 </a>
                             @else
                                 <a href="{{ route('outprofile', ['username' => $comment->user->user_name]) }}">
