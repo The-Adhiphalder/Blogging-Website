@@ -494,7 +494,16 @@
                                     </div>
 
                                     <div class="profile-img2"></div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -634,7 +643,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -770,7 +788,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -913,7 +940,16 @@
                                     </div>
 
                                     <div class="profile-img2"></div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -924,11 +960,13 @@
                                     @else
                                         <span class="post-wall-member" style="color: #d0d3da;">Members</span>
                                     @endif
+
                                 </div>
                                 
                                 {{-- <h3>This is a title</h3> --}}
                                 <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
 
+                                
                                 <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
                                     <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
                                         <div style="
@@ -1041,7 +1079,6 @@
 
                         @elseif($post->post_caption && $post->post_desc )
 
-
                             <div class="post-wall2">
                                 <div class="username">
                                     <div class="profile-img2">
@@ -1052,7 +1089,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1083,6 +1129,7 @@
                                 <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
                                     <p class="post-para">{{ $post->post_desc }}</p>
                                 </a>
+
 
 
 
@@ -1177,7 +1224,7 @@
 
                         @elseif($post->post_caption )
 
-                            <div class="post-wall2" style="height: 143px">
+                            <div class="post-wall2" style="height: 143px; " >
                                 <div class="username">
                                     <div class="profile-img2">
                                         {{-- <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture"> --}}
@@ -1187,7 +1234,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1199,13 +1255,14 @@
                                         <span class="post-wall-member" style="color: #d0d3da;">Members</span>
                                     @endif
                                 </div>
+
                                 
                                 {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
+                                
 
                                 <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
                                     <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
                                 </a>
-
 
 
                                 <div class="like-cmt-share">

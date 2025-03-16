@@ -1424,7 +1424,7 @@ transition: all 0.3s ease;
   width: 100%; 
   overflow: hidden; 
   padding-top: 15px;
-  margin-bottom: 21px;
+  margin-bottom: 14px;
   /* padding-left: 195px; */
 }
 
@@ -1484,7 +1484,7 @@ transition: all 0.3s ease;
 \*-----------------------*/
 
 .identifier-body{
-  /* display: flex; */
+  display: flex;
   flex-wrap: wrap;
   gap: 35px;
   opacity: 0;
@@ -1918,7 +1918,7 @@ transition: all 0.3s ease;
 
 .post-wall2{
   position: relative;
-  margin-top: 20px;
+  /* margin-top: 55px; */
   /* max-height: 143px; */
   height: auto;
   padding-bottom: 10px;
