@@ -60,6 +60,7 @@ document.getElementById('create-post-form-img').addEventListener('change', funct
     }
 });
 
+
 /*-----------------*\
   COMMUNITY SEARCH
 \*-----------------*/

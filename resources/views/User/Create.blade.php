@@ -538,10 +538,10 @@
 
                         <div class="form-one">
                             <label for="create-post-title">Title<span class="required-star">*</span></label>
-                            <input type="text" name="post_caption" id="create-post-title" class="create-post-title" style="margin-left: 0px;" placeholder="" required>
+                            <input type="text" name="post_caption" id="create-post-title" class="create-post-title" style="margin-left: 0px;" placeholder="" value="{{ old('post_caption') }}" required>
                         </div>
                         <div class="form-two">
-                            <textarea name="post_desc" id="" class="create-post-body" placeholder="Body"></textarea>
+                            <textarea name="post_desc" id="" class="create-post-body" placeholder="Body">{{ old('post_desc') }}</textarea>
                         </div>
                         <div class="form-three">
                             <input type="file" name="post_img" class="" id="create-post-form-img" style="display: none;" accept="image/*">

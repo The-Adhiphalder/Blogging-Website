@@ -1389,7 +1389,7 @@
                 </div>
                 <div>
                     <span>Active</span>
-                    <span>0</span>
+                    <span>{{ $totalActiveUsers }}</span>
                 </div>
             </div>
 

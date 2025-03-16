@@ -1202,7 +1202,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1330,7 +1339,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1469,7 +1487,19 @@
                                     </div>
 
                                     <div class="profile-img2"></div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <a href="">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
+                                    
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1604,7 +1634,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1732,7 +1771,16 @@
                                             <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         @endif
                                     </div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
@@ -1948,7 +1996,8 @@
                 </div>
                 <div>
                     <span>Active</span>
-                    <span>120</span>
+                    {{-- <span>120</span> --}}
+                    <span>{{ $totalActiveUsers }}</span>
                 </div>
             </div>
 

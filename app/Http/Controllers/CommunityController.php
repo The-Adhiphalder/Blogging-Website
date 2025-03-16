@@ -82,20 +82,23 @@ class CommunityController extends Controller
         if (!$community) {
             return redirect()->route('home')->with('error', 'Community not found.');
         }
-
+    
         $posts = Post::with('user')
             ->where('community_id', $community->community_id)
             ->latest()
             ->get();
-
+    
         $totalPosts = $posts->count();
-
         $totalMembers = \DB::table('join')->where('community_id', $community->community_id)->count();
-
-        return view('Community.MyCommunity', compact('community', 'posts', 'totalPosts', 'totalMembers'));
+    
+        $totalActiveUsers = \DB::table('sessions')->whereNotNull('user_id')->count();
+    
+        return view('Community.MyCommunity', compact('community', 'posts', 'totalPosts', 'totalMembers', 'totalActiveUsers'));
     }
 
-    public function showCommunity($community_name){
+    public function showCommunity($community_name)
+    {
+
 
         $community = Communities::where('community_name', $community_name)->first();
 
@@ -115,14 +118,15 @@ class CommunityController extends Controller
 
         $totalMembers = \DB::table('join')->where('community_id', $community->community_id)->count();
 
-        return view('Community.Community', compact('community', 'posts', 'isMember', 'totalPosts', 'totalMembers'));
+        $totalActiveUsers = \DB::table('sessions')->whereNotNull('user_id')->count();
+
+        return view('Community.Community', compact('community', 'posts', 'isMember', 'totalPosts', 'totalMembers', 'totalActiveUsers'));
 
     }
 
     public function explore() 
     {
         // return view('Community.Explore');
-
 
         $userId = session('user_id'); 
 
@@ -133,6 +137,10 @@ class CommunityController extends Controller
                     ->where('user_id', $userId);
             })
             ->get();
+
+        foreach ($otherCommunities as $community) {
+            $community->members_count = \DB::table('join')->where('community_id', $community->community_id)->count();
+        }
 
         $groupedCommunities = $otherCommunities->groupBy('category');
 
