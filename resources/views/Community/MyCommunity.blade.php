@@ -1043,6 +1043,7 @@
                         -->
 
                         @if($post->post_caption && $post->post_img)
+
                             <div class="post-wall">
                                 <div class="username">
 
@@ -1083,20 +1084,22 @@
                                 {{-- <h3>This is a title</h3> --}}
                                 <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
 
-                                <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
-                                    <div style="
-                                        position: absolute;
-                                        top: -10%;
-                                        left: -10%;
-                                        height: 120%;
-                                        width: 120%;
-                                        background: url('{{ asset("storage/" . $post->post_img) }}') no-repeat center;
-                                        background-size: cover;
-                                        filter: blur(20px);
-                                        z-index: 1;
-                                    "></div>
-                                    <img src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
-                                </div>
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
+                                        <div style="
+                                            position: absolute;
+                                            top: -10%;
+                                            left: -10%;
+                                            height: 120%;
+                                            width: 120%;
+                                            background: url('{{ asset("storage/" . $post->post_img) }}') no-repeat center;
+                                            background-size: cover;
+                                            filter: blur(20px);
+                                            z-index: 1;
+                                        "></div>
+                                        <img src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
+                                    </div>
+                                </a>
 
                                 <!-- 
                                 - SECTION LIKE CMT SHARE POST-WALL1
@@ -1192,6 +1195,7 @@
 
 
                         @elseif($post->post_caption && $post->post_desc )
+
                             <div class="post-wall2">
                                 <div class="username">
                                     <div class="profile-img2">
@@ -1226,7 +1230,9 @@
                                 </div>
                                 
                                 {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
-                                <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                </a>
                                 {{-- <p class="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years.
 
                                     I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it.
@@ -1235,7 +1241,9 @@
                                     
                                     Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p> --}}
 
-                                    <p class="post-para">{{ $post->post_desc }}</p>
+                                    <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                        <p class="post-para">{{ $post->post_desc }}</p>
+                                    </a>
 
 
 
@@ -1329,6 +1337,7 @@
                             -->
 
                         @elseif($post->post_caption )
+
                             <div class="post-wall2" style="height: 143px">
                                 <div class="username">
                                     <div class="profile-img2">
@@ -1362,7 +1371,9 @@
                                 </div>
                                 
                                 {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
-                                <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                </a>
 
 
 
@@ -1475,6 +1486,7 @@
                         -->
 
                         @if($post->post_caption && $post->post_img)
+
                             <div class="post-wall">
                                 <div class="username">
 
@@ -1514,21 +1526,22 @@
                                 
                                 {{-- <h3>This is a title</h3> --}}
                                 <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
-
-                                <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
-                                    <div style="
-                                        position: absolute;
-                                        top: -10%;
-                                        left: -10%;
-                                        height: 120%;
-                                        width: 120%;
-                                        background: url('{{ asset("storage/" . $post->post_img) }}') no-repeat center;
-                                        background-size: cover;
-                                        filter: blur(20px);
-                                        z-index: 1;
-                                    "></div>
-                                    <img src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
-                                </div>
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
+                                        <div style="
+                                            position: absolute;
+                                            top: -10%;
+                                            left: -10%;
+                                            height: 120%;
+                                            width: 120%;
+                                            background: url('{{ asset("storage/" . $post->post_img) }}') no-repeat center;
+                                            background-size: cover;
+                                            filter: blur(20px);
+                                            z-index: 1;
+                                        "></div>
+                                        <img src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
+                                    </div>
+                                </a>
 
                                 <!-- 
                                 - SECTION LIKE CMT SHARE POST-WALL1
@@ -1624,6 +1637,9 @@
 
 
                         @elseif($post->post_caption && $post->post_desc )
+
+                            <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                            </a>
                             <div class="post-wall2">
                                 <div class="username">
                                     <div class="profile-img2">
@@ -1658,7 +1674,9 @@
                                 </div>
                                 
                                 {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
-                                <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                </a>
                                 {{-- <p class="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years.
 
                                     I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it.
@@ -1667,7 +1685,9 @@
                                     
                                     Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p> --}}
 
-                                    <p class="post-para">{{ $post->post_desc }}</p>
+                                    <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                        <p class="post-para">{{ $post->post_desc }}</p>
+                                    </a>
 
 
 
@@ -1761,6 +1781,7 @@
                             -->
 
                         @elseif($post->post_caption )
+
                             <div class="post-wall2" style="height: 143px">
                                 <div class="username">
                                     <div class="profile-img2">
@@ -1794,7 +1815,9 @@
                                 </div>
                                 
                                 {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
-                                <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                                </a>
 
 
 

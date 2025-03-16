@@ -1484,7 +1484,7 @@ transition: all 0.3s ease;
 \*-----------------------*/
 
 .identifier-body{
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
   gap: 35px;
   opacity: 0;
@@ -1918,7 +1918,7 @@ transition: all 0.3s ease;
 
 .post-wall2{
   position: relative;
-  /* margin-top: 55px; */
+  margin-top: 20px;
   /* max-height: 143px; */
   height: auto;
   padding-bottom: 10px;
