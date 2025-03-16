@@ -29,7 +29,7 @@
          - SECTION PRELOADER
         -->
 
-        {{-- <div class="preloader">
+        <div class="preloader">
             <svg id="preloader" width="240px" height="120px" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
         
@@ -61,11 +61,12 @@
             </svg>
 
             <script>
-                window.onload = function() {
-                    document.querySelector('.preloader').style.display = 'none';
-                };
+                window.addEventListener("load", function () {
+                    document.querySelector(".preloader").classList.add("hidden");
+                    setTimeout(() => document.querySelector(".preloader").style.display = "none", 500);
+                });
             </script>
-        </div> --}}
+        </div>
 
 
         <!-- 
