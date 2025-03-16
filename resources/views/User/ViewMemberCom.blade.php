@@ -341,7 +341,6 @@
                             @endphp
 
                             @if(Auth::id() === $community->user_id)
-                                {{-- Community owner logic can go here --}}
                             @elseif($isMember)
                                 <form id="leave-form-{{ $community->community_id }}" action="{{ route('leave.community', ['community_name' => $community->community_name]) }}" method="POST" class="leave-form">
                                     @csrf

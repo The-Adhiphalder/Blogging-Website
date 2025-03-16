@@ -9,6 +9,17 @@
 
 </head>
 <body>
+
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="/Video/Space.mp4" type="video/mp4">
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var video = document.getElementById("background-video");
+                    video.playbackRate = 1.2; 
+                });
+            </script>
+    </video>
+    
     <div class="main-div">
         <div class="left-div">
             <div class="left-div-img">

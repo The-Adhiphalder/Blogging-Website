@@ -4,7 +4,7 @@
     padding: 0;
     color: white;
 }
-body{/* Reset and base styles */
+body{
     * {
         margin: 0;
         padding: 0;
@@ -12,6 +12,19 @@ body{/* Reset and base styles */
     }
     body {
         background-color: black;
+    }
+
+    .background-video {
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        min-width: 100%; 
+        min-height: 100%;
+        width: auto;
+        filter: blur(15px);
+        height: auto;
+        z-index: -1; 
+        transform: translate(-50%, -50%); 
     }
     
     .main-div {

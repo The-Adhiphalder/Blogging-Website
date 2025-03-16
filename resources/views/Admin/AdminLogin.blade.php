@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <link rel="stylesheet" href="{{asset('css/adminlogin.css')}}"> 
+
 </head>
 
 <body>
+
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="/Video/Space.mp4" type="video/mp4">
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var video = document.getElementById("background-video");
+                    video.playbackRate = 1.2; 
+                });
+            </script>
+    </video>
+
     <div class="main-div">
         <div class="left-div">
             <div id="login" class="login">

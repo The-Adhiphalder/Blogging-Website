@@ -1010,7 +1010,19 @@
                                     </div>
 
                                     <div class="profile-img2"></div>
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    {{-- <a href="">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a> --}}
+                                    @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                        <a href="{{ route('profile') }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                            <span class="username-hover">{{ $post->user->user_name }}</span>
+                                        </a>
+                                    @endif
+                                    
                                     {{-- <p> • 22 hr. ago</p> --}}
                                     <p> • {{ $post->created_at->diffForHumans() }}</p>
                                     {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>

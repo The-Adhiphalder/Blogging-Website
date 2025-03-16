@@ -43,7 +43,7 @@ const infoImage = document.getElementById("infoImage");
 const infoCover = document.querySelector(".info-cover");
 
 function updateBackground() {
-    if (!infoImage || !infoCover) return;  // Prevent errors if elements are missing
+    if (!infoImage || !infoCover) return;  
 
     const newSrc = infoImage.src;
     infoCover.style.setProperty("--bg-url", `url('${newSrc}')`);
@@ -51,7 +51,6 @@ function updateBackground() {
 
 updateBackground();
 
-// Watch for image changes and update the background
 const observer = new MutationObserver(updateBackground);
 observer.observe(infoImage, { attributes: true, attributeFilter: ["src"] });
 
@@ -155,7 +154,6 @@ function showToast(message) {
 //   JOIN & JOINED BUTTON
 // \-----------------------/
 
-// Join Button Logic
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".join").forEach(button => {
         button.addEventListener("click", function(event) {
@@ -175,15 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 .then(data => {
                     if (data.success) {
                         showToast("You're successfully joined this community");
-                        // Optionally, you can change the button to "Joined"
-                        const button = document.createElement("button");
-                        button.classList.add("joined");
-                        button.setAttribute("type", "button");
-                        button.innerHTML = "<span>Joined</span>";
-                        button.onclick = function() {
-                            leaveCommunity('{{ $community->community_id }}');
-                        };
-                        form.replaceWith(button);
+                        location.reload();
                     } else {
                         alert(data.message);
                     }
@@ -196,7 +186,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Leave Button Logic
 function leaveCommunity(communityId) {
     if (!confirm("Are you sure you want to leave this community?")) {
         return;
@@ -216,21 +205,8 @@ function leaveCommunity(communityId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            const button = document.createElement("button");
-            button.classList.add("join");
-            button.setAttribute("type", "submit");
-            button.innerHTML = "<span>Join</span>";
-            button.onclick = function() {
-                const joinForm = document.createElement("form");
-                joinForm.action = "{{ route('join.community', ['community_name' => $community->community_name]) }}";
-                joinForm.method = "POST";
-                joinForm.innerHTML = `@csrf <button type="submit" class="join"><span>Join</span></button>`;
-                document.body.appendChild(joinForm);
-                joinForm.submit();
-            };
-
-            form.replaceWith(button);
             showToast("You've left this community successfully!");
+            location.reload();
         } else {
             alert(data.error);
         }
@@ -240,7 +216,6 @@ function leaveCommunity(communityId) {
     });
 }
 
-// Toast Function
 function showToast(message) {
     let toast = document.createElement("div");
     toast.className = "toast";
