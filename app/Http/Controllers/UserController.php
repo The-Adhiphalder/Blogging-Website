@@ -66,6 +66,59 @@ class UserController extends Controller
     public function storePost(Request $request)
     {
     
+        // $request->validate([
+        //     'post_caption' => 'required|string|max:255',
+        //     'post_desc' => 'string|nullable',
+        //     'post_img' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        //     'selected_entity' => 'required'
+        // ]);
+    
+        // $postImagePath = null;
+        // if ($request->hasFile('post_img')) {
+        //     $postImagePath = $request->file('post_img')->store('posts', 'public');
+        // }
+    
+        // $userId = session('user_id');
+        // $selectedEntity = $request->selected_entity;
+        // $redirectRoute = $request->input('redirectRoute', 'profile'); 
+    
+        // $user_id = null;
+        // $community_id = null;
+    
+        // if (strpos($selectedEntity, 'r/') !== false) {
+        //     $selectedEntity = str_replace('r/', '', $selectedEntity);
+            
+        //     if ($selectedEntity === User::find($userId)->user_name) {
+        //         $user_id = $userId;
+        //         $redirectRoute = 'profile';
+        //     } else {
+        //         $community = Communities::where('community_name', $selectedEntity)->first();
+        //         if ($community) {
+        //             $community_id = $community->community_id;
+        //             $user_id = $userId;
+        //         }
+        //     }
+        // }
+    
+        // if (!$user_id && !$community_id) {
+        //     return redirect()->back()->withInput()->with('error', 'Please select a valid community or your profile.');
+        // }
+    
+        // Post::create([
+        //     'post_caption' => $request->post_caption,
+        //     'post_desc' => $request->post_desc,
+        //     'post_img' => $postImagePath,
+        //     'user_id' => $user_id,
+        //     'community_id' => $community_id,
+        // ]);
+    
+        // return ($redirectRoute === 'mycommunity') 
+        //     ? redirect()->route('show.mycommunity', ['community_name' => $selectedEntity])
+        //         ->with('success', 'Post created successfully!')
+        //     : redirect()->route('profile')->with('success', 'Post created successfully!');
+
+
+
         $request->validate([
             'post_caption' => 'required|string|max:255',
             'post_desc' => 'string|nullable',
@@ -80,46 +133,58 @@ class UserController extends Controller
     
         $userId = session('user_id');
         $selectedEntity = $request->selected_entity;
-        $redirectRoute = $request->input('redirectRoute', 'profile'); 
     
+        // Initialize variables for user and community IDs
         $user_id = null;
         $community_id = null;
     
+        // Check if the selected entity is a community
         if (strpos($selectedEntity, 'r/') !== false) {
             $selectedEntity = str_replace('r/', '', $selectedEntity);
             
+            // Check if the selected entity is the logged-in user's username
             if ($selectedEntity === User::find($userId)->user_name) {
-                $user_id = $userId;
-                $redirectRoute = 'profile';
+                $user_id = $userId; // Set user ID for the logged-in user
             } else {
+                // Check if the selected entity is a community
                 $community = Communities::where('community_name', $selectedEntity)->first();
                 if ($community) {
-                    $community_id = $community->community_id;
-                    $user_id = $userId;
+                    $community_id = $community->community_id; // Set community ID
+                    $user_id = $userId; // Set user ID for the logged-in user
                 }
             }
         }
     
+        // If neither user nor community ID is set, return an error
         if (!$user_id && !$community_id) {
             return redirect()->back()->withInput()->with('error', 'Please select a valid community or your profile.');
         }
     
+        // Create the post
         Post::create([
             'post_caption' => $request->post_caption,
             'post_desc' => $request->post_desc,
             'post_img' => $postImagePath,
             'user_id' => $user_id,
             'community_id' => $community_id,
-            // 'up_votes' => 0,
-            // 'down_votes' => 0,
-            // 'comments' => 0,
-            // 'share' => 0,
         ]);
     
-        return ($redirectRoute === 'mycommunity') 
-            ? redirect()->route('show.mycommunity', ['community_name' => $selectedEntity])
-                ->with('success', 'Post created successfully!')
-            : redirect()->route('profile')->with('success', 'Post created successfully!');
+        // Determine the redirect route based on ownership
+        if ($community_id) {
+            $community = Communities::find($community_id);
+            if ($community->user_id === $userId) {
+                // If the community is owned by the user, redirect to their mycommunity page
+                return redirect()->route('show.mycommunity', ['community_name' => $community->community_name])
+                    ->with('success', 'Post created successfully!');
+            } else {
+                // If the community is not owned by the user, redirect to the specific community page
+                return redirect()->route('show.community', ['community_name' => $community->community_name])
+                    ->with('success', 'Post created successfully!');
+            }
+        }
+    
+        // Fallback redirect if no community is involved
+        return redirect()->route('profile')->with('success', 'Post created successfully!');
     }
 
     public function profile() 

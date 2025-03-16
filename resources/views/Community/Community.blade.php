@@ -754,7 +754,7 @@
 
                         @elseif($post->post_caption )
                             <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
-                                <div class="post-wall2" style="height: 143px; margin-left: -35px;" >
+                                <div class="post-wall2" style="height: 143px; " >
                                     <div class="username">
                                         <div class="profile-img2">
                                             {{-- <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture"> --}}
