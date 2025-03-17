@@ -65,15 +65,26 @@ const commentButton = document.querySelector(".main-user-comments-button");
 const commentBox = document.getElementById("commentBox");
 
 function toggleCommentBox() {
-    commentButton.style.display = "none"; // Hide "Add a comment" button
-    commentBox.style.display = "block"; // Show comment box
-    setTimeout(() => commentBox.classList.add("active"), 10); // Add fade-in effect
+    commentButton.style.display = "none"; 
+    commentBox.style.display = "block"; 
+    setTimeout(() => commentBox.classList.add("active"), 10); 
 }
 
 function hideCommentBox() {
-    commentBox.classList.remove("active"); // Start fade-out effect
+    commentBox.classList.remove("active"); 
     setTimeout(() => {
-        commentBox.style.display = "none"; // Hide comment box
-        commentButton.style.display = "block"; // Show "Add a comment" button
-    }, 300); // Delay to allow transition effect
+        commentBox.style.display = "none"; 
+        commentButton.style.display = "block";
+    }, 300); 
+}
+
+
+
+////// DELETE BUTTON //////
+
+function confirmDelete(postId) {
+    const confirmation = confirm("Do you want to delete this post?");
+    if (confirmation) {
+        window.location.href = `/post/delete/${postId}`; 
+    }
 }

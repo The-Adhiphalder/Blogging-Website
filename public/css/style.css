@@ -1221,7 +1221,7 @@ transition: all 0.3s ease;
 .username p{
   margin-left: 7px;
   font-size: 12px;
-  padding-top: 2.5px;
+  /* padding-top: 2.5px; */
 }
 
 /* .post-wall h3{

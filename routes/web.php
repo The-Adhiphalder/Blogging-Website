@@ -118,6 +118,14 @@ Route::get('/editprofile', [UserController::class, 'editprofile']);
 
 Route::get('/profile/edit/{id}', [UserController::class, 'editprofile'])->name('profile.edit');
 
+// Route::get('/profile/edit/{post_id}', [UserController::class, 'editprofile'])->name('profile.edit');
+
+Route::post('/post/update/{post_id}', [UserController::class, 'updatePost'])->name('update.post');
+
+Route::get('/post/delete/{post_id}', [UserController::class, 'deletePost'])->name('delete.post');
+
+Route::get('/post/edit/{post_id}', [UserController::class, 'editprofile'])->name('post.edit');
+
 Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
 
 Route::get('/user/posts', [PostController::class, 'showUserPosts'])->name('user.posts');

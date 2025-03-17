@@ -45,7 +45,7 @@ class UserController extends Controller
     }
 
 
-    public function create() 
+    public function create(Request $request) 
     {
 
         $userId = session('user_id');
@@ -60,6 +60,7 @@ class UserController extends Controller
             ->get();
 
         return view('User.Create', compact('joinedCommunities'));
+
 
     }
 
@@ -80,33 +81,27 @@ class UserController extends Controller
         $userId = session('user_id');
         $selectedEntity = $request->selected_entity;
     
-        // Initialize variables for user and community IDs
         $user_id = null;
         $community_id = null;
     
-        // Check if the selected entity is a community
         if (strpos($selectedEntity, 'r/') !== false) {
             $selectedEntity = str_replace('r/', '', $selectedEntity);
             
-            // Check if the selected entity is the logged-in user's username
             if ($selectedEntity === User::find($userId)->user_name) {
-                $user_id = $userId; // Set user ID for the logged-in user
+                $user_id = $userId; 
             } else {
-                // Check if the selected entity is a community
                 $community = Communities::where('community_name', $selectedEntity)->first();
                 if ($community) {
-                    $community_id = $community->community_id; // Set community ID
-                    $user_id = $userId; // Set user ID for the logged-in user
+                    $community_id = $community->community_id; 
+                    $user_id = $userId; 
                 }
             }
         }
     
-        // If neither user nor community ID is set, return an error
         if (!$user_id && !$community_id) {
             return redirect()->back()->withInput()->with('error', 'Please select a valid community or your profile.');
         }
     
-        // Create the post
         Post::create([
             'post_caption' => $request->post_caption,
             'post_desc' => $request->post_desc,
@@ -115,21 +110,17 @@ class UserController extends Controller
             'community_id' => $community_id,
         ]);
     
-        // Determine the redirect route based on ownership
         if ($community_id) {
             $community = Communities::find($community_id);
             if ($community->user_id === $userId) {
-                // If the community is owned by the user, redirect to their mycommunity page
                 return redirect()->route('show.mycommunity', ['community_name' => $community->community_name])
                     ->with('success', 'Post created successfully!');
             } else {
-                // If the community is not owned by the user, redirect to the specific community page
                 return redirect()->route('show.community', ['community_name' => $community->community_name])
                     ->with('success', 'Post created successfully!');
             }
         }
     
-        // Fallback redirect if no community is involved
         return redirect()->route('profile')->with('success', 'Post created successfully!');
     }
 
@@ -151,13 +142,23 @@ class UserController extends Controller
         return view('User.Profile', compact('user', 'posts', 'totalPosts', 'totalFollowers'));
     }
 
-    public function editprofile()
+    public function editprofile($post_id = null)
     {
         // return view('User.EditProfile');
 
-        $userId = session('user_id'); 
-        $user = User::findOrFail($userId); 
-        return view('User.EditProfile', compact('user')); 
+
+        $user = auth()->user(); 
+
+        if ($post_id) {
+            $post = Post::find($post_id);
+            if (!$post) {
+                return redirect()->route('profile')->with('error', 'Post not found.');
+            }
+
+            return view('User.EditProfile', compact('user', 'post'));
+        }
+
+        return view('User.EditProfile', compact('user'));
     }
 
     public function updateProfile(Request $request)
@@ -218,6 +219,53 @@ class UserController extends Controller
         $posts = Post::where('user_id', $userId)->get(); 
 
         return view('user.posts', compact('posts'));
+    }
+
+    public function updatePost(Request $request, $post_id)
+    {
+
+        $request->validate([
+            'post_caption' => 'required|string|max:255',
+            'post_desc' => 'string|nullable',
+            'cover_img' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+    
+        $post = Post::findOrFail($post_id);
+        $post->post_caption = $request->post_caption;
+        $post->post_desc = $request->post_desc;
+    
+        if ($request->hasFile('cover_img')) {
+            $postImagePath = $request->file('cover_img')->store('posts', 'public');
+            $post->post_img = $postImagePath;
+        }
+    
+        $post->save();
+    
+        if ($post->community_id) {
+            $community = Communities::find($post->community_id);
+            
+            if ($community->user_id === Auth::id()) {
+                return redirect()->route('show.mycommunity', ['community_name' => $community->community_name])
+                                 ->with('success', 'Post updated successfully!');
+            } else {
+                return redirect()->route('show.community', ['community_name' => $community->community_name])
+                                 ->with('success', 'Post updated successfully!');
+            }
+        }
+    
+        return redirect()->route('profile')->with('success', 'Post updated successfully!');
+    }
+
+    public function deletePost($post_id)
+    {
+        $post = Post::find($post_id);
+        if (!$post) {
+            return redirect()->route('profile')->with('error', 'Post not found.');
+        }
+
+        $post->delete(); 
+
+        return redirect()->route('profile')->with('success', 'Post deleted successfully!');
     }
 
     public function showProfile()
