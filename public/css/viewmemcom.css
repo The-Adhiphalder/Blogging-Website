@@ -1415,9 +1415,9 @@ a:hover .com-follower-profile-text-inner-span {
   font-weight: 600;
   transition: all 0.4s ease-out; 
   cursor: pointer;
-  background-color: blue;
+  background-color: #102770;
   color: white;
-  border: 1px solid blue;
+  border: 1px solid #102770;
 }
 
 
@@ -1461,4 +1461,21 @@ a:hover .com-follower-profile-text-inner-span {
 
 .not-found h3{
     margin-top: -6px;
+}
+
+
+.com-follower-profile-button{
+  width: 89px;
+  height: 33px;
+  text-align: center;
+  border-radius: 21px;
+  font-weight: 600;
+  transition: all 0.4s ease-out; 
+  cursor: pointer;
+  background-color: #102770;
+  color: white;
+  border: 1px solid #102770;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

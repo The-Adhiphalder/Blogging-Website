@@ -443,17 +443,17 @@
                             <input type="text" name="post_caption" id="create-post-title" class="create-post-title" value="{{ old('post_caption', $post->post_caption) }}" required>
                         </div>
                         <div class="form-two">
-                            <textarea name="post_desc" class="create-post-body" placeholder="Body">{{ old('post_desc', $post->post_desc) }}</textarea>
+                            <textarea name="post_desc" id="post-desc"  class="create-post-body" placeholder="Body">{{ old('post_desc', $post->post_desc) }}</textarea>
                         </div>
                         <div class="all-element-main-img">
                             <div class="main-img-cover-img">
                                 <input type="file" name="cover_img" id="main-img-cover-img" style="display: none;" accept="image/*">
-                                <label class="main-img-cover-img-lable" for="main-img-cover-img">
+                                <label class="main-img-cover-img-lable" for="main-img-cover-img" style="height: 24.7rem;">
                                     <span id="upload-label">Add Picture</span>
                                 </label>
-                                <div id="image-preview-cover">
+                                <div id="image-preview-cover-two" style="top: 413px; height:23.7rem;">
                                     @if($post->post_img)
-                                        <img src="{{ asset('storage/'.$post->post_img) }}" alt="Cover Picture" style="width: 516px; cursor: pointer;">
+                                        <img src="{{ asset('storage/'.$post->post_img) }}" alt="Cover Picture" style="width: 516px; height: 23.7rem; cursor: pointer;">
                                     @endif
                                 </div>
                             </div>
@@ -462,6 +462,68 @@
                             <button class="form-four-button" type="submit">Update</button>
                         </div>
                     </form>
+
+                    
+                    <div class="post-wall">
+                        <div class="username">
+                    
+                            <div class="profile-img2">
+                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                            </div>
+                    
+                            <div class="profile-img2"></div>
+                            <a href="">
+                                <span class="username-hover">r/mriganka</span>
+                            </a>
+                            {{-- @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                <a href="{{ route('profile') }}">
+                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                </a>
+                            @else
+                                <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                </a>
+                            @endif --}}
+                            
+                            <p> • 22 hr. ago</p>
+                            {{-- <p> • {{ $post->created_at->diffForHumans() }}</p> --}}
+                            {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> --}}
+                            {{-- <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
+                    
+                            {{-- @if($post->user_id === $community->user_id) 
+                                <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                            @else
+                                <span class="post-wall-member" style="color: #d0d3da;">Members</span>
+                            @endif --}}
+                        </div>
+                        
+                        <h3 class="post-wall-first-h3 hidden" id="post-title">This is a title</h3>
+                        {{-- <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3> --}}
+                    
+                    
+                        <p class="post-para hidden" id="post-para"></p>
+
+                        @if(!empty($post->post_img))
+                            <div class="post-img hidden" style="position: relative; display: inline-block; overflow: hidden;">
+                                <div id="post-bg"  style="
+                                    position: absolute;
+                                    top: -10%;
+                                    left: -10%;
+                                    height: 120%;
+                                    width: 120%;
+                                    background: url('{{ asset('storage/' . $post->post_img) }}') no-repeat center;
+                                    background-size: cover;
+                                    filter: blur(20px);
+                                    z-index: 1;
+                                "></div>
+                                <img id="post-img" src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
+                            </div>
+                        @endif
+                    
+                        
+                    </div> 
+
+
                 @else
                     <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -569,9 +631,7 @@
                         <button type="submit" class="main-submit-button">Save</button>
                     </form>
                 @endif
-
                 
-
 
 
             </div>

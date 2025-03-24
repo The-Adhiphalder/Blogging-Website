@@ -77,13 +77,13 @@
 
                     <!-- <button class="forget-pass" id="backButton" type="button">Back</button> -->
                     <form action="" method="post">
-                        <div class="forgot-ele">
+                        <div class="forgot-ele" style="margin-bottom: 12px">
                             <input type="email" name="" id="" placeholder="Email" required>
                         </div>
-                        <div class="forgot-ele">
+                        <div class="forgot-ele" style="margin-bottom: 12px">
                             <input type="password" name="" id="" placeholder="Password" required>
                         </div>
-                        <div class="forgot-ele">
+                        <div class="forgot-ele" style="margin-bottom: 6px">
                             <input type="password" name="" id="" placeholder="Confirm Password" required>
                         </div>
                         <button class="submit-button forgot-button" id="showButton">Continue</button>

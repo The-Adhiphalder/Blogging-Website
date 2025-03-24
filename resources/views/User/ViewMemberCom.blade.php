@@ -364,8 +364,8 @@
                         <div class="text-info-inner">
                             <div class="profile-img3">
                                 {{-- <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile" alt="Default Profile"> --}}
-                                @if(!empty($community->image))
-                                    <img src="{{ asset('storage/' . $community->image) }}" alt="Community Profile">
+                                @if(!empty($community->community_pic))
+                                    <img src="{{ asset('storage/' . $community->community_pic) }}" alt="Community Profile">
                                 @else
                                     <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Profile">
                                 @endif
