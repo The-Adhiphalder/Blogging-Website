@@ -523,6 +523,87 @@
                         
                     </div> 
 
+                    
+                    <div class="post-wall" style="top: 316px;">
+                        <div class="username">
+                    
+                            <div class="profile-img2">
+                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                            </div>
+                    
+                            <div class="profile-img2"></div>
+                            <a href="">
+                                <span class="username-hover">r/mriganka</span>
+                            </a>
+                            {{-- @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                <a href="{{ route('profile') }}">
+                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                </a>
+                            @else
+                                <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                </a>
+                            @endif --}}
+                            
+                            <p> • 22 hr. ago</p>
+                            {{-- <p> • {{ $post->created_at->diffForHumans() }}</p> --}}
+                            {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> --}}
+                            {{-- <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
+                    
+                            {{-- @if($post->user_id === $community->user_id) 
+                                <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                            @else
+                                <span class="post-wall-member" style="color: #d0d3da;">Members</span>
+                            @endif --}}
+                        </div>
+                        
+                        <h3 class="post-wall-first-h3">This is a title</h3>
+                        {{-- <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3> --}}
+                    
+                        <p class="post-para" id="post-para"></p>
+                        
+                    </div> 
+                             
+                    
+                    <div class="post-wall" style="height: 6rem; top:341px;">
+                        <div class="username">
+                    
+                            <div class="profile-img2">
+                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                            </div>
+                    
+                            <div class="profile-img2"></div>
+                            <a href="">
+                                <span class="username-hover">r/mriganka</span>
+                            </a>
+                            {{-- @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                <a href="{{ route('profile') }}">
+                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                </a>
+                            @else
+                                <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                    <span class="username-hover">{{ $post->user->user_name }}</span>
+                                </a>
+                            @endif --}}
+                            
+                            <p> • 22 hr. ago</p>
+                            {{-- <p> • {{ $post->created_at->diffForHumans() }}</p> --}}
+                            {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> --}}
+                            {{-- <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
+                    
+                            {{-- @if($post->user_id === $community->user_id) 
+                                <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                            @else
+                                <span class="post-wall-member" style="color: #d0d3da;">Members</span>
+                            @endif --}}
+                        </div>
+                        
+                        <h3 class="post-wall-first-h3">This is a title</h3>
+                        {{-- <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3> --}}
+                    
+                        
+                    </div> 
+
 
                 @else
                     <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
