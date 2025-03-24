@@ -475,30 +475,9 @@
                             <a href="">
                                 <span class="username-hover">r/mriganka</span>
                             </a>
-                            {{-- @if (Auth::check() && Auth::id() === $post->user->user_id)
-                                <a href="{{ route('profile') }}">
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
-                                </a>
-                            @else
-                                <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
-                                </a>
-                            @endif --}}
-                            
-                            <p> • 22 hr. ago</p>
-                            {{-- <p> • {{ $post->created_at->diffForHumans() }}</p> --}}
-                            {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> --}}
-                            {{-- <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
-                    
-                            {{-- @if($post->user_id === $community->user_id) 
-                                <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                            @else
-                                <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                            @endif --}}
                         </div>
                         
                         <h3 class="post-wall-first-h3 hidden" id="post-title">This is a title</h3>
-                        {{-- <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3> --}}
                     
                     
                         <p class="post-para hidden" id="post-para"></p>
