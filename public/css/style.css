@@ -1187,7 +1187,7 @@ transition: all 0.3s ease;
   margin-top: 10px;
 }
 
-.profile-img2{
+.profile-img2 img{
   position: relative;
   width: 25px;
   height: 25px;
@@ -2125,4 +2125,40 @@ left: 55px;
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px);
+}
+
+
+
+.post-wall-admin{
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
+  color: #9fa5b5;
+  background-color: #ff5200a6;
+}
+
+.post-wall-member{
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
+  color: #9fa5b5;
+  background-color: #6f2cf7;
+}
+
+
+.not-found {
+  position: relative;
+  /* left: 217px; */
+  top: 256px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center; 
+}
+
+.not-found h3{
+  margin-top: 0px;
 }

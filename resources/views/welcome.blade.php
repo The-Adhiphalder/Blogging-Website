@@ -240,34 +240,34 @@
         - SECTION SIDEBAR
         -->
 
-         <nav class="sidebar" id="sidebar">
+        <nav class="sidebar" id="sidebar">
             <div class="sidebar__container">
-   
-               <div class="sidebar__content">
-                  <div>
-                     <h3 class="sidebar__title">MANAGE</h3>
-   
-                     <div class="sidebar__list">
+
+                <div class="sidebar__content">
+                    <div>
+                        <h3 class="sidebar__title">MANAGE</h3>
+
+                        <div class="sidebar__list">
                         <a href="#" class="sidebar__link active-link">
-                           <i class="fa-solid fa-house"></i>
-                           <span>Home</span>
+                            <i class="fa-solid fa-house"></i>
+                            <span>Home</span>
                         </a>
                         
                         <a href="#" class="sidebar__link">
                             <i class="fa-solid fa-arrow-trend-up"></i>
-                           <span>Popular</span>
+                            <span>Popular</span>
                         </a>
-   
+
                         <a href="/explore" class="sidebar__link">
                             <i class="fa-solid fa-table"></i>
-                           <span>Explore</span>
+                            <span>Explore</span>
                         </a>
-                     </div>
-                  </div>
+                        </div>
+                    </div>
 
-                  <div>
+                    <div>
                         <h3 class="sidebar__title">YOUR COMMUNITIES</h3>
-    
+
                         <div class="sidebar__list">
                             <a href="/createcommunity" class="sidebar__link">
                                 <i class="fa-solid fa-plus"></i>
@@ -355,10 +355,10 @@
                             
                         </div>
                     </div>
-   
 
 
-                  {{-- @php
+
+                    {{-- @php
                         $otherCommunities = App\Models\Communities::where('user_id', '!=', session('user_id'))->get();
                     @endphp
 
@@ -403,450 +403,518 @@
                         </div>
                     @endif
 
-               </div>
-   
-               <div class="sidebar__actions">
-                  <button>
-                     <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
-                        <span>Theme</span>
-                     </i>
-                  </button>
-   
-                  {{-- <button class="sidebar__link">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                     <span>Log Out</span>
-                  </button> --}}
+                </div>
 
-                  <form action="{{ route('logout') }}" method="POST">
+                <div class="sidebar__actions">
+                    <button>
+                        <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
+                        <span>Theme</span>
+                        </i>
+                    </button>
+
+                    {{-- <button class="sidebar__link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Log Out</span>
+                    </button> --}}
+
+                    <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="sidebar__link">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                         <span>Log Out</span>
-                      </button>
-                  </form>
+                            <span>Log Out</span>
+                        </button>
+                    </form>
 
-               </div>
+                </div>
             </div>
-         </nav>
-   
-         <main class="main container" id="main">
+        </nav>
 
-            <!-- 
-            - SECTION POST-WALL1
-            -->
+        <main class="main container" id="main">
 
-            <div class="post-wall">
-                <div class="username">
-                    <div class="profile-img2"></div>
-                    <span class="username-hover">adhiphalder</span>
-                    <p> • 22 hr. ago</p>
-
-                    <!-- 
-                    - DROPDOWN4 POST-WALL1 OPTIONS
-                    -->
-
-                    <div class="sec-center"> 	
-                        <input class="dropdown4" type="checkbox" id="dropdown4" name="dropdown"/>
-                        <label class="for-dropdown" for="dropdown4"> <i class="fa-solid fa-ellipsis"></i> </label> 
-                        <div class="section-dropdown4"> 
-                    
-                            <a href="#">
-                                <div class="profile-container1">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="save-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.114 20A1.117 1.117 0 0 1 3 18.884V2.628A1.629 1.629 0 0 1 4.628 1h10.744A1.63 1.63 0 0 1 17 2.628v16.245a1.12 1.12 0 0 1-1.718.946L10 16.479l-5.291 3.346a1.11 1.11 0 0 1-.595.175Zm.514-17.75a.378.378 0 0 0-.378.378v16.009L10 15l5.75 3.636V2.628a.378.378 0 0 0-.378-.378H4.628Z"></path><!--?-->
-                                    </svg>
-                                    <div class="profile-info1">
-                                        <span>Save</span>
-                                    </div>
-                                </div>
-                            </a>
-                    
-                            <a href="#">
-                                <div class="profile-container1">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="hide-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.73 10.127c.004-.069.02-.135.02-.205 0-.721-.29-1.413-.806-1.922A2.768 2.768 0 0 0 10 7.203c-.071 0-.138.015-.208.02l-1.05-1.037c.405-.14.83-.214 1.258-.22 1.06 0 2.078.417 2.829 1.159A3.932 3.932 0 0 1 14 9.922c-.005.423-.08.843-.222 1.242l-1.049-1.037Zm7.187-.63a10.538 10.538 0 0 0-3.954-4.748A10.72 10.72 0 0 0 10 3c-1.297 0-2.584.227-3.8.673l.985.973A9.819 9.819 0 0 1 10 4.236a9.525 9.525 0 0 1 5.242 1.514 9.368 9.368 0 0 1 3.519 4.128 9.186 9.186 0 0 1-2.526 3.455c-.047.04-.1.075-.148.114l.89.88c.024-.02.051-.037.075-.058a10.421 10.421 0 0 0 2.866-3.924c.11-.273.11-.576-.001-.849ZM3.724 3.541l12.73 12.584-.886.874-1.13-1.117a10.923 10.923 0 0 1-4.438.96 10.804 10.804 0 0 1-7.476-2.956 10.265 10.265 0 0 1-2.44-3.542 1.117 1.117 0 0 1 0-.847 10.35 10.35 0 0 1 3.453-4.392l-.7-.692.887-.872Zm9.766 11.403-1.59-1.57a3.936 3.936 0 0 1-1.9.502 4.024 4.024 0 0 1-2.829-1.159A3.932 3.932 0 0 1 6 9.922c.004-.66.179-1.306.508-1.879L4.447 6.005a9.065 9.065 0 0 0-3.208 3.961 9.64 9.64 0 0 0 2.151 3.03 9.552 9.552 0 0 0 6.61 2.61 9.669 9.669 0 0 0 3.49-.66ZM7.25 9.922c0 .72.29 1.412.806 1.922.515.51 1.215.796 1.944.797.333 0 .664-.063.974-.183L7.434 8.96a2.609 2.609 0 0 0-.184.962Z"></path><!--?-->
-                                    </svg>
-                                    <div class="profile-info1">
-                                        <span>Hide</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="profile-container1">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="report-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.25 19.775H1V2.193l.353-.171a10.293 10.293 0 0 1 8.919 0 9.054 9.054 0 0 0 7.7.061l.309-.144.385.188a.715.715 0 0 1 .334.606V14.79l-.353.17a10.286 10.286 0 0 1-8.919 0 9.033 9.033 0 0 0-7.478-.16v4.975Zm3.562-6.956a10.23 10.23 0 0 1 4.46 1.016A9.04 9.04 0 0 0 17.75 14V3.531a10.17 10.17 0 0 1-8.022-.384 9.037 9.037 0 0 0-7.478-.162v10.468c1.14-.42 2.347-.635 3.562-.634Z"></path>
-                                    </svg>
-                                    <div class="profile-info1">
-                                        <span>Report</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+            @if($allPosts->isEmpty())
+                <div class="not-found">
+                    <img src="https://www.redditstatic.com/shreddit/assets/hmm-snoo.png" alt="">
+                    <h3>No posts available</h3> 
                 </div>
-                
-                <h3 class="post-wall-first-h3">This is a title</h3>
+            @else
+                @foreach($allPosts as $post)
 
-                <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
-                    <div style="
-                        position: absolute;
-                        top: -10%;
-                        left: -10%;
-                        height: 120%;
-                        width: 120%;
-                        background: url('{{ asset('Images/4.jpeg') }}') no-repeat center;
-                        background-size: cover;
-                        filter: blur(20px);
-                        z-index: 1;
-                    "></div>
-                    <img src="{{ asset('Images/4.jpeg') }}" alt="Post Image"style="position: relative; z-index: 2;">
-                </div>
+                    @if($post->post_caption && $post->post_img)
 
-                <!-- 
-                - SECTION LIKE CMT SHARE POST-WALL1
-                -->
+                        <div class="post-wall">
+                            <div class="username">
 
-                
-                <div class="like-cmt-share">
+                                <div class="profile-img2">
+                                    @if($post->user->profile_pic)
+                                    <img src="{{ asset('storage/' . $post->user->profile_pic) }}" alt="Profile Picture">
+                                    @else
+                                        <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                    @endif
+                                </div>
 
-                    <div class="like-dislike">
-                        <svg class="upvote" rpl="" fill="currentColor" height="16" icon-name="upvote-outline" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>
-                        </svg>
-                        
-                        <span>151</span>
-                        <svg class="downvote" rpl="" fill="currentColor" height="16" icon-name="downvote-outline" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>
-                        </svg>
-                    </div>
+                                <div class="profile-img2"></div>
+                                {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                    <a href="{{ route('profile') }}">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a>
+                                @endif
 
-                    <div class="cmt">
-                        <svg rpl="" aria-hidden="true" class="icon-comment" fill="currentColor" height="20" icon-name="comment-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.725 19.872a.718.718 0 0 1-.607-.328.725.725 0 0 1-.118-.397V16H3.625A2.63 2.63 0 0 1 1 13.375v-9.75A2.629 2.629 0 0 1 3.625 1h12.75A2.63 2.63 0 0 1 19 3.625v9.75A2.63 2.63 0 0 1 16.375 16h-4.161l-4 3.681a.725.725 0 0 1-.489.191ZM3.625 2.25A1.377 1.377 0 0 0 2.25 3.625v9.75a1.377 1.377 0 0 0 1.375 1.375h4a.625.625 0 0 1 .625.625v2.575l3.3-3.035a.628.628 0 0 1 .424-.165h4.4a1.377 1.377 0 0 0 1.375-1.375v-9.75a1.377 1.377 0 0 0-1.374-1.375H3.625Z"></path>
-                        </svg>
-                        <span>15</span>
-                    </div>
+                                @if($post->community_id) 
+                                    @php
+                                        $community = \App\Models\Communities::find($post->community_id);
+                                    @endphp
+                                    @if($community && $community->user_id == session('user_id'))
+                                        <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                            <span class="username-hover"> | {{ $community->community_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                            <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                        </a>
+                                    @endif
+                                @endif
+                                {{-- <p> • 22 hr. ago</p> --}}
+                                <p> • {{ $post->created_at->diffForHumans() }}</p>
+                                {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                                <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
 
-                    <!-- 
-                    - SECTION SHARE POST-WALL1 
-                    -->
+                                @if(isset($community->user_id) && $post->user_id === $community->user_id)
+                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                                @else
+                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
+                                @endif
 
+                            </div>
+                            
+                            {{-- <h3>This is a title</h3> --}}
+                            <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
 
-                    <!-- 
-                    - DROPDOWN5 SHARE OPTOINS POST-WALL1 
-                    -->
-
-                    <div class="sec-center"> 	
-                        <input class="dropdown5" type="checkbox" id="dropdown5" name="dropdown"/>
-                        <label class="for-dropdown" for="dropdown5"> 
-                            <svg rpl="" aria-hidden="true" class="icon-share" fill="currentColor" height="20" icon-name="share-new-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m18.8 8.286-6.466-7.064a.759.759 0 0 0-1.295.537v3.277C5.623 5.365 1 9.918 1 15.082v2.907h1.274C2.516 15 5.81 12.62 9.834 12.62h1.205v3.226a.757.757 0 0 0 1.315.515l6.422-7.021A.756.756 0 0 0 19 8.8a.736.736 0 0 0-.2-.514Zm-6.508 6.3V12a.625.625 0 0 0-.625-.625H9.834A9.436 9.436 0 0 0 2.26 14.7c.228-4.536 4.525-8.435 9.4-8.435a.626.626 0 0 0 .625-.625V3.023L17.576 8.8l-5.284 5.786Zm5.586-6.107a.176.176 0 0 0-.023.024.171.171 0 0 1 .02-.028l.003.004Zm-.011.642a.53.53 0 0 0-.003-.004l.003.004Z"></path>
-                            </svg>
-                            <p class="sec-center-p">15</p>
-                        </label> 
-
-                        <div class="section-dropdown5"> 
-                            <a href="#">
-                                <div class="profile-container2">
-                                    <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path><path d="M16.017 1.467A5.123 5.123 0 0 0 12.422 0a5.123 5.123 0 0 0-3.595 1.467c-.478.471-.926.923-1.377 1.374-.45.451-.894.9-1.367 1.366a4.966 4.966 0 0 0-1.106 1.624 4.907 4.907 0 0 0-.291 2.86l1.2-1.19a3.699 3.699 0 0 1 1.092-2.41c.478-.472.928-.923 1.377-1.374.45-.45.894-.9 1.368-1.366a3.844 3.844 0 0 1 2.698-1.101c1.012 0 1.982.396 2.698 1.101a3.736 3.736 0 0 1 1.116 2.66c0 .996-.401 1.953-1.116 2.658-.478.471-.927.922-1.377 1.373-.45.451-.893.9-1.368 1.367a3.933 3.933 0 0 1-2.014 1.003 3.966 3.966 0 0 1-2.24-.26c-.273.274-.551.549-.818.818l-.123.12a5.087 5.087 0 0 0 3.183.624 5.053 5.053 0 0 0 2.906-1.423c.477-.472.926-.923 1.376-1.375.45-.452.894-.9 1.368-1.365A4.977 4.977 0 0 0 17.5 5.008a4.977 4.977 0 0 0-1.488-3.543l.005.002Z"></path>
-                                      </svg>
-                                    <div class="profile-info2">
-                                        <span>Copy link</span>
-                                    </div>
+                            
+                            <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                <div class="post-img" style="position: relative; display: inline-block; overflow: hidden;">
+                                    <div style="
+                                        position: absolute;
+                                        top: -10%;
+                                        left: -10%;
+                                        height: 120%;
+                                        width: 120%;
+                                        background: url('{{ asset("storage/" . $post->post_img) }}') no-repeat center;
+                                        background-size: cover;
+                                        filter: blur(20px);
+                                        z-index: 1;
+                                    "></div>
+                                    <img src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
                                 </div>
                             </a>
-                    
-                            <a href="#">
-                                <div class="profile-container2">
-                                    <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="crosspost-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="m15.944 11.926-.888.879 1.925 1.945H12A4.873 4.873 0 0 1 7.138 10 4.873 4.873 0 0 1 12 5.25h4.971l-1.915 1.936.888.878L18.875 5.1a.727.727 0 0 0-.007-1.025l-2.929-2.9-.878.888L17.011 4H12a6.128 6.128 0 0 0-6.056 5.25H1v1.625h4.981A6.117 6.117 0 0 0 12 16h5l-1.94 1.92.878.89 2.929-2.9a.726.726 0 0 0 .006-1.025l-2.929-2.96Z"></path>
-                                      </svg>
-                                    <div class="profile-info2">
-                                        <span>Crosspost</span>
+
+                            <!-- 
+                            - SECTION LIKE CMT SHARE POST-WALL1
+                            -->
+
+                            
+                            <div class="like-cmt-share">
+
+                                <div class="like-dislike">
+                                    <svg class="upvote" rpl="" fill="currentColor" height="16" icon-name="upvote-outline" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>
+                                    </svg>
+                                    
+                                    {{-- <span>151</span> --}}
+                                    <span aria-label="Vote count">0</span>
+                                    <svg class="downvote" rpl="" fill="currentColor" height="16" icon-name="downvote-outline" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>
+                                    </svg>
+                                </div>
+
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <div class="cmt">
+                                        <svg rpl="" aria-hidden="true" class="icon-comment" fill="currentColor" height="20" icon-name="comment-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.725 19.872a.718.718 0 0 1-.607-.328.725.725 0 0 1-.118-.397V16H3.625A2.63 2.63 0 0 1 1 13.375v-9.75A2.629 2.629 0 0 1 3.625 1h12.75A2.63 2.63 0 0 1 19 3.625v9.75A2.63 2.63 0 0 1 16.375 16h-4.161l-4 3.681a.725.725 0 0 1-.489.191ZM3.625 2.25A1.377 1.377 0 0 0 2.25 3.625v9.75a1.377 1.377 0 0 0 1.375 1.375h4a.625.625 0 0 1 .625.625v2.575l3.3-3.035a.628.628 0 0 1 .424-.165h4.4a1.377 1.377 0 0 0 1.375-1.375v-9.75a1.377 1.377 0 0 0-1.374-1.375H3.625Z"></path>
+                                        </svg>
+                                        {{-- <span>15</span> --}}
+                                        <span>{{ $post->comments_count }}</span>
+                                    </div>
+                                </a>
+
+                                <!-- 
+                                - SECTION SHARE POST-WALL1 
+                                -->
+
+
+                                <!-- 
+                                - DROPDOWN5 SHARE OPTOINS POST-WALL1 
+                                -->
+
+                                <div class="sec-center"> 	
+                                    <input class="dropdown5" type="checkbox" id="dropdown5" name="dropdown"/>
+                                    <label class="for-dropdown" for="dropdown5"> 
+                                        <svg rpl="" aria-hidden="true" class="icon-share" fill="currentColor" height="20" icon-name="share-new-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m18.8 8.286-6.466-7.064a.759.759 0 0 0-1.295.537v3.277C5.623 5.365 1 9.918 1 15.082v2.907h1.274C2.516 15 5.81 12.62 9.834 12.62h1.205v3.226a.757.757 0 0 0 1.315.515l6.422-7.021A.756.756 0 0 0 19 8.8a.736.736 0 0 0-.2-.514Zm-6.508 6.3V12a.625.625 0 0 0-.625-.625H9.834A9.436 9.436 0 0 0 2.26 14.7c.228-4.536 4.525-8.435 9.4-8.435a.626.626 0 0 0 .625-.625V3.023L17.576 8.8l-5.284 5.786Zm5.586-6.107a.176.176 0 0 0-.023.024.171.171 0 0 1 .02-.028l.003.004Zm-.011.642a.53.53 0 0 0-.003-.004l.003.004Z"></path>
+                                        </svg>
+                                        <p class="sec-center-p">15</p>
+                                    </label> 
+
+                                    <div class="section-dropdown5"> 
+                                        {{-- <a href="#">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path><path d="M16.017 1.467A5.123 5.123 0 0 0 12.422 0a5.123 5.123 0 0 0-3.595 1.467c-.478.471-.926.923-1.377 1.374-.45.451-.894.9-1.367 1.366a4.966 4.966 0 0 0-1.106 1.624 4.907 4.907 0 0 0-.291 2.86l1.2-1.19a3.699 3.699 0 0 1 1.092-2.41c.478-.472.928-.923 1.377-1.374.45-.45.894-.9 1.368-1.366a3.844 3.844 0 0 1 2.698-1.101c1.012 0 1.982.396 2.698 1.101a3.736 3.736 0 0 1 1.116 2.66c0 .996-.401 1.953-1.116 2.658-.478.471-.927.922-1.377 1.373-.45.451-.893.9-1.368 1.367a3.933 3.933 0 0 1-2.014 1.003 3.966 3.966 0 0 1-2.24-.26c-.273.274-.551.549-.818.818l-.123.12a5.087 5.087 0 0 0 3.183.624 5.053 5.053 0 0 0 2.906-1.423c.477-.472.926-.923 1.376-1.375.45-.452.894-.9 1.368-1.365A4.977 4.977 0 0 0 17.5 5.008a4.977 4.977 0 0 0-1.488-3.543l.005.002Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Copy link</span>
+                                                </div>
+                                            </div>
+                                        </a> --}}
+
+                                        <a href="#" onclick="copyCurrentLink()">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path><path d="M16.017 1.467A5.123 5.123 0 0 0 12.422 0a5.123 5.123 0 0 0-3.595 1.467c-.478.471-.926.923-1.377 1.374-.45.451-.894.9-1.367 1.366a4.966 4.966 0 0 0-1.106 1.624 4.907 4.907 0 0 0-.291 2.86l1.2-1.19a3.699 3.699 0 0 1 1.092-2.41c.478-.472.928-.923 1.377-1.374.45-.45.894-.9 1.368-1.366a3.844 3.844 0 0 1 2.698-1.101c1.012 0 1.982.396 2.698 1.101a3.736 3.736 0 0 1 1.116 2.66c0 .996-.401 1.953-1.116 2.658-.478.471-.927.922-1.377 1.373-.45.451-.893.9-1.368 1.367a3.933 3.933 0 0 1-2.014 1.003 3.966 3.966 0 0 1-2.24-.26c-.273.274-.551.549-.818.818l-.123.12a5.087 5.087 0 0 0 3.183.624 5.053 5.053 0 0 0 2.906-1.423c.477-.472.926-.923 1.376-1.375.45-.452.894-.9 1.368-1.365A4.977 4.977 0 0 0 17.5 5.008a4.977 4.977 0 0 0-1.488-3.543l.005.002Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Copy link</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                                    
+                                
+                                        <a href="#">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="crosspost-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="m15.944 11.926-.888.879 1.925 1.945H12A4.873 4.873 0 0 1 7.138 10 4.873 4.873 0 0 1 12 5.25h4.971l-1.915 1.936.888.878L18.875 5.1a.727.727 0 0 0-.007-1.025l-2.929-2.9-.878.888L17.011 4H12a6.128 6.128 0 0 0-6.056 5.25H1v1.625h4.981A6.117 6.117 0 0 0 12 16h5l-1.94 1.92.878.89 2.929-2.9a.726.726 0 0 0 .006-1.025l-2.929-2.96Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Crosspost</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    
                                     </div>
                                 </div>
+
+                            </div>
+                        </div> 
+
+
+                        <!-- 
+                        - SECTION POST-WALL3
+                        -->
+
+
+                    @elseif($post->post_caption && $post->post_desc )
+
+                        <div class="post-wall2">
+                            <div class="username">
+                                <div class="profile-img2">
+                                    {{-- <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture"> --}}
+                                    @if($post->user->profile_pic)
+                                        <img src="{{ asset('storage/' . $post->user->profile_pic) }}" alt="Profile Picture">
+                                    @else
+                                        <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                    @endif
+                                </div>
+                                {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                    <a href="{{ route('profile') }}">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a>
+                                @endif
+
+                                @if($post->community_id) 
+                                    @php
+                                        $community = \App\Models\Communities::find($post->community_id);
+                                    @endphp
+                                    @if($community && $community->user_id == session('user_id'))
+                                        <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                            <span class="username-hover"> | {{ $community->community_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                            <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                        </a>
+                                    @endif
+                                @endif
+                                {{-- <p> • 22 hr. ago</p> --}}
+                                <p> • {{ $post->created_at->diffForHumans() }}</p>
+                                {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                                <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
+
+                                @if(isset($community->user_id) && $post->user_id === $community->user_id)
+                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                                @else
+                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
+                                @endif
+                            
+                            </div>
+                            
+                            {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
+
+                            <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
                             </a>
-                        
+
+                            {{-- <p class="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years.
+
+                                I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it.
+                                
+                                Never thought a sequel would come out. Finally got to try the new one and I am BLOWN AWAY at how absolutely creative and visually appealing this game is. I felt like I was a kid playing an all time classic for the first time. It’s bringing me so much joy!
+                                
+                                Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p> --}}
+
+                            <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                <p class="post-para">{{ $post->post_desc }}</p>
+                            </a>
+
+
+
+
+                            <div class="like-cmt-share">
+
+
+                                <div class="like-dislike">
+                                    <svg class="upvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>
+                                    </svg>
+                                    
+                                    <span>151</span>
+                                    
+                                    <svg class="downvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>
+                                    </svg>
+                                </div>
+
+                                
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <div class="cmt">
+                                        <svg rpl="" aria-hidden="true" class="icon-comment" fill="currentColor" height="20" icon-name="comment-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.725 19.872a.718.718 0 0 1-.607-.328.725.725 0 0 1-.118-.397V16H3.625A2.63 2.63 0 0 1 1 13.375v-9.75A2.629 2.629 0 0 1 3.625 1h12.75A2.63 2.63 0 0 1 19 3.625v9.75A2.63 2.63 0 0 1 16.375 16h-4.161l-4 3.681a.725.725 0 0 1-.489.191ZM3.625 2.25A1.377 1.377 0 0 0 2.25 3.625v9.75a1.377 1.377 0 0 0 1.375 1.375h4a.625.625 0 0 1 .625.625v2.575l3.3-3.035a.628.628 0 0 1 .424-.165h4.4a1.377 1.377 0 0 0 1.375-1.375v-9.75a1.377 1.377 0 0 0-1.374-1.375H3.625Z"></path>
+                                        </svg>
+                                        {{-- <span>15</span> --}}
+                                        <span>{{ $post->comments_count }}</span>
+                                    </div>
+                                </a>
+
+
+                                <!-- 
+                                - SECTION SHARE POST-WALL3
+                                -->
+
+
+                                <!-- 
+                                - DROPDOWN9 SHARE OPTOINS POST-WALL3
+                                -->
+
+
+                                <div class="sec-center"> 	
+                                    <input class="dropdown9" type="checkbox" id="dropdown9" name="dropdown"/>
+                                    <label class="for-dropdown" for="dropdown9"> 
+                                        <svg rpl="" aria-hidden="true" class="icon-share" fill="currentColor" height="20" icon-name="share-new-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m18.8 8.286-6.466-7.064a.759.759 0 0 0-1.295.537v3.277C5.623 5.365 1 9.918 1 15.082v2.907h1.274C2.516 15 5.81 12.62 9.834 12.62h1.205v3.226a.757.757 0 0 0 1.315.515l6.422-7.021A.756.756 0 0 0 19 8.8a.736.736 0 0 0-.2-.514Zm-6.508 6.3V12a.625.625 0 0 0-.625-.625H9.834A9.436 9.436 0 0 0 2.26 14.7c.228-4.536 4.525-8.435 9.4-8.435a.626.626 0 0 0 .625-.625V3.023L17.576 8.8l-5.284 5.786Zm5.586-6.107a.176.176 0 0 0-.023.024.171.171 0 0 1 .02-.028l.003.004Zm-.011.642a.53.53 0 0 0-.003-.004l.003.004Z"></path>
+                                        </svg>
+                                        <p class="sec-center-p"> 17</p>
+                                    </label> 
+                                
+                                    <div class="section-dropdown9"> 
+                                        {{-- <a href="#">
+                                            <div class="profile-container9">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path>
+                                                </svg>
+                                                <div class="profile-info9">
+                                                    <span>Copy link</span>
+                                                </div>
+                                            </div>
+                                        </a> --}}
+
+                                        <a href="#" onclick="copyCurrentLink()">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path><path d="M16.017 1.467A5.123 5.123 0 0 0 12.422 0a5.123 5.123 0 0 0-3.595 1.467c-.478.471-.926.923-1.377 1.374-.45.451-.894.9-1.367 1.366a4.966 4.966 0 0 0-1.106 1.624 4.907 4.907 0 0 0-.291 2.86l1.2-1.19a3.699 3.699 0 0 1 1.092-2.41c.478-.472.928-.923 1.377-1.374.45-.45.894-.9 1.368-1.366a3.844 3.844 0 0 1 2.698-1.101c1.012 0 1.982.396 2.698 1.101a3.736 3.736 0 0 1 1.116 2.66c0 .996-.401 1.953-1.116 2.658-.478.471-.927.922-1.377 1.373-.45.451-.893.9-1.368 1.367a3.933 3.933 0 0 1-2.014 1.003 3.966 3.966 0 0 1-2.24-.26c-.273.274-.551.549-.818.818l-.123.12a5.087 5.087 0 0 0 3.183.624 5.053 5.053 0 0 0 2.906-1.423c.477-.472.926-.923 1.376-1.375.45-.452.894-.9 1.368-1.365A4.977 4.977 0 0 0 17.5 5.008a4.977 4.977 0 0 0-1.488-3.543l.005.002Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Copy link</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                
+                                        <a href="#">
+                                            <div class="profile-container9">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="crosspost-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="m15.944 11.926-.888.879 1.925 1.945H12A4.873 4.873 0 0 1 7.138 10 4.873 4.873 0 0 1 12 5.25h4.971l-1.915 1.936.888.878L18.875 5.1a.727.727 0 0 0-.007-1.025l-2.929-2.9-.878.888L17.011 4H12a6.128 6.128 0 0 0-6.056 5.25H1v1.625h4.981A6.117 6.117 0 0 0 12 16h5l-1.94 1.92.878.89 2.929-2.9a.726.726 0 0 0 .006-1.025l-2.929-2.96Z"></path>
+                                                </svg>
+                                                <div class="profile-info9">
+                                                    <span>Crosspost</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>   
+
                         </div>
-                    </div>
 
-                </div>
-            </div> 
+                        <!-- 
+                        - SECTION POST-WALL2
+                        -->
 
-            <!-- 
-            - SECTION POST-WALL2
-            -->
+                    @elseif($post->post_caption )
 
-            <div class="post-wall2">
-                <div class="username">
-                    <div class="profile-img2"></div>
-                    <span class="username-hover">adhiphalder</span>
-                    <p> • 22 hr. ago</p>
-                
+                        <div class="post-wall2">
+                            <div class="username">
+                                <div class="profile-img2">
+                                    {{-- <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture"> --}}
+                                    @if($post->user->profile_pic)
+                                        <img src="{{ asset('storage/' . $post->user->profile_pic) }}" alt="Profile Picture">
+                                    @else
+                                        <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                    @endif
+                                </div>
+                                {{-- <span class="username-hover">{{ $post->user->user_name }}</span> --}}
+                                @if (Auth::check() && Auth::id() === $post->user->user_id)
+                                    <a href="{{ route('profile') }}">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
+                                        <span class="username-hover">{{ $post->user->user_name }}</span>
+                                    </a>
+                                @endif
 
-                    <!-- 
-                    - DROPDOWN6 POST-WALL2 OPTIONS
-                    -->
+                                @if($post->community_id) 
+                                    @php
+                                        $community = \App\Models\Communities::find($post->community_id);
+                                    @endphp
+                                    @if($community && $community->user_id == session('user_id'))
+                                        <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                            <span class="username-hover"> | {{ $community->community_name }}</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                            <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                        </a>
+                                    @endif
+                                @endif
+                                {{-- <p> • 22 hr. ago</p> --}}
+                                <p> • {{ $post->created_at->diffForHumans() }}</p>
+                                {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                                <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
+
+                                @if(isset($community->user_id) && $post->user_id === $community->user_id)
+                                    <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
+                                @else
+                                    <span class="post-wall-member" style="color: #d0d3da;">Members</span>
+                                @endif
+                            </div>
+
+                            
+                            {{-- <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3> --}}
+                            
+
+                            <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3>
+                            </a>
 
 
-                    <div class="sec-center"> 	
-                        <input class="dropdown6" type="checkbox" id="dropdown6" name="dropdown"/>
-                        <label class="for-dropdown" for="dropdown6"> <i class="fa-solid fa-ellipsis"></i> </label> 
-                        <div class="section-dropdown6"> 
-                            <a href="#">
-                                <div class="profile-container1">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="save-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.114 20A1.117 1.117 0 0 1 3 18.884V2.628A1.629 1.629 0 0 1 4.628 1h10.744A1.63 1.63 0 0 1 17 2.628v16.245a1.12 1.12 0 0 1-1.718.946L10 16.479l-5.291 3.346a1.11 1.11 0 0 1-.595.175Zm.514-17.75a.378.378 0 0 0-.378.378v16.009L10 15l5.75 3.636V2.628a.378.378 0 0 0-.378-.378H4.628Z"></path>
+                            <div class="like-cmt-share">
+
+
+                                <div class="like-dislike">
+                                    <svg class="upvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>
                                     </svg>
-                                    <div class="profile-info1">
-                                        <span>Save</span>
+                                    
+                                    <span>151</span>
+                                    
+                                    <svg class="downvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>
+                                    </svg>
+                                </div>
+
+                                
+                                <a href="{{ route('comment', ['post_id' => $post->post_id]) }}">
+                                    <div class="cmt">
+                                        <svg rpl="" aria-hidden="true" class="icon-comment" fill="currentColor" height="20" icon-name="comment-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.725 19.872a.718.718 0 0 1-.607-.328.725.725 0 0 1-.118-.397V16H3.625A2.63 2.63 0 0 1 1 13.375v-9.75A2.629 2.629 0 0 1 3.625 1h12.75A2.63 2.63 0 0 1 19 3.625v9.75A2.63 2.63 0 0 1 16.375 16h-4.161l-4 3.681a.725.725 0 0 1-.489.191ZM3.625 2.25A1.377 1.377 0 0 0 2.25 3.625v9.75a1.377 1.377 0 0 0 1.375 1.375h4a.625.625 0 0 1 .625.625v2.575l3.3-3.035a.628.628 0 0 1 .424-.165h4.4a1.377 1.377 0 0 0 1.375-1.375v-9.75a1.377 1.377 0 0 0-1.374-1.375H3.625Z"></path>
+                                        </svg>
+                                        {{-- <span>15</span> --}}
+                                        <span>{{ $post->comments_count }}</span>
+                                    </div>
+                                </a>
+
+
+                                <!-- 
+                                - SECTION SHARE POST-WALL2
+                                -->
+
+
+                                <!-- 
+                                - DROPDOWN7 SHARE OPTOINS POST-WALL2
+                                -->
+
+
+                                <div class="sec-center"> 	
+                                    <input class="dropdown7" type="checkbox" id="dropdown7" name="dropdown"/>
+                                    <label class="for-dropdown" for="dropdown7"> 
+                                        <svg rpl="" aria-hidden="true" class="icon-share" fill="currentColor" height="20" icon-name="share-new-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m18.8 8.286-6.466-7.064a.759.759 0 0 0-1.295.537v3.277C5.623 5.365 1 9.918 1 15.082v2.907h1.274C2.516 15 5.81 12.62 9.834 12.62h1.205v3.226a.757.757 0 0 0 1.315.515l6.422-7.021A.756.756 0 0 0 19 8.8a.736.736 0 0 0-.2-.514Zm-6.508 6.3V12a.625.625 0 0 0-.625-.625H9.834A9.436 9.436 0 0 0 2.26 14.7c.228-4.536 4.525-8.435 9.4-8.435a.626.626 0 0 0 .625-.625V3.023L17.576 8.8l-5.284 5.786Zm5.586-6.107a.176.176 0 0 0-.023.024.171.171 0 0 1 .02-.028l.003.004Zm-.011.642a.53.53 0 0 0-.003-.004l.003.004Z"></path>
+                                        </svg>
+                                        <p class="sec-center-p"> 17</p>
+                                    </label> 
+                                
+                                    <div class="section-dropdown7"> 
+                                        {{-- <a href="#">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Copy link</span>
+                                                </div>
+                                            </div>
+                                        </a> --}}
+
+                                        <a href="#" onclick="copyCurrentLink()">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path><path d="M16.017 1.467A5.123 5.123 0 0 0 12.422 0a5.123 5.123 0 0 0-3.595 1.467c-.478.471-.926.923-1.377 1.374-.45.451-.894.9-1.367 1.366a4.966 4.966 0 0 0-1.106 1.624 4.907 4.907 0 0 0-.291 2.86l1.2-1.19a3.699 3.699 0 0 1 1.092-2.41c.478-.472.928-.923 1.377-1.374.45-.45.894-.9 1.368-1.366a3.844 3.844 0 0 1 2.698-1.101c1.012 0 1.982.396 2.698 1.101a3.736 3.736 0 0 1 1.116 2.66c0 .996-.401 1.953-1.116 2.658-.478.471-.927.922-1.377 1.373-.45.451-.893.9-1.368 1.367a3.933 3.933 0 0 1-2.014 1.003 3.966 3.966 0 0 1-2.24-.26c-.273.274-.551.549-.818.818l-.123.12a5.087 5.087 0 0 0 3.183.624 5.053 5.053 0 0 0 2.906-1.423c.477-.472.926-.923 1.376-1.375.45-.452.894-.9 1.368-1.365A4.977 4.977 0 0 0 17.5 5.008a4.977 4.977 0 0 0-1.488-3.543l.005.002Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Copy link</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                
+                                        <a href="#">
+                                            <div class="profile-container2">
+                                                <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="crosspost-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="m15.944 11.926-.888.879 1.925 1.945H12A4.873 4.873 0 0 1 7.138 10 4.873 4.873 0 0 1 12 5.25h4.971l-1.915 1.936.888.878L18.875 5.1a.727.727 0 0 0-.007-1.025l-2.929-2.9-.878.888L17.011 4H12a6.128 6.128 0 0 0-6.056 5.25H1v1.625h4.981A6.117 6.117 0 0 0 12 16h5l-1.94 1.92.878.89 2.929-2.9a.726.726 0 0 0 .006-1.025l-2.929-2.96Z"></path>
+                                                </svg>
+                                                <div class="profile-info2">
+                                                    <span>Crosspost</span>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
-                            </a>
-                            <a href="#">
-                                <div class="profile-container1">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="hide-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.73 10.127c.004-.069.02-.135.02-.205 0-.721-.29-1.413-.806-1.922A2.768 2.768 0 0 0 10 7.203c-.071 0-.138.015-.208.02l-1.05-1.037c.405-.14.83-.214 1.258-.22 1.06 0 2.078.417 2.829 1.159A3.932 3.932 0 0 1 14 9.922c-.005.423-.08.843-.222 1.242l-1.049-1.037Zm7.187-.63a10.538 10.538 0 0 0-3.954-4.748A10.72 10.72 0 0 0 10 3c-1.297 0-2.584.227-3.8.673l.985.973A9.819 9.819 0 0 1 10 4.236a9.525 9.525 0 0 1 5.242 1.514 9.368 9.368 0 0 1 3.519 4.128 9.186 9.186 0 0 1-2.526 3.455c-.047.04-.1.075-.148.114l.89.88c.024-.02.051-.037.075-.058a10.421 10.421 0 0 0 2.866-3.924c.11-.273.11-.576-.001-.849ZM3.724 3.541l12.73 12.584-.886.874-1.13-1.117a10.923 10.923 0 0 1-4.438.96 10.804 10.804 0 0 1-7.476-2.956 10.265 10.265 0 0 1-2.44-3.542 1.117 1.117 0 0 1 0-.847 10.35 10.35 0 0 1 3.453-4.392l-.7-.692.887-.872Zm9.766 11.403-1.59-1.57a3.936 3.936 0 0 1-1.9.502 4.024 4.024 0 0 1-2.829-1.159A3.932 3.932 0 0 1 6 9.922c.004-.66.179-1.306.508-1.879L4.447 6.005a9.065 9.065 0 0 0-3.208 3.961 9.64 9.64 0 0 0 2.151 3.03 9.552 9.552 0 0 0 6.61 2.61 9.669 9.669 0 0 0 3.49-.66ZM7.25 9.922c0 .72.29 1.412.806 1.922.515.51 1.215.796 1.944.797.333 0 .664-.063.974-.183L7.434 8.96a2.609 2.609 0 0 0-.184.962Z"></path>
-                                    </svg>
-                                    <div class="profile-info1">
-                                        <span>Hide</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="profile-container1">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="report-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.25 19.775H1V2.193l.353-.171a10.293 10.293 0 0 1 8.919 0 9.054 9.054 0 0 0 7.7.061l.309-.144.385.188a.715.715 0 0 1 .334.606V14.79l-.353.17a10.286 10.286 0 0 1-8.919 0 9.033 9.033 0 0 0-7.478-.16v4.975Zm3.562-6.956a10.23 10.23 0 0 1 4.46 1.016A9.04 9.04 0 0 0 17.75 14V3.531a10.17 10.17 0 0 1-8.022-.384 9.037 9.037 0 0 0-7.478-.162v10.468c1.14-.42 2.347-.635 3.562-.634Z"></path>
-                                    </svg>
-                                    <div class="profile-info1">
-                                        <span>Report</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                
-                </div>
-                
-                <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3>
 
+                            </div>   
 
-
-                <div class="like-cmt-share">
-
-
-                    <div class="like-dislike">
-                        <svg class="upvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>
-                        </svg>
-                        
-                        <span>151</span>
-                        
-                        <svg class="downvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>
-                        </svg>
-                    </div>
-
-                    
-
-                    <div class="cmt">
-                        <svg rpl="" aria-hidden="true" class="icon-comment" fill="currentColor" height="20" icon-name="comment-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.725 19.872a.718.718 0 0 1-.607-.328.725.725 0 0 1-.118-.397V16H3.625A2.63 2.63 0 0 1 1 13.375v-9.75A2.629 2.629 0 0 1 3.625 1h12.75A2.63 2.63 0 0 1 19 3.625v9.75A2.63 2.63 0 0 1 16.375 16h-4.161l-4 3.681a.725.725 0 0 1-.489.191ZM3.625 2.25A1.377 1.377 0 0 0 2.25 3.625v9.75a1.377 1.377 0 0 0 1.375 1.375h4a.625.625 0 0 1 .625.625v2.575l3.3-3.035a.628.628 0 0 1 .424-.165h4.4a1.377 1.377 0 0 0 1.375-1.375v-9.75a1.377 1.377 0 0 0-1.374-1.375H3.625Z"></path>
-                        </svg>
-                        <span>15</span>
-                    </div>
-
-
-                    <!-- 
-                    - SECTION SHARE POST-WALL2
-                    -->
-
-
-                    <!-- 
-                    - DROPDOWN7 SHARE OPTOINS POST-WALL2
-                    -->
-
-
-                    <div class="sec-center"> 	
-                        <input class="dropdown7" type="checkbox" id="dropdown7" name="dropdown"/>
-                        <label class="for-dropdown" for="dropdown7"> 
-                            <svg rpl="" aria-hidden="true" class="icon-share" fill="currentColor" height="20" icon-name="share-new-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m18.8 8.286-6.466-7.064a.759.759 0 0 0-1.295.537v3.277C5.623 5.365 1 9.918 1 15.082v2.907h1.274C2.516 15 5.81 12.62 9.834 12.62h1.205v3.226a.757.757 0 0 0 1.315.515l6.422-7.021A.756.756 0 0 0 19 8.8a.736.736 0 0 0-.2-.514Zm-6.508 6.3V12a.625.625 0 0 0-.625-.625H9.834A9.436 9.436 0 0 0 2.26 14.7c.228-4.536 4.525-8.435 9.4-8.435a.626.626 0 0 0 .625-.625V3.023L17.576 8.8l-5.284 5.786Zm5.586-6.107a.176.176 0 0 0-.023.024.171.171 0 0 1 .02-.028l.003.004Zm-.011.642a.53.53 0 0 0-.003-.004l.003.004Z"></path>
-                            </svg>
-                            <p class="sec-center-p">17</p>
-                        </label> 
-                    
-                        <div class="section-dropdown7"> 
-                            <a href="#">
-                                <div class="profile-container2">
-                                    <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path>
-                                    </svg>
-                                    <div class="profile-info2">
-                                        <span>Copy link</span>
-                                    </div>
-                                </div>
-                            </a>
-                    
-                            <a href="#">
-                                <div class="profile-container2">
-                                    <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="crosspost-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="m15.944 11.926-.888.879 1.925 1.945H12A4.873 4.873 0 0 1 7.138 10 4.873 4.873 0 0 1 12 5.25h4.971l-1.915 1.936.888.878L18.875 5.1a.727.727 0 0 0-.007-1.025l-2.929-2.9-.878.888L17.011 4H12a6.128 6.128 0 0 0-6.056 5.25H1v1.625h4.981A6.117 6.117 0 0 0 12 16h5l-1.94 1.92.878.89 2.929-2.9a.726.726 0 0 0 .006-1.025l-2.929-2.96Z"></path>
-                                    </svg>
-                                    <div class="profile-info2">
-                                        <span>Crosspost</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>   
-
-            </div> 
-            
-
-            <!-- 
-            - SECTION POST-WALL3
-            -->
-
-
-            <div class="post-wall2">
-                <div class="username">
-                    <div class="profile-img2"></div>
-                    <span class="username-hover">adhiphalder</span>
-                    <p> • 22 hr. ago</p>
-                
-
-                    <!-- 
-                    - DROPDOWN8 POST-WALL3 OPTIONS
-                    -->
-
-
-                    <div class="sec-center"> 	
-                        <input class="dropdown8" type="checkbox" id="dropdown8" name="dropdown"/>
-                        <label class="for-dropdown" for="dropdown8"> <i class="fa-solid fa-ellipsis"></i> </label> 
-                        <div class="section-dropdown8"> 
-                            <a href="#">
-                                <div class="profile-container8">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="save-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.114 20A1.117 1.117 0 0 1 3 18.884V2.628A1.629 1.629 0 0 1 4.628 1h10.744A1.63 1.63 0 0 1 17 2.628v16.245a1.12 1.12 0 0 1-1.718.946L10 16.479l-5.291 3.346a1.11 1.11 0 0 1-.595.175Zm.514-17.75a.378.378 0 0 0-.378.378v16.009L10 15l5.75 3.636V2.628a.378.378 0 0 0-.378-.378H4.628Z"></path>
-                                    </svg>
-                                    <div class="profile-info8">
-                                        <span>Save</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="profile-container8">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="hide-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.73 10.127c.004-.069.02-.135.02-.205 0-.721-.29-1.413-.806-1.922A2.768 2.768 0 0 0 10 7.203c-.071 0-.138.015-.208.02l-1.05-1.037c.405-.14.83-.214 1.258-.22 1.06 0 2.078.417 2.829 1.159A3.932 3.932 0 0 1 14 9.922c-.005.423-.08.843-.222 1.242l-1.049-1.037Zm7.187-.63a10.538 10.538 0 0 0-3.954-4.748A10.72 10.72 0 0 0 10 3c-1.297 0-2.584.227-3.8.673l.985.973A9.819 9.819 0 0 1 10 4.236a9.525 9.525 0 0 1 5.242 1.514 9.368 9.368 0 0 1 3.519 4.128 9.186 9.186 0 0 1-2.526 3.455c-.047.04-.1.075-.148.114l.89.88c.024-.02.051-.037.075-.058a10.421 10.421 0 0 0 2.866-3.924c.11-.273.11-.576-.001-.849ZM3.724 3.541l12.73 12.584-.886.874-1.13-1.117a10.923 10.923 0 0 1-4.438.96 10.804 10.804 0 0 1-7.476-2.956 10.265 10.265 0 0 1-2.44-3.542 1.117 1.117 0 0 1 0-.847 10.35 10.35 0 0 1 3.453-4.392l-.7-.692.887-.872Zm9.766 11.403-1.59-1.57a3.936 3.936 0 0 1-1.9.502 4.024 4.024 0 0 1-2.829-1.159A3.932 3.932 0 0 1 6 9.922c.004-.66.179-1.306.508-1.879L4.447 6.005a9.065 9.065 0 0 0-3.208 3.961 9.64 9.64 0 0 0 2.151 3.03 9.552 9.552 0 0 0 6.61 2.61 9.669 9.669 0 0 0 3.49-.66ZM7.25 9.922c0 .72.29 1.412.806 1.922.515.51 1.215.796 1.944.797.333 0 .664-.063.974-.183L7.434 8.96a2.609 2.609 0 0 0-.184.962Z"></path>
-                                    </svg>
-                                    <div class="profile-info8">
-                                        <span>Hide</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="profile-container8">
-                                    <svg rpl="" fill="currentColor" height="20" icon-name="report-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.25 19.775H1V2.193l.353-.171a10.293 10.293 0 0 1 8.919 0 9.054 9.054 0 0 0 7.7.061l.309-.144.385.188a.715.715 0 0 1 .334.606V14.79l-.353.17a10.286 10.286 0 0 1-8.919 0 9.033 9.033 0 0 0-7.478-.16v4.975Zm3.562-6.956a10.23 10.23 0 0 1 4.46 1.016A9.04 9.04 0 0 0 17.75 14V3.531a10.17 10.17 0 0 1-8.022-.384 9.037 9.037 0 0 0-7.478-.162v10.468c1.14-.42 2.347-.635 3.562-.634Z"></path>
-                                    </svg>
-                                    <div class="profile-info8">
-                                        <span>Report</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                
-                </div>
-                
-                <h3 class="post-wall-first-h3">Who are you? Without reference to your name, job, culture, hobbies, family and relationships? dhfvshfvshvfskfshfshf   </h3>
-                <p class="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years.
-
-                    I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it.
-                    
-                    Never thought a sequel would come out. Finally got to try the new one and I am BLOWN AWAY at how absolutely creative and visually appealing this game is. I felt like I was a kid playing an all time classic for the first time. It’s bringing me so much joy!
-                    
-                    Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p>
-
-
-
-                <div class="like-cmt-share">
-
-
-                    <div class="like-dislike">
-                        <svg class="upvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>
-                        </svg>
-                        
-                        <span>151</span>
-                        
-                        <svg class="downvote" fill="currentColor" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>
-                        </svg>
-                    </div>
-
-                    
-
-                    <div class="cmt">
-                        <svg rpl="" aria-hidden="true" class="icon-comment" fill="currentColor" height="20" icon-name="comment-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.725 19.872a.718.718 0 0 1-.607-.328.725.725 0 0 1-.118-.397V16H3.625A2.63 2.63 0 0 1 1 13.375v-9.75A2.629 2.629 0 0 1 3.625 1h12.75A2.63 2.63 0 0 1 19 3.625v9.75A2.63 2.63 0 0 1 16.375 16h-4.161l-4 3.681a.725.725 0 0 1-.489.191ZM3.625 2.25A1.377 1.377 0 0 0 2.25 3.625v9.75a1.377 1.377 0 0 0 1.375 1.375h4a.625.625 0 0 1 .625.625v2.575l3.3-3.035a.628.628 0 0 1 .424-.165h4.4a1.377 1.377 0 0 0 1.375-1.375v-9.75a1.377 1.377 0 0 0-1.374-1.375H3.625Z"></path>
-                        </svg>
-                        <span>15</span>
-                    </div>
-
-
-                    <!-- 
-                    - SECTION SHARE POST-WALL3
-                    -->
-
-
-                    <!-- 
-                    - DROPDOWN9 SHARE OPTOINS POST-WALL3
-                    -->
-
-
-                    <div class="sec-center"> 	
-                        <input class="dropdown9" type="checkbox" id="dropdown9" name="dropdown"/>
-                        <label class="for-dropdown" for="dropdown9"> 
-                            <svg rpl="" aria-hidden="true" class="icon-share" fill="currentColor" height="20" icon-name="share-new-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m18.8 8.286-6.466-7.064a.759.759 0 0 0-1.295.537v3.277C5.623 5.365 1 9.918 1 15.082v2.907h1.274C2.516 15 5.81 12.62 9.834 12.62h1.205v3.226a.757.757 0 0 0 1.315.515l6.422-7.021A.756.756 0 0 0 19 8.8a.736.736 0 0 0-.2-.514Zm-6.508 6.3V12a.625.625 0 0 0-.625-.625H9.834A9.436 9.436 0 0 0 2.26 14.7c.228-4.536 4.525-8.435 9.4-8.435a.626.626 0 0 0 .625-.625V3.023L17.576 8.8l-5.284 5.786Zm5.586-6.107a.176.176 0 0 0-.023.024.171.171 0 0 1 .02-.028l.003.004Zm-.011.642a.53.53 0 0 0-.003-.004l.003.004Z"></path>
-                            </svg>
-                            <p class="sec-center-p">17</p>
-                        </label> 
-                    
-                        <div class="section-dropdown9"> 
-                            <a href="#">
-                                <div class="profile-container9">
-                                    <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="link-post-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.111 12.5a3.701 3.701 0 0 1-1.09 2.41c-.479.47-.928.922-1.378 1.373-.45.45-.894.9-1.368 1.366a3.852 3.852 0 0 1-2.698 1.099 3.852 3.852 0 0 1-2.698-1.099 3.738 3.738 0 0 1-1.116-2.659c0-.997.402-1.953 1.116-2.658.479-.472.928-.923 1.378-1.375.45-.45.893-.9 1.368-1.365A3.936 3.936 0 0 1 9.638 8.59a3.968 3.968 0 0 1 2.24.258c.27-.269.546-.54.812-.806l.131-.13a5.086 5.086 0 0 0-3.182-.624A5.052 5.052 0 0 0 6.732 8.71c-.48.471-.929.922-1.377 1.373-.449.451-.894.9-1.37 1.366A4.982 4.982 0 0 0 2.5 14.992c0 1.328.534 2.602 1.486 3.543A5.13 5.13 0 0 0 7.58 20a5.13 5.13 0 0 0 3.595-1.465c.478-.471.927-.923 1.377-1.374.451-.451.894-.9 1.368-1.366a4.993 4.993 0 0 0 1.263-2.071c.243-.781.288-1.61.132-2.412L14.11 12.5Z"></path>
-                                    </svg>
-                                    <div class="profile-info9">
-                                        <span>Copy link</span>
-                                    </div>
-                                </div>
-                            </a>
-                    
-                            <a href="#">
-                                <div class="profile-container9">
-                                    <svg rpl="" class="mt-[1px] ml-[4px]" fill="currentColor" height="20" icon-name="crosspost-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="m15.944 11.926-.888.879 1.925 1.945H12A4.873 4.873 0 0 1 7.138 10 4.873 4.873 0 0 1 12 5.25h4.971l-1.915 1.936.888.878L18.875 5.1a.727.727 0 0 0-.007-1.025l-2.929-2.9-.878.888L17.011 4H12a6.128 6.128 0 0 0-6.056 5.25H1v1.625h4.981A6.117 6.117 0 0 0 12 16h5l-1.94 1.92.878.89 2.929-2.9a.726.726 0 0 0 .006-1.025l-2.929-2.96Z"></path>
-                                    </svg>
-                                    <div class="profile-info9">
-                                        <span>Crosspost</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>   
-
-            </div>
-         </main>
+                        </div> 
+                    @endif
+                @endforeach
+            @endif 
+        
+        </main>
 
 
 

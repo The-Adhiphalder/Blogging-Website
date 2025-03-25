@@ -464,124 +464,120 @@
                     </form>
 
                     
-                    <div class="post-wall">
+                    <div class="post-wall" id="post-wall-2">
                         <div class="username">
                     
                             <div class="profile-img2">
-                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                @if($user->profile_pic)
+                                    <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture">
+                                @else
+                                    <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                @endif
                             </div>
                     
                             <div class="profile-img2"></div>
-                            <a href="">
-                                <span class="username-hover">r/mriganka</span>
-                            </a>
+                            <span class="username-hover">{{ session('user')->user_name }}</span>
+
+                            @if($post->community_id) 
+                                @php
+                                    $community = \App\Models\Communities::find($post->community_id);
+                                @endphp
+                                @if($community && $community->user_id == session('user_id'))
+                                    <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                        <span class="username-hover"> | {{ $community->community_name }}</span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                        <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                    </a>
+                                @endif
+                            @endif
                         </div>
                         
-                        <h3 class="post-wall-first-h3 hidden" id="post-title">This is a title</h3>
+                        <h3 class="post-wall-first-h3 post-title-display">This is a title</h3>
                     
                     
-                        <p class="post-para hidden" id="post-para"></p>
-
-                        @if(!empty($post->post_img))
                             <div class="post-img hidden" style="position: relative; display: inline-block; overflow: hidden;">
-                                <div id="post-bg"  style="
-                                    position: absolute;
-                                    top: -10%;
-                                    left: -10%;
-                                    height: 120%;
-                                    width: 120%;
-                                    background: url('{{ asset('storage/' . $post->post_img) }}') no-repeat center;
-                                    background-size: cover;
-                                    filter: blur(20px);
-                                    z-index: 1;
-                                "></div>
                                 <img id="post-img" src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image"style="position: relative; z-index: 2;">
                             </div>
-                        @endif
                     
                         
                     </div> 
 
                     
-                    <div class="post-wall" style="top: 316px;">
+                    <div class="post-wall" id="post-wall-3" style="top: 316px;">
                         <div class="username">
                     
                             <div class="profile-img2">
-                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                @if($user->profile_pic)
+                                    <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture">
+                                @else
+                                    <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                @endif
                             </div>
                     
                             <div class="profile-img2"></div>
-                            <a href="">
-                                <span class="username-hover">r/mriganka</span>
-                            </a>
-                            {{-- @if (Auth::check() && Auth::id() === $post->user->user_id)
-                                <a href="{{ route('profile') }}">
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
-                                </a>
-                            @else
-                                <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
-                                </a>
-                            @endif --}}
+                            <span class="username-hover">{{ session('user')->user_name }}</span>
+
+                            @if($post->community_id) 
+                                @php
+                                    $community = \App\Models\Communities::find($post->community_id);
+                                @endphp
+                                @if($community && $community->user_id == session('user_id'))
+                                    <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                        <span class="username-hover"> | {{ $community->community_name }}</span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                        <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                    </a>
+                                @endif
+                            @endif
                             
-                            <p> • 22 hr. ago</p>
-                            {{-- <p> • {{ $post->created_at->diffForHumans() }}</p> --}}
-                            {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> --}}
-                            {{-- <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
-                    
-                            {{-- @if($post->user_id === $community->user_id) 
-                                <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                            @else
-                                <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                            @endif --}}
                         </div>
                         
-                        <h3 class="post-wall-first-h3">This is a title</h3>
-                        {{-- <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3> --}}
+                        <h3 class="post-wall-first-h3 post-title-display">This is a title</h3>
                     
-                        <p class="post-para" id="post-para"></p>
+                        <p class="post-para" id="post-para">Ok so I am 30 years old. Turned 30 back in March and I bought myself a PS5 after my 4 shit out finally after 12 years. I was excited about all the big games but was pleasantly entertained with Astro Bot. So clever! My kids would watch me play before bed and they just loved it. Never thought a sequel would come out. Finally got to try the new one and I am BLOWN AWAY at how absolutely creative and visually appealing this game is. I felt like I was a kid playing an all time classic for the first time. It’s bringing me so much joy! Don’t have many gamers in my life. So I figured I would write this just to share how great I thought it is. Anyone else feel the same?</p>
                         
                     </div> 
                              
-                    
-                    <div class="post-wall" style="height: 6rem; top:341px;">
+                    <div class="post-wall" id="post-wall-1" style=" top:341px;">
                         <div class="username">
                     
                             <div class="profile-img2">
-                                <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                @if($user->profile_pic)
+                                    <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture">
+                                @else
+                                    <img src="https://plus.unsplash.com/premium_photo-1701090939615-1794bbac5c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                                @endif
                             </div>
                     
                             <div class="profile-img2"></div>
-                            <a href="">
-                                <span class="username-hover">r/mriganka</span>
-                            </a>
-                            {{-- @if (Auth::check() && Auth::id() === $post->user->user_id)
-                                <a href="{{ route('profile') }}">
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
-                                </a>
-                            @else
-                                <a href="{{ route('outprofile', ['username' => $post->user->user_name]) }}">
-                                    <span class="username-hover">{{ $post->user->user_name }}</span>
-                                </a>
-                            @endif --}}
+                            <span class="username-hover">{{ session('user')->user_name }}</span>
+
+                            @if($post->community_id) 
+                                @php
+                                    $community = \App\Models\Communities::find($post->community_id);
+                                @endphp
+                                @if($community && $community->user_id == session('user_id'))
+                                    <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}">
+                                        <span class="username-hover"> | {{ $community->community_name }}</span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}">
+                                        <span class="username-hover"> | {{ $community ? $community->community_name : 'Unknown Community' }}</span>
+                                    </a>
+                                @endif
+                            @endif
                             
-                            <p> • 22 hr. ago</p>
-                            {{-- <p> • {{ $post->created_at->diffForHumans() }}</p> --}}
-                            {{-- <span class="post-wall-admin" style="color: #d0d3da;">Admin</span> --}}
-                            {{-- <span class="post-wall-member" style="color: #d0d3da;">Members</span> --}}
-                    
-                            {{-- @if($post->user_id === $community->user_id) 
-                                <span class="post-wall-admin" style="color: #d0d3da;">Admin</span>
-                            @else
-                                <span class="post-wall-member" style="color: #d0d3da;">Members</span>
-                            @endif --}}
                         </div>
                         
-                        <h3 class="post-wall-first-h3">This is a title</h3>
-                        {{-- <h3 class="post-wall-first-h3">{{ $post->post_caption }}</h3> --}}
+                        <h3 class="post-wall-first-h3 post-title-display" style="margin-bottom: 17px; margin-right: 8px;">This is a title</h3>
                     
                         
                     </div> 
+                    
 
 
                 @else

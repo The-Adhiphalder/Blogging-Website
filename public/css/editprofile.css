@@ -1539,11 +1539,6 @@ color: tomato;
   # SECTION POST-WALL 1
 \*-----------------------------------------*/
 
-.hidden { 
-  display: none;
-  transition: opacity 0.3s ease-in-out;
-}
-
 .post-wall{
   position: absolute;
   top: 227px;

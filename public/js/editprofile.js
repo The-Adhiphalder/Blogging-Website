@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
 /*-----------------*\
     COVER IMAGE
 \*-----------------*/
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const imagePreview = document.getElementById('image-preview-cover');
     const label = document.getElementById('upload-label');
     const existingImg = imagePreview.querySelector('img');
+    const postImg = document.getElementById('post-img');
 
     if (existingImg && existingImg.src.trim() !== '') {
         imagePreview.classList.add('active');
@@ -96,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     imagePreview.classList.add('active');
                     imagePreview.appendChild(img);
+
+                    if (postImg) {
+                        postImg.src = e.target.result; 
+                    }
                 };
 
                 reader.readAsDataURL(file);
@@ -117,20 +123,21 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const fileInput = document.getElementById('main-img-cover-img');
+    const fileInputTwo = document.getElementById('main-img-cover-img'); 
     const imagePreviewTwo = document.getElementById('image-preview-cover-two');
-    const label = document.getElementById('upload-label');
-    const existingImg = imagePreviewTwo.querySelector('img');
+    const labelTwo = document.getElementById('upload-label');
+    const existingImgTwo = imagePreviewTwo.querySelector('img');
+    const postImgTwo = document.getElementById('post-img'); 
 
-    if (existingImg && existingImg.src.trim() !== '') {
+    if (existingImgTwo && existingImgTwo.src.trim() !== '') {
         imagePreviewTwo.classList.add('active');
     }
 
-    fileInput.addEventListener('change', function () {
+    fileInputTwo.addEventListener('change', function () {
         imagePreviewTwo.innerHTML = ''; 
 
-        if (fileInput.files && fileInput.files.length > 0) {
-            const file = fileInput.files[0];
+        if (fileInputTwo.files && fileInputTwo.files.length > 0) {
+            const file = fileInputTwo.files[0];
 
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
@@ -139,26 +146,29 @@ document.addEventListener('DOMContentLoaded', function () {
                     const img = document.createElement('img');
                     img.src = e.target.result;
 
-
                     imagePreviewTwo.classList.add('active');
                     imagePreviewTwo.appendChild(img);
+
+                    if (postImgTwo) {
+                        postImgTwo.src = e.target.result; 
+                    }
                 };
 
                 reader.readAsDataURL(file);
-                label.innerHTML = `File selected: ${file.name}`;
+                labelTwo.innerHTML = `File selected: ${file.name}`;
             } else {
-                label.innerHTML = 'Please select an image';
+                labelTwo.innerHTML = 'Please select an image';
                 imagePreviewTwo.classList.remove('active');
                 alert('Please upload a valid image file (jpg, png, gif, etc.).');
             }
         } else {
-            label.innerHTML = 'Click me to upload image';
+            labelTwo.innerHTML = 'Click me to upload image';
             imagePreviewTwo.classList.remove('active');
         }
     });
 
     imagePreviewTwo.addEventListener('click', function () {
-        fileInput.click();
+        fileInputTwo.click();
     });
 });
 
@@ -185,40 +195,46 @@ function validatePhone(input) {
     PRERVIEW PANEL
 \*-----------------*/
 
+document.addEventListener('DOMContentLoaded', function() {
+    const postCaptionInput = document.getElementById('create-post-title');
+    const postDescTextarea = document.getElementById('post-desc');
+    const postParaDisplay = document.getElementById('post-para');
+    const coverImageInput = document.getElementById('main-img-cover-img');
+    const postWall1 = document.getElementById('post-wall-1'); 
+    const postWall2 = document.getElementById('post-wall-2');
+    const postWall3 = document.getElementById('post-wall-3'); 
+    const postImg = document.getElementById('post-img');
 
+    function updateDisplays() {
+        const titleDisplays = document.querySelectorAll('.post-title-display');
+        titleDisplays.forEach(display => {
+            display.textContent = postCaptionInput.value;
+        });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     const titleInput = document.getElementById("create-post-title");
-//     const titlePreview = document.getElementById("post-title");
+        postParaDisplay.textContent = postDescTextarea.value; 
 
-//     titleInput.addEventListener("input", function () {
-//         titlePreview.textContent = this.value.trim() || "This is a title";
-//         titlePreview.classList.remove("hidden"); 
-//     });
+        const caption = postCaptionInput.value.trim();
+        const description = postDescTextarea.value.trim();
+        const hasImage = coverImageInput.files.length > 0 || document.getElementById('image-preview-cover-two').querySelector('img') !== null;
 
-//     const descInput = document.getElementById("post-desc");
-//     const descPreview = document.getElementById("post-para");
+        postWall1.style.display = 'none';
+        postWall2.style.display = 'none';
+        postWall3.style.display = 'none';
 
-//     descInput.addEventListener("input", function () {
-//         descPreview.textContent = this.value.trim();
-//         descPreview.classList.remove("hidden"); 
-//     });
+        if (caption && !description && !hasImage) {
+            postWall1.style.display = 'block'; 
+        } else if (caption && hasImage && !description) {
+            postWall2.style.display = 'block'; 
+        } else if (caption && description) {
+            postWall3.style.display = 'block'; 
+        } else if (caption && hasImage) {
+            postWall2.style.display = 'block'; 
+        }
+    }
 
-//     const imgInput = document.getElementById("main-img-cover-img");
-//     const imgPreview = document.getElementById("post-img");
-//     const bgPreview = document.getElementById("post-bg");
+    postCaptionInput.addEventListener('input', updateDisplays);
+    postDescTextarea.addEventListener('input', updateDisplays);
+    coverImageInput.addEventListener('change', updateDisplays);
 
-//     imgInput.addEventListener("change", function (event) {
-//         const file = event.target.files[0];
-
-//         if (file) {
-//             const reader = new FileReader();
-//             reader.onload = function (e) {
-//                 imgPreview.src = e.target.result;
-//                 imgPreview.classList.remove("hidden");
-//                 bgPreview.style.backgroundImage = `url('${e.target.result}')`;
-//             };
-//             reader.readAsDataURL(file);
-//         }
-//     });
-// });
+    updateDisplays();
+});

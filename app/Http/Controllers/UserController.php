@@ -135,7 +135,7 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail($userId); 
-        $posts = Post::where('user_id', $userId)->latest()->get(); 
+        $posts = Post::withCount('comments')->where('user_id', $userId)->latest()->get();
         $totalPosts = $posts->count();
         $totalFollowers = Follow::where('following_id', $userId)->count();
 
@@ -283,22 +283,62 @@ class UserController extends Controller
     public function outprofile($username){
 
         // return view('User.OutsiderProfile'); 
+
         $user = User::where('user_name', $username)->first();
 
         if (!$user) {
             return redirect()->route('home')->with('error', 'User  not found.');
         }
 
-        $posts = Post::where('user_id', $user->user_id)->latest()->get();
+        $userId = $user->user_id;
+
+        $posts = Post::withCount('comments')->where('user_id', $userId)->latest()->get();
         $totalPosts = $posts->count();
-        $totalFollowers = Follow::where('following_id', $user->user_id)->count();
+        $totalFollowers = Follow::where('following_id', $userId)->count();
 
         return view('User.OutsiderProfile', compact('user', 'posts', 'totalPosts', 'totalFollowers'));
         
     }
 
     public function welcome() {
-        return view('welcome');
+        // return view('welcome');
+
+        if (!Auth::check()) {
+            $allPosts = collect(); 
+            return view('welcome', compact('allPosts'));
+        }
+    
+        $userId = Auth::id();
+    
+        $followedUserIds = Follow::where('follower_id', $userId)->pluck('following_id');
+        $joinedCommunityIds = Join::where('user_id', $userId)->pluck('community_id');
+    
+        $userPosts = Post::withCount('comments')
+            ->whereIn('user_id', $followedUserIds)
+            ->latest()
+            ->get();
+    
+        $communityPosts = Post::withCount('comments')
+            ->whereIn('community_id', $joinedCommunityIds)
+            ->latest()
+            ->get();
+    
+        $myCommunityPosts = Post::withCount('comments')
+            ->where('user_id', $userId)
+            ->latest()
+            ->get();
+    
+        $otherUserPosts = Post::withCount('comments')
+            ->whereNotIn('user_id', $followedUserIds)
+            ->whereNotIn('community_id', $joinedCommunityIds)
+            ->latest()
+            ->get();
+    
+        $allPosts = $userPosts->merge($communityPosts)->merge($myCommunityPosts)->merge($otherUserPosts)->shuffle();
+    
+        return view('welcome', compact('allPosts'));
+
+        
     }
 
     public function viewmember($user_id){
