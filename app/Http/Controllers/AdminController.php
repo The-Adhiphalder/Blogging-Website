@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
-    // ADMIN
 
     public function adminlogin(){
         return view('Admin.AdminLogin');

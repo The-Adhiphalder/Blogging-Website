@@ -76,17 +76,33 @@
                 <div id="forgot" class="forgot">
 
                     <!-- <button class="forget-pass" id="backButton" type="button">Back</button> -->
-                    <form action="" method="post">
+
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('password.update') }}" method="post">
+                        @csrf
                         <div class="forgot-ele" style="margin-bottom: 12px">
-                            <input type="email" name="" id="" placeholder="Email" required>
+                            <input type="email" name="email" id="email" placeholder="Email" required>
                         </div>
                         <div class="forgot-ele" style="margin-bottom: 12px">
-                            <input type="password" name="" id="" placeholder="Password" required>
+                            <input type="password" name="password" id="password" placeholder="New Password" required>
                         </div>
                         <div class="forgot-ele" style="margin-bottom: 6px">
-                            <input type="password" name="" id="" placeholder="Confirm Password" required>
+                            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
                         </div>
-                        <button class="submit-button forgot-button" id="showButton">Continue</button>
+                        <button type="submit" class="submit-button forgot-button">Continue</button>
                     </form>
                 </div>
 

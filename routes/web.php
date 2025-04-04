@@ -41,6 +41,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/forgot', [LoginController::class, 'forgot']);
 
+Route::post('/forgot', [LoginController::class, 'resetPassword'])->name('password.update');
+
 
 
 

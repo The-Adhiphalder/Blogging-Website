@@ -72,4 +72,21 @@ class LoginController extends Controller
     public function forgot() {
         return view('User.Forgot');
     }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|confirmed',
+        ]);
+    
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return redirect('/registration')->with('success', 'Password reset successful! You can now log in.');
+        }
+    
+        return back()->withErrors(['email' => 'Email not found.']);
+    }
 }
