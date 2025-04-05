@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('admin_id');
             $table->string('admin_name');
             $table->string('password');
-            $table->string('profile_pic')->nullable();
+            $table->string('profile_pic')->nullable(); 
             $table->timestamps();
         });
     }

@@ -50,7 +50,19 @@ Route::post('/forgot', [LoginController::class, 'resetPassword'])->name('passwor
   #ADMIN
 \*----------------*/
 
-Route::get('/adminlogin', [AdminController::class, 'adminlogin']);
+Route::get('/adminlogin', [AdminController::class, 'adminlogin'])->name('admin.login');
+
+Route::post('/adminlogin', [AdminController::class, 'adminAuth'])->name('admin.auth');
+
+Route::get('/dashboard', [AdminController::class, 'adminhome'])->name('dashboard');
+
+Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('admin.delete.user');
+
+Route::post('/admin/suspend-user/{userId}', [AdminController::class, 'suspendUser']);
+
+Route::get('/adminuser', [AdminController::class, 'adminuser']);
+
+Route::get('/adminpost', [AdminController::class, 'adminpost']);
 
 Route::get('/admincommunity', [AdminController::class, 'admincommunity']);
 
@@ -58,11 +70,7 @@ Route::get('/vcommunity', [AdminController::class, 'viewcommunity']);
 
 Route::get('/admincontent', [AdminController::class, 'admincontent']);
 
-Route::get('/adminpost', [AdminController::class, 'adminpost']);
-
 Route::get('/vpost', [AdminController::class, 'viewpost']);
-
-Route::get('/adminuser', [AdminController::class, 'adminuser']);
 
 
 

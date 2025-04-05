@@ -45,8 +45,17 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
     
+        $user = User::where('email', $request->email)->first();
+    
+        if (!$user) {
+            return back()->withErrors(['email' => 'Invalid credentials']);
+        }
+    
+        if ($user->suspend_account == 1) {
+            return back()->withErrors(['email' => 'Your account has been temporarily suspended.']);
+        }
+    
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
             $request->session()->put('user', $user); 
             $request->session()->put('user_id', $user->user_id);
             return redirect()->route('home')->with('success', 'Logged in successfully!');

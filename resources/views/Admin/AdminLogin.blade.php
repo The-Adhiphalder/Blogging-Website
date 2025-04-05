@@ -26,10 +26,10 @@
 
                 <h3 class="login-heading">Admin Login</h3>
 
-                <form action="" method="get">
+                {{-- <form action="" method="get">
 
                     <div class="login-ele">
-                        <input type="email" name="" id="" placeholder="Username" required>
+                        <input type="email" name="" id="" placeholder="Admin ID" required>
                     </div>
 
                     <div class="login-ele">
@@ -38,6 +38,34 @@
 
                     <button type="submit" class="submit-button">Login</button>
                     
+                </form> --}}
+
+
+                @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                <form action="{{ route('admin.login') }}" method="post">
+                    @csrf
+                    <div class="login-ele">
+                        <input name="admin_id" id="admin_id" placeholder="Admin ID" required>
+                    </div>
+
+                    <div class="login-ele">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
+
+                    <button type="submit" class="submit-button">Login</button>
                 </form>
             </div>
         </div>

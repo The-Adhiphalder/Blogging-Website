@@ -52,3 +52,70 @@ function openPopup(imgElement) {
     }
   };
   
+
+  function confirmDelete(button) {
+    const form = button.closest('form'); 
+    const userName = button.closest('tr').querySelector('td:nth-child(2)').innerText; 
+
+    const confirmation = confirm(`Do you want to delete the user "${userName}"?`);
+
+    if (confirmation) {
+        form.submit(); 
+    }
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerText = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 500);
+    }, 3000);
+}
+
+function confirmSuspendUser (checkbox, userId) {
+    const isSuspended = checkbox.checked; 
+    const confirmationMessage = isSuspended ? "Do you want to suspend this user?" : "Do you want to activate this user?";
+
+    if (confirm(confirmationMessage)) {
+        const suspendStatus = isSuspended ? 1 : 0;
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(`/admin/suspend-user/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ suspend_account: suspendStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const toastMessage = suspendStatus === 1 ? "User suspended successfully" : "User activated successfull";
+                showToast(toastMessage);
+            } else {
+                alert(data.error);
+                checkbox.checked = !isSuspended;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating the user status.');
+            checkbox.checked = !isSuspended;
+        });
+    } else {
+        checkbox.checked = !isSuspended;
+    }
+}

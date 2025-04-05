@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Welcome</title>
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -17,7 +18,8 @@
 
         <div class="top">
           <div class="logo">
-            <h2>Hi, <span class="danger">ADHIP</span> </h2>
+            {{-- <h2>Hi, <span class="danger">ADHIP</span> </h2> --}}
+            <h2>Hi, <span class="danger">{{ strtoupper(explode(' ', session('admin')->admin_name)[0]) }}</span></h2>
           </div>
           <div class="close" id="close_btn">
             <span class="material-symbols-sharp">
@@ -84,12 +86,14 @@
 
           <!-- start seling -->
           <div class="sales">
-            <span class="material-symbols-sharp">trending_up</span>
+            <img src="/Images/up.gif" alt="">
+            {{-- <span class="material-symbols-sharp">trending_up</span> --}}
             <div class="middle">
 
               <div class="left">
                 <h3>Total Users</h3>
-                <h1>25,024</h1>
+                {{-- <h1>25,024</h1> --}}
+                <h1>{{ number_format($totalUsersLast24Hours) }}</h1>
               </div>
               <div class="progress">
                 <svg>
@@ -106,12 +110,14 @@
           <!-- end seling -->
           <!-- start expenses -->
           <div class="expenses">
-            <span class="material-symbols-sharp">local_mall</span>
+            <img src="/Images/post.gif" alt="">
+            {{-- <span class="material-symbols-sharp">local_mall</span> --}}
             <div class="middle">
 
               <div class="left">
                 <h3>Total Posts</h3>
-                <h1>25,024</h1>
+                {{-- <h1>25,024</h1> --}}
+                <h1>{{ number_format($totalPostsLast24Hours) }}</h1>
               </div>
               <div class="progress">
                 <svg>
@@ -164,43 +170,60 @@
                   <th>Name</th>
                   <th> Contact No</th>
                   <th> Email</th>
-                  <th> Password</th>
+                  {{-- <th> Password</th> --}}
                   <th>Suspend Account</th>
                   <th>Action</th>
                 </tr>
               </thead>
             
               <tbody>
-                <tr>
-                  <td>dfdf</td>
-                  <td>fsdfsf</td>
-                  <td>sdfsfs</td>
-                  <td>dfdsfd</td>
-                  <td>sfshfsdf</td>
-                  <td>
-                    <div class="days">
-                      Days :
-                      <input type="number" id="quantity" name="quantity" min="0" max="365" step="1" value="0">
-                    </div>
-                  </td>
-                  <td class="button-container">
-                    <!-- <button class="edit">Edit</button>  -->
-            
-                    <button type="submit" class="delete">
-                      <p class="button-container-p">Delete</p>
-                      <span class="icon-wrapper">
-                        <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
+                @foreach($users as $user)
+                  <tr>
+                    {{-- <td>bdsfhdfhb</td>
+                    <td>bdsfhdfhb</td>
+                    <td>bdsfhdfhb</td>
+                    <td>bdsfhdfhb</td> --}}
+                    
 
-                        
-                      </span>
-                    </button>
-                  </td>
-                </tr>
+
+                    <td>{{ $user->user_id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->contact_no ?? 'N/A' }}</td> 
+                    <td>{{ $user->email }}</td>
+                    {{-- <td>{{ $user->password }}</td> --}}
+                    <td>
+                      <label class="switch">
+                        <input type="checkbox" onchange="confirmSuspendUser (this, {{ $user->user_id }})" {{ $user->suspend_account ? 'checked' : '' }}>
+                        <div class="slider"></div>
+                        <div class="slider-card">
+                            <div class="slider-card-face slider-card-front"></div>
+                            <div class="slider-card-face slider-card-back"></div>
+                        </div>
+                     </label>
+
+                    </td>
+                    <td class="button-container">
+                      <!-- <button class="edit">Edit</button>  -->
+  
+                      <form action="{{ route('admin.delete.user', $user->user_id) }}" method="POST" class="delete-form" style="display: inline;">
+                        @csrf
+                        @method('DELETE') 
+                        <button type="button" class="delete" onclick="confirmDelete(this)">
+                            <p class="button-container-p">Delete</p>
+                            <span class="icon-wrapper">
+                                <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    </form>
+
+                    </td>
+                  </tr>
+                @endforeach
 
                 
               </tbody>
@@ -230,12 +253,16 @@
           </div>
           <div class="profile">
             <div class="info">
-              <p><b>Adhip</b></p>
+              {{-- <p><b>Adhip</b></p> --}}
+              <p><b>{{(explode(' ', session('admin')->admin_name)[0]) }}</b></p>
               <p>Admin</p>
               <small class="text-muted"></small>
             </div>
             <div class="profile-photo">
-              <img src="/Images/profile-1.jpg" alt="" />
+              <a href="">
+                <img src="/Images/profile-1.jpg" alt="" />
+              </a>
+
             </div>
           </div>
         </div>
@@ -243,6 +270,7 @@
         <div class="recent_updates">
           <h2>Recent Update</h2>
           <div class="updates">
+
             <div class="update">
               <div class="profile-photo">
                 <img src="Pictures/agamani.jpg" alt="" />
@@ -251,14 +279,16 @@
                 <p><b>Agamani</b> Recently post a picture</p>
               </div>
             </div>
+
             <div class="update">
               <div class="profile-photo">
                 <img src="Pictures/Adhip.jpg" alt="" />
               </div>
               <div class="message">
-                <p><b>Adhip</b> Upload profile picture</p>
+                <p><b>Adhip</b> Upload his profile picture</p>
               </div>
             </div>
+
             <div class="update">
               <div class="profile-photo">
                 <img src="Pictures/my.jpg" alt="" />
@@ -267,6 +297,9 @@
                 <p><b>Mriganka</b> Comment on Adhip's post</p>
               </div>
             </div>
+            
+            
+
           </div>
         </div>
 
