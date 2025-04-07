@@ -60,15 +60,19 @@ Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name(
 
 Route::post('/admin/suspend-user/{userId}', [AdminController::class, 'suspendUser']);
 
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
 Route::get('/adminuser', [AdminController::class, 'adminuser']);
 
 Route::get('/adminpost', [AdminController::class, 'adminpost']);
+
+Route::delete('/admin/posts/{post}', [AdminController::class, 'deletePost'])->name('admin.delete.post');
 
 Route::get('/admincommunity', [AdminController::class, 'admincommunity']);
 
 Route::get('/vcommunity', [AdminController::class, 'viewcommunity']);
 
-Route::get('/admincontent', [AdminController::class, 'admincontent']);
+Route::get('/admincontent', [AdminController::class, 'admincontent'])->name('admin.content');
 
 Route::get('/vpost', [AdminController::class, 'viewpost']);
 

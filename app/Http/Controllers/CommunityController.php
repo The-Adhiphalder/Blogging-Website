@@ -116,6 +116,7 @@ class CommunityController extends Controller
 
         $totalMembers = \DB::table('join')->where('community_id', $community->community_id)->count();
         $totalActiveUsers = \DB::table('sessions')->whereNotNull('user_id')->count();
+        
 
         return view('Community.Community', compact('community', 'posts', 'isMember', 'totalPosts', 'totalMembers', 'totalActiveUsers'));
 

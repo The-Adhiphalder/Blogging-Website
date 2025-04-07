@@ -496,7 +496,7 @@ Right Side
 .right .top .profile{
   display: flex;
   gap: 2rem;
-  text-align: right;
+  text-align: center;
 }
 .info{
   padding-top: 10px;

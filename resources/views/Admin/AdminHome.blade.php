@@ -57,13 +57,13 @@
             <h3>Reports</h3>
           </a>
           <a href="#">
-            <span class="material-symbols-sharp">settings </span>
-            <h3>settings</h3>
+            <span class="material-symbols-sharp">Settings </span>
+            <h3>Settings</h3>
           </a>
 
-          <a href="#">
-            <span class="material-symbols-sharp">logout </span>
-            <h3>logout</h3>
+          <a href="{{ route('admin.logout') }}">
+            <span class="material-symbols-sharp">Logout </span>
+            <h3>Logout</h3>
           </a>
 
 
@@ -208,7 +208,7 @@
                       <form action="{{ route('admin.delete.user', $user->user_id) }}" method="POST" class="delete-form" style="display: inline;">
                         @csrf
                         @method('DELETE') 
-                        <button type="button" class="delete" onclick="confirmDelete(this)">
+                        <button type="button" class="delete" onclick="confirmDelete(this, 'user')">
                             <p class="button-container-p">Delete</p>
                             <span class="icon-wrapper">
                                 <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"

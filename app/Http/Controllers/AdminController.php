@@ -85,6 +85,13 @@ class AdminController extends Controller
         return redirect()->back()->withErrors(['user' => 'User  not found.']);
     }
 
+    public function logout()
+    {
+        session()->flush();
+
+        return redirect()->route('admin.login')->with('success', 'Logged out successfully!');
+    }
+
     public function adminuser()
     {
         // return view('Admin.AdminUser');
@@ -93,15 +100,34 @@ class AdminController extends Controller
             return redirect()->route('admin.login')->with('error', 'Please log in first.');
         }
     
-        // Fetch all users from the database
-        $users = User::all(); // You can also use pagination if needed
+        $users = User::all(); 
     
         return view('Admin.AdminUser ', compact('users'));
     }
 
     public function adminpost()
     {
-        return view('Admin.AdminPost');
+        // return view('Admin.AdminPost');
+
+        if (!session()->has('admin')) {
+            return redirect()->route('admin.login')->with('error', 'Please log in first.');
+        }
+    
+        $posts = Post::withCount('comments')->get();
+    
+        return view('Admin.AdminPost', compact('posts'));
+    }
+
+    public function deletePost($post_id)
+    {
+        $post = Post::find($post_id);
+        if (!$post) {
+            return back()->with('error', 'Post not found.'); 
+        }
+    
+        $post->delete();
+    
+        return back()->with('success', 'Post deleted successfully!'); 
     }
 
     public function admincommunity()

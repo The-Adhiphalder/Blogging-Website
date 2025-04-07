@@ -17,7 +17,8 @@
 
                 <div class="top">
                     <div class="logo">
-                        <h2>Hi, <span class="danger">ADHIP</span> </h2>
+                        {{-- <h2>Hi, <span class="danger">ADHIP</span> </h2> --}}
+                    <h2>Hi, <span class="danger">{{ strtoupper(explode(' ', session('admin')->admin_name)[0]) }}</span></h2>
                     </div>
                     <div class="close" id="close_btn">
                         <span class="material-symbols-sharp">
@@ -59,9 +60,9 @@
                         <h3>settings</h3>
                     </a>
 
-                    <a href="#">
-                        <span class="material-symbols-sharp">logout </span>
-                        <h3>logout</h3>
+                    <a href="{{ route('admin.logout') }}">
+                        <span class="material-symbols-sharp">Logout </span>
+                        <h3>Logout</h3>
                     </a>
 
 
@@ -93,54 +94,76 @@
                             <tr>
                                 <th>Post ID</th>
                                 <th>User ID</th>
-                                <th>Image</th>
+                                <th>Community ID</th>
+                                <th>Post</th>
                                 <!-- <th>Caption</th>
                                 <th>Description</th> -->
-                                <th>Total Upvotes</th>
-                                <th>Total Downvotes</th>
+                                <th>Total Comments</th>
                                 <th>Date & Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>dfdf</td>
-                                <td>fsdfsf</td>
+                            @foreach($posts as $post)
+                                <tr>
+                                    <td>{{ $post->post_id }}</td>
+                                    <td>{{ $post->user_id }}</td>
+                                    <td>{{ $post->community_id }}</td>
 
-                                <div id="imagePopup" class="popup">
-                                    <span class="close">&times;</span>
-                                    <img class="popup-content" id="popupImg">
-                                </div>             
-                                <td> 
-                                    <img src="/Images/4.jpeg" alt="Post Image" onclick="openPopup(this)">
-                                    <a href="admin_content.html">View Posts</a>
-                                </td>
-                                
-                                <td>dfdsfd</td>
-                                <td>sfsfsdf</td>
-                                <td>dhchjdhschsg</td>
-                                <!-- <td>dhchjdschsg</td>
-                                <td>dhchjdschsg</td> -->
-                                <td class="button-container">
-                                    <!-- <button class="edit">Edit</button>  -->
+                                    <div id="imagePopup" class="popup">
+                                        <span class="close">&times;</span>
+                                        <img class="popup-content" id="popupImg">
+                                    </div>             
+                                    {{-- <td> 
+                                        <img src="/Images/4.jpeg" alt="Post Image" onclick="openPopup(this)">
+                                        <a href="admin_content.html">View Posts</a>
+                                    </td> --}}
+                                    <td>
+                                        @if($post->post_img)
+                                            <img src="{{ asset('storage/' . $post->post_img) }}" alt="Post Image" onclick="openPopup(this)">
+                                        @endif
+                                        <a href="{{ route('admin.content') }}">View Posts</a>
+                                    </td>
+                                    
+                                    <td>
+                                        <a href="">{{ $post->comments_count }}</a>
+                                    </td>
+                                    <td>{{ $post->created_at->format('d-m-Y') }} at {{ $post->created_at->format('H:i') }}</td>
+                                    <!-- <td>dhchjdschsg</td>
+                                    <td>dhchjdschsg</td> -->
+                                    <td class="button-container">
+                                        <!-- <button class="edit">Edit</button>  -->
 
-                                    <button type="submit" class="delete">
-                                        <p class="button-container-p">Delete</p>
-                                        <span class="icon-wrapper">
-                                            <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
-                                                    stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                            </svg>
+                                        {{-- <button type="submit" class="delete">
+                                            <p class="button-container-p">Delete</p>
+                                            <span class="icon-wrapper">
+                                                <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                                                        stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round"></path>
+                                                </svg>
 
 
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
+                                            </span>
+                                        </button> --}}
+                                        <form action="{{ route('admin.delete.post', $post->post_id) }}" method="POST" class="delete-form" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="delete" onclick="confirmDelete(this)">
+                                                <p class="button-container-p">Delete</p>
+                                                <span class="icon-wrapper">
+                                                    <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
 
                             
 
@@ -172,7 +195,8 @@
                     </div>
                     <div class="profile">
                         <div class="info">
-                            <p><b>Adhip</b></p>
+                            {{-- <p><b>Adhip</b></p> --}}
+                            <p><b>{{(explode(' ', session('admin')->admin_name)[0]) }}</b></p>
                             <p>Admin</p>
                             <small class="text-muted"></small>
                         </div>

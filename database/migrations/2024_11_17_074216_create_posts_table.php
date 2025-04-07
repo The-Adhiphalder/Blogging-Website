@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('post_img')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('community_id')->nullable();
-            $table->integer('up_votes')->nullable();
-            $table->integer('down_votes')->nullable();
+            // $table->integer('up_votes')->nullable();
+            // $table->integer('down_votes')->nullable();
             // $table->integer('comments')->nullable();
             // $table->integer('share')->nullable();
             $table->timestamps();

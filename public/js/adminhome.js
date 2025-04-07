@@ -24,7 +24,7 @@ themeToggler.addEventListener('click', () => {
 
 
 document.querySelectorAll('.button').forEach(button => button.addEventListener('click', e => {
-    if(!button.classList.contains('delete')) {
+    if (!button.classList.contains('delete')) {
         button.classList.add('delete');
         setTimeout(() => button.classList.remove('delete'), 3200);
     }
@@ -37,30 +37,37 @@ document.querySelectorAll('.button').forEach(button => button.addEventListener('
 function openPopup(imgElement) {
     var popup = document.getElementById("imagePopup");
     var popupImg = document.getElementById("popupImg");
-    popupImg.src = imgElement.src; 
-    popup.style.display = "block"; 
-  }
-  
-  document.querySelector(".popup .close").onclick = function() {
+    popupImg.src = imgElement.src;
+    popup.style.display = "block";
+}
+
+document.querySelector(".popup .close").onclick = function () {
     document.getElementById("imagePopup").style.display = "none";
-  };
-  
-  window.onclick = function(event) {
+};
+
+window.onclick = function (event) {
     var popup = document.getElementById("imagePopup");
     if (event.target == popup) {
-      popup.style.display = "none";
+        popup.style.display = "none";
     }
-  };
-  
+};
 
-  function confirmDelete(button) {
+function confirmDelete(button, type = 'post') {
     const form = button.closest('form'); 
-    const userName = button.closest('tr').querySelector('td:nth-child(2)').innerText; 
+    let itemName;
 
-    const confirmation = confirm(`Do you want to delete the user "${userName}"?`);
-
-    if (confirmation) {
-        form.submit(); 
+    if (type === 'user') {
+        itemName = button.closest('tr').querySelector('td:nth-child(2)').innerText; 
+        const confirmation = confirm(`Do you want to delete the user "${itemName}"?`); 
+        if (confirmation) {
+            form.submit(); 
+        }
+    } else if (type === 'post') {
+        itemName = button.closest('tr').querySelector('td:nth-child(1)').innerText; 
+        const confirmation = confirm(`Do you want to delete this post?`);
+        if (confirmation) {
+            form.submit(); 
+        }
     }
 }
 
@@ -83,8 +90,8 @@ function showToast(message) {
     }, 3000);
 }
 
-function confirmSuspendUser (checkbox, userId) {
-    const isSuspended = checkbox.checked; 
+function confirmSuspendUser(checkbox, userId) {
+    const isSuspended = checkbox.checked;
     const confirmationMessage = isSuspended ? "Do you want to suspend this user?" : "Do you want to activate this user?";
 
     if (confirm(confirmationMessage)) {
@@ -100,21 +107,21 @@ function confirmSuspendUser (checkbox, userId) {
             },
             body: JSON.stringify({ suspend_account: suspendStatus })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const toastMessage = suspendStatus === 1 ? "User suspended successfully" : "User activated successfull";
-                showToast(toastMessage);
-            } else {
-                alert(data.error);
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const toastMessage = suspendStatus === 1 ? "User suspended successfully" : "User activated successfull";
+                    showToast(toastMessage);
+                } else {
+                    alert(data.error);
+                    checkbox.checked = !isSuspended;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the user status.');
                 checkbox.checked = !isSuspended;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while updating the user status.');
-            checkbox.checked = !isSuspended;
-        });
+            });
     } else {
         checkbox.checked = !isSuspended;
     }
