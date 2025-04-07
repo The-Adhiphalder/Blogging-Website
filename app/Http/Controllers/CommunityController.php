@@ -33,8 +33,9 @@ class CommunityController extends Controller
         $community->community_name = $validatedData['community_name'];
         $community->community_description = $validatedData['community_description'];
         $community->category = $validatedData['main-form3-name'];
-    
         $community->user_id = Auth::id(); 
+        $community->community_total_member = 0; 
+        $community->community_total_posts = 0; 
     
         if ($request->hasFile('community_coverpic')) {
             $coverPicPath = $request->file('community_coverpic')->store('community_banners', 'public');
@@ -202,6 +203,8 @@ class CommunityController extends Controller
 
     public function joinCommunity(Request $request, $community_name)
     {
+
+
         $userId = Auth::id(); 
         $community = Communities::where('community_name', $community_name)->first();
 
@@ -222,12 +225,15 @@ class CommunityController extends Controller
             'updated_at' => now(),
         ]);
 
+        $community->increment('community_total_member');
+
         return redirect()->route('show.community', ['community_name' => $community_name])
                         ->with('success', "You're successfully joined this community!");
     }
 
     public function leaveCommunity(Request $request, $community_name)
     {
+
         $userId = Auth::id();
         $community = Communities::where('community_name', $community_name)->first();
 
@@ -237,7 +243,11 @@ class CommunityController extends Controller
 
         \DB::table('join')->where('user_id', $userId)->where('community_id', $community->community_id)->delete();
 
+        // Decrement the total members count
+        $community->decrement('community_total_member');
+
         return response()->json(['success' => "You've left the community successfully!"]);
+
     }
 
     public function viewmembercom($community_name){

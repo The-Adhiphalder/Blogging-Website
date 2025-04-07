@@ -102,7 +102,8 @@ class UserController extends Controller
             return redirect()->back()->withInput()->with('error', 'Please select a valid community or your profile.');
         }
     
-        Post::create([
+        // Create the post
+        $post = Post::create([
             'post_caption' => $request->post_caption,
             'post_desc' => $request->post_desc,
             'post_img' => $postImagePath,
@@ -112,6 +113,12 @@ class UserController extends Controller
     
         if ($community_id) {
             $community = Communities::find($community_id);
+            if ($community) {
+                $community->increment('community_total_posts');
+            }
+        }
+    
+        if ($community_id) {
             if ($community->user_id === $userId) {
                 return redirect()->route('show.mycommunity', ['community_name' => $community->community_name])
                     ->with('success', 'Post created successfully!');
