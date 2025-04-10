@@ -186,5 +186,8 @@ class AdminController extends Controller
         return view('Admin.ViewPost');
     }
     
+    public function adminprofile(){
+        return view('Admin.AdminProfile');
+    }
 
 }

@@ -234,6 +234,6 @@ class CommunityController extends Controller
 
         $user = User::find($community->user_id);
 
-        return view('User .ViewMemberCom', compact('community', 'members', 'user'));
+        return view('User.ViewMemberCom', compact('community', 'members', 'user'));
     }
 }

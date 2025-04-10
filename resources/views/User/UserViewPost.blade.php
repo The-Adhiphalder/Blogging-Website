@@ -242,32 +242,32 @@
 
         <nav class="sidebar" id="sidebar">
             <div class="sidebar__container">
-   
-               <div class="sidebar__content">
-                  <div>
-                     <h3 class="sidebar__title">MANAGE</h3>
-   
-                     <div class="sidebar__list">
+
+                <div class="sidebar__content">
+                    <div>
+                        <h3 class="sidebar__title">MANAGE</h3>
+
+                        <div class="sidebar__list">
                         <a href="#" class="sidebar__link active-link">
-                           <i class="fa-solid fa-house"></i>
-                           <span>Home</span>
+                            <i class="fa-solid fa-house"></i>
+                            <span>Home</span>
                         </a>
                         
                         <a href="#" class="sidebar__link">
                             <i class="fa-solid fa-arrow-trend-up"></i>
-                           <span>Popular</span>
+                            <span>Popular</span>
                         </a>
-   
+
                         <a href="/explore" class="sidebar__link">
                             <i class="fa-solid fa-table"></i>
-                           <span>Explore</span>
+                            <span>Explore</span>
                         </a>
-                     </div>
-                  </div>
+                        </div>
+                    </div>
 
-                  <div>
+                    <div>
                         <h3 class="sidebar__title">YOUR COMMUNITIES</h3>
-    
+
                         <div class="sidebar__list">
                             <a href="/createcommunity" class="sidebar__link">
                                 <i class="fa-solid fa-plus"></i>
@@ -277,7 +277,6 @@
 
                             {{-- @php
                                 $userId = session('user_id');
-                                $user = \App\Models\User::find($userId);
 
                                 $createdCommunities = \App\Models\Communities::where('user_id', $userId)->get();
 
@@ -286,45 +285,26 @@
                                     ->where('join.user_id', $userId)
                                     ->select('communities.community_name', 'communities.community_pic', 'join.created_at as joined_at')
                                     ->get();
-
-                                $allCommunities = collect();
-
-                                foreach ($createdCommunities as $community) {
-                                    $allCommunities->push((object) [
-                                        'community_name' => $community->community_name,
-                                        'community_pic' => $community->community_pic,
-                                        'created_at' => $community->created_at, 
-                                        'type' => 'created'
-                                    ]);
-                                }
-
-                                foreach ($joinedCommunities as $community) {
-                                    $allCommunities->push((object) [
-                                        'community_name' => $community->community_name,
-                                        'community_pic' => $community->community_pic,
-                                        'created_at' => $community->joined_at,
-                                        'type' => 'joined'
-                                    ]);
-                                }
-
-                                $sortedCommunities = $allCommunities->sortByDesc('created_at');
                             @endphp --}}
 
                             @php
                                 $userId = session('user_id');
 
-                                $createdCommunities = \App\Models\Communities::where('user_id', $userId)->get();
+                                $createdCommunities = \App\Models\Communities::where('user_id', $userId)
+                                    ->where('community_suspend', 0) 
+                                    ->get();
 
                                 $joinedCommunities = \DB::table('join')
                                     ->join('communities', 'join.community_id', '=', 'communities.community_id')
                                     ->where('join.user_id', $userId)
+                                    ->where('communities.community_suspend', 0) 
                                     ->select('communities.community_name', 'communities.community_pic', 'join.created_at as joined_at')
                                     ->get();
                             @endphp
 
-                            
-                            {{-- @if ($sortedCommunities->isNotEmpty())
-                                @foreach ($sortedCommunities as $community)
+
+                            {{-- @if ($createdCommunities->isNotEmpty())
+                                @foreach ($createdCommunities as $community)
                                     <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}" class="sidebar__link">
                                         <div class="profile-img1">
                                             @if (!empty($community->community_pic))
@@ -355,19 +335,13 @@
                             
                         </div>
                     </div>
-   
 
 
-                  {{-- @php
-                        $otherCommunities = App\Models\Communities::where('user_id', '!=', session('user_id'))->get();
-                    @endphp
-
-
-                    @if ($otherCommunities->isNotEmpty())
+                    {{-- @if ($joinedCommunities->isNotEmpty())
                         <div>
                             <h3 class="sidebar__title">OTHER COMMUNITIES</h3>
                             <div class="sidebar__list">
-                                @foreach ($otherCommunities as $community)
+                                @foreach ($joinedCommunities as $community)
                                     <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}" class="sidebar__link">
                                         <div class="profile-img1">
                                             @if (!empty($community->community_pic))
@@ -382,6 +356,7 @@
                             </div>
                         </div>
                     @endif --}}
+
 
                     @if ($joinedCommunities->isNotEmpty())
                         <div>
@@ -403,31 +378,32 @@
                         </div>
                     @endif
 
-               </div>
-   
-               <div class="sidebar__actions">
-                  <button>
-                     <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
-                        <span>Theme</span>
-                     </i>
-                  </button>
-   
-                  {{-- <button class="sidebar__link">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                     <span>Log Out</span>
-                  </button> --}}
+                </div>
 
-                  <form action="{{ route('logout') }}" method="POST">
+                <div class="sidebar__actions">
+                    <button>
+                        <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
+                        <span>Theme</span>
+                        </i>
+                    </button>
+
+                    {{-- <button class="sidebar__link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Log Out</span>
+                    </button> --}}
+
+                    <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="sidebar__link">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                         <span>Log Out</span>
-                      </button>
-                  </form>
+                            <span>Log Out</span>
+                        </button>
+                    </form>
 
-               </div>
+                </div>
             </div>
         </nav>
+
    
         <main class="main container" id="main">
 

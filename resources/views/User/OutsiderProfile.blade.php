@@ -265,7 +265,6 @@
 
                             {{-- @php
                                 $userId = session('user_id');
-                                $user = \App\Models\User::find($userId);
 
                                 $createdCommunities = \App\Models\Communities::where('user_id', $userId)->get();
 
@@ -274,45 +273,26 @@
                                     ->where('join.user_id', $userId)
                                     ->select('communities.community_name', 'communities.community_pic', 'join.created_at as joined_at')
                                     ->get();
-
-                                $allCommunities = collect();
-
-                                foreach ($createdCommunities as $community) {
-                                    $allCommunities->push((object) [
-                                        'community_name' => $community->community_name,
-                                        'community_pic' => $community->community_pic,
-                                        'created_at' => $community->created_at, 
-                                        'type' => 'created'
-                                    ]);
-                                }
-
-                                foreach ($joinedCommunities as $community) {
-                                    $allCommunities->push((object) [
-                                        'community_name' => $community->community_name,
-                                        'community_pic' => $community->community_pic,
-                                        'created_at' => $community->joined_at,
-                                        'type' => 'joined'
-                                    ]);
-                                }
-
-                                $sortedCommunities = $allCommunities->sortByDesc('created_at');
                             @endphp --}}
 
                             @php
                                 $userId = session('user_id');
 
-                                $createdCommunities = \App\Models\Communities::where('user_id', $userId)->get();
+                                $createdCommunities = \App\Models\Communities::where('user_id', $userId)
+                                    ->where('community_suspend', 0) 
+                                    ->get();
 
                                 $joinedCommunities = \DB::table('join')
                                     ->join('communities', 'join.community_id', '=', 'communities.community_id')
                                     ->where('join.user_id', $userId)
+                                    ->where('communities.community_suspend', 0) 
                                     ->select('communities.community_name', 'communities.community_pic', 'join.created_at as joined_at')
                                     ->get();
                             @endphp
 
-                            
-                            {{-- @if ($sortedCommunities->isNotEmpty())
-                                @foreach ($sortedCommunities as $community)
+
+                            {{-- @if ($createdCommunities->isNotEmpty())
+                                @foreach ($createdCommunities as $community)
                                     <a href="{{ route('show.mycommunity', ['community_name' => $community->community_name]) }}" class="sidebar__link">
                                         <div class="profile-img1">
                                             @if (!empty($community->community_pic))
@@ -345,17 +325,11 @@
                     </div>
 
 
-
-                    {{-- @php
-                        $otherCommunities = App\Models\Communities::where('user_id', '!=', session('user_id'))->get();
-                    @endphp
-
-
-                    @if ($otherCommunities->isNotEmpty())
+                    {{-- @if ($joinedCommunities->isNotEmpty())
                         <div>
                             <h3 class="sidebar__title">OTHER COMMUNITIES</h3>
                             <div class="sidebar__list">
-                                @foreach ($otherCommunities as $community)
+                                @foreach ($joinedCommunities as $community)
                                     <a href="{{ route('show.community', ['community_name' => $community->community_name]) }}" class="sidebar__link">
                                         <div class="profile-img1">
                                             @if (!empty($community->community_pic))
@@ -370,6 +344,7 @@
                             </div>
                         </div>
                     @endif --}}
+
 
                     @if ($joinedCommunities->isNotEmpty())
                         <div>

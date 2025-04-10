@@ -80,7 +80,7 @@ Route::get('/admincontent', [AdminController::class, 'admincontent'])->name('adm
 
 Route::get('/vpost', [AdminController::class, 'viewpost']);
 
-
+Route::get('/adminprofile', [AdminController::class, 'adminprofile']);
 
 /*------------------------*\
   #COMMUNITY
