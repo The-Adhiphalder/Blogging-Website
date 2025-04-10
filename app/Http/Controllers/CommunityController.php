@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UserController;
 use App\Models\Communities;
 use App\Models\User;
-use App\Models\Join;
-use App\Models\Post; 
-use App\Models\Follow; 
-
+use App\Models\Post;
 
 class CommunityController extends Controller
 {
-
-    public function createcommunity(){
+    public function createCommunity()
+    {
         return view('Community.CreateCommunity');
     }
 
@@ -28,60 +24,50 @@ class CommunityController extends Controller
             'community_pic' => 'nullable|image|mimes:jpeg,png,jpg',
             'main-form3-name' => 'required|string|in:games,technologies,movies,travel,music,education,sport,news_politics,business_finance',
         ]);
-    
+
         $community = new Communities();
-        $community->community_name = $validatedData['community_name'];
-        $community->community_description = $validatedData['community_description'];
-        $community->category = $validatedData['main-form3-name'];
-        $community->user_id = Auth::id(); 
-        $community->community_total_member = 0; 
-        $community->community_total_posts = 0; 
-    
+        $community->fill($validatedData);
+        $community->user_id = Auth::id();
+        $community->community_total_member = 0;
+        $community->community_total_posts = 0;
+
         if ($request->hasFile('community_coverpic')) {
-            $coverPicPath = $request->file('community_coverpic')->store('community_banners', 'public');
-            $community->community_coverpic = $coverPicPath;
+            $community->community_coverpic = $request->file('community_coverpic')->store('community_banners', 'public');
         }
-    
+
         if ($request->hasFile('community_pic')) {
-            $profilePicPath = $request->file('community_pic')->store('community_profiles', 'public');
-            $community->community_pic = $profilePicPath;
+            $community->community_pic = $request->file('community_pic')->store('community_profiles', 'public');
         }
-    
+
         $community->save();
-    
+
         return redirect()->route('show.mycommunity', ['community_name' => $community->community_name])
                          ->with('success', 'Community created successfully!');
-
-
     }
-    
-    public function userCommunities(){
 
-        $userId = session('user_id');
+    public function userCommunities()
+    {
+        $userId = Auth::id();
 
         if (!$userId) {
             return redirect()->route('login')->with('error', 'Please log in first.');
         }
 
-        $communities = Communities::where('user_id', $userId)->get();
+        $communities = Communities::where('user_id', $userId)
+            ->where('community_suspend', 0)
+            ->get();
+
         return view('Community.Community', compact('communities'));
     }
 
-    public function community(){
-        return view('Community.Community');
-    }
-
-    public function mycommunity(){
-        return view('Community.MyCommunity');
-    }
-
-
-    public function showMyCommunity($community_name){
-
-        $community = Communities::where('community_name', $community_name)->first();
+    public function showMyCommunity($community_name)
+    {
+        $community = Communities::where('community_name', $community_name)
+            ->where('community_suspend', 0)
+            ->first();
 
         if (!$community) {
-            return redirect()->route('home')->with('error', 'Community not found.');
+            return redirect()->route('home')->with('error', 'Community not found or suspended.');
         }
 
         $posts = Post::withCount('comments')
@@ -98,11 +84,12 @@ class CommunityController extends Controller
 
     public function showCommunity($community_name)
     {
-
-        $community = Communities::where('community_name', $community_name)->first();
+        $community = Communities::where('community_name', $community_name)
+            ->where('community_suspend', 0)
+            ->first();
 
         if (!$community) {
-            return redirect()->route('home')->with('error', 'Community not found.');
+            return redirect()->route('home')->with('error', 'Community not found or suspended.');
         }
 
         $posts = Post::withCount('comments')
@@ -111,25 +98,20 @@ class CommunityController extends Controller
             ->get();
 
         $totalPosts = $posts->count();
-        
-        $userId = session('user_id');
+        $userId = Auth::id();
         $isMember = \DB::table('join')->where('user_id', $userId)->where('community_id', $community->community_id)->exists();
-
         $totalMembers = \DB::table('join')->where('community_id', $community->community_id)->count();
         $totalActiveUsers = \DB::table('sessions')->whereNotNull('user_id')->count();
-        
 
         return view('Community.Community', compact('community', 'posts', 'isMember', 'totalPosts', 'totalMembers', 'totalActiveUsers'));
-
     }
 
-    public function explore() 
+    public function explore()
     {
-        // return view('Community.Explore');
-
-        $userId = session('user_id'); 
+        $userId = Auth::id();
 
         $otherCommunities = Communities::where('user_id', '!=', $userId)
+            ->where('community_suspend', 0) 
             ->whereNotIn('community_id', function($query) use ($userId) {
                 $query->select('community_id')
                     ->from('join')
@@ -144,13 +126,10 @@ class CommunityController extends Controller
         $groupedCommunities = $otherCommunities->groupBy('category');
 
         return view('Community.Explore', compact('groupedCommunities'));
-
-    
     }
 
     public function editCommunity($community_name)
     {
-
         $community = Communities::where('community_name', $community_name)->first();
 
         if (!$community) {
@@ -166,7 +145,6 @@ class CommunityController extends Controller
 
     public function updateCommunity(Request $request, $community_name)
     {
-
         $community = Communities::where('community_name', $community_name)->first();
 
         if (!$community) {
@@ -181,18 +159,14 @@ class CommunityController extends Controller
             'main-form3-name' => 'required|string|in:games,technologies,movies,travel,music,education,sport,news_politics,business_finance',
         ]);
 
-        $community->community_name = $validatedData['community_name'];
-        $community->community_description = $validatedData['community_description'];
-        $community->category = $validatedData['main-form3-name'];
+        $community->fill($validatedData);
 
         if ($request->hasFile('community_coverpic')) {
-            $coverPicPath = $request->file('community_coverpic')->store('community_banners', 'public');
-            $community->community_coverpic = $coverPicPath;
+            $community->community_coverpic = $request->file('community_coverpic')->store('community_banners', 'public');
         }
 
         if ($request->hasFile('community_pic')) {
-            $profilePicPath = $request->file('community_pic')->store('community_profiles', 'public');
-            $community->community_pic = $profilePicPath;
+            $community->community_pic = $request->file('community_pic')->store('community_profiles', 'public');
         }
 
         $community->save();
@@ -203,9 +177,7 @@ class CommunityController extends Controller
 
     public function joinCommunity(Request $request, $community_name)
     {
-
-
-        $userId = Auth::id(); 
+        $userId = Auth::id();
         $community = Communities::where('community_name', $community_name)->first();
 
         if (!$community) {
@@ -233,7 +205,6 @@ class CommunityController extends Controller
 
     public function leaveCommunity(Request $request, $community_name)
     {
-
         $userId = Auth::id();
         $community = Communities::where('community_name', $community_name)->first();
 
@@ -242,35 +213,27 @@ class CommunityController extends Controller
         }
 
         \DB::table('join')->where('user_id', $userId)->where('community_id', $community->community_id)->delete();
-
-        // Decrement the total members count
         $community->decrement('community_total_member');
 
         return response()->json(['success' => "You've left the community successfully!"]);
-
     }
 
-    public function viewmembercom($community_name){
-        // return view('User.ViewMemberCom');
-
+    public function viewMemberCom($community_name)
+    {
         $community = Communities::where('community_name', $community_name)->first();
 
         if (!$community) {
             return redirect()->route('home')->with('error', 'Community not found.');
         }
-    
+
         $members = \DB::table('join')
             ->join('users', 'join.user_id', '=', 'users.user_id')
             ->where('join.community_id', $community->community_id)
             ->select('users.user_id', 'users.user_name', 'users.profile_pic')
             ->get();
-    
+
         $user = User::find($community->user_id);
-    
-        return view('User.ViewMemberCom', compact('community', 'members', 'user'));
-    
+
+        return view('User .ViewMemberCom', compact('community', 'members', 'user'));
     }
-
-
-
 }
