@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Welcome</title>
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -96,45 +97,51 @@
                                 <th> User ID</th>
                                 <th>Community Name</th>
                                 <th> Total Members</th>
-                                <th>Member's List</th>
+                                <th>Member List</th>
                                 <th>Suspend Community</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>dfdf</td>
-                                <td>fsdfsf</td>
-                                <td>sdfsfs</td>
-                                <td>dfdsfd</td>
-                                <td><a href="view_comminities.html">View Members</a></td>
-                                <td>
-                                    <div class="days">
-                                        Days :
-                                        <input type="number" id="quantity" name="quantity" min="0" max="365" step="1"
-                                            value="0">
-                                    </div>
-                                </td>
-                                <td class="button-container">
-                                    <!-- <button class="edit">Edit</button>  -->
+                            @foreach($communities as $community)
+                                <tr>
+                                    <td>{{ $community->community_id }}</td>
+                                    <td>{{ $community->user_id }}</td>
+                                    <td>{{ $community->community_name }}</td>
+                                    <td>{{ $community->community_total_member }}</td>
+                                    <td><a href="view_comminities.html">View Members</a></td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox" onchange="confirmSuspendCommunity(this, '{{ $community->community_id }}')" {{ $community->community_suspend ? 'checked' : '' }}>
+                                            <div class="slider"></div>
+                                            <div class="slider-card">
+                                                <div class="slider-card-face slider-card-front"></div>
+                                                <div class="slider-card-face slider-card-back"></div>
+                                            </div>
+                                        </label>
+                                    </td>
+                                    <td class="button-container">
 
-                                    <button type="submit" class="delete">
-                                        <p class="button-container-p">Delete</p>
-                                        <span class="icon-wrapper">
-                                            <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
-                                                    stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                            </svg>
-
-
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
+                                        <form id="deleteForm-{{ $community->community_id }}" action="{{ route('admin.deleteCommunity', $community->community_id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete" onclick="confirmDelete(this, 'community'); return false;">
+                                                <p class="button-container-p">Delete</p>
+                                                <span class="icon-wrapper">
+                                                    <svg class="icon" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                                                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </form>
+                                        
+                                    </td>
+                                </tr>
+                            @endforeach
 
 
                         </tbody>

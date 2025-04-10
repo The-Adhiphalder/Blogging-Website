@@ -32,8 +32,6 @@ document.querySelectorAll('.button').forEach(button => button.addEventListener('
 }));
 
 
-
-
 function openPopup(imgElement) {
     var popup = document.getElementById("imagePopup");
     var popupImg = document.getElementById("popupImg");
@@ -55,21 +53,29 @@ window.onclick = function (event) {
 function confirmDelete(button, type = 'post') {
     const form = button.closest('form'); 
     let itemName;
+    let confirmation;
 
     if (type === 'user') {
         itemName = button.closest('tr').querySelector('td:nth-child(2)').innerText; 
-        const confirmation = confirm(`Do you want to delete the user "${itemName}"?`); 
+        confirmation = confirm(`Do you want to delete the user "${itemName}"?`); 
         if (confirmation) {
             form.submit(); 
         }
     } else if (type === 'post') {
         itemName = button.closest('tr').querySelector('td:nth-child(1)').innerText; 
-        const confirmation = confirm(`Do you want to delete this post?`);
+        confirmation = confirm(`Do you want to delete this post?`);
         if (confirmation) {
             form.submit(); 
         }
+    } else if (type === 'community') {
+        confirmation = confirm("Do you want to delete this community?");
+        if (confirmation) {
+            form.submit();
+            alert("Community deleted successfully");
+        }
     }
 }
+
 
 function showToast(message) {
     const toast = document.createElement('div');
@@ -124,5 +130,37 @@ function confirmSuspendUser(checkbox, userId) {
             });
     } else {
         checkbox.checked = !isSuspended;
+    }
+}
+
+function confirmSuspendCommunity(element, communityId) {
+    const isSuspended = element.checked;
+    const confirmation = confirm(`Do you want to ${isSuspended ? 'suspend' : 'activate'} this community?`);
+
+    if (confirmation) {
+        fetch(`/suspend-community/${communityId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ suspend: isSuspended })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast(isSuspended ? "Community suspended successfully" : "Community activated successfully");
+            } else {
+                showToast('Error: ' + data.message);
+                element.checked = !isSuspended; 
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('An error occurred while trying to suspend the community.');
+            element.checked = !isSuspended; 
+        });
+    } else {
+        element.checked = !isSuspended; 
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Communities;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Post;
@@ -132,8 +133,43 @@ class AdminController extends Controller
 
     public function admincommunity()
     {
-        return view('Admin.AdminCommunity');
+        // return view('Admin.AdminCommunity');
+
+        $communities = Communities::all();
+        return view('Admin.AdminCommunity', compact('communities'));
     }
+
+    public function suspendCommunity(Request $request, $id) 
+    {
+        $request->validate([
+            'suspend' => 'required|boolean',
+        ]);
+
+        $community = Communities::find($id);
+        if ($community) {
+            $community->community_suspend = $request->suspend;
+            $community->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => $request->suspend ? 'Community suspended.' : 'Community activated.'
+            ]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Community not found.'], 404);
+    }
+
+    public function deleteCommunity($id)
+    {
+        $community = Communities::find($id);
+        if (!$community) {
+            return redirect()->back()->with('error', 'Community not found.');
+        }
+
+        $community->delete();
+        return redirect()->back()->with('success', 'Community deleted successfully.');
+    }
+
 
     public function viewcommunity()
     {

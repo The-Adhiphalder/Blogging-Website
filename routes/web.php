@@ -70,6 +70,10 @@ Route::delete('/admin/posts/{post}', [AdminController::class, 'deletePost'])->na
 
 Route::get('/admincommunity', [AdminController::class, 'admincommunity']);
 
+Route::post('/suspend-community/{id}', [AdminController::class, 'suspendCommunity']);
+
+Route::delete('/admin/community/delete/{id}', [AdminController::class, 'deleteCommunity'])->name('admin.deleteCommunity');
+
 Route::get('/vcommunity', [AdminController::class, 'viewcommunity']);
 
 Route::get('/admincontent', [AdminController::class, 'admincontent'])->name('admin.content');
