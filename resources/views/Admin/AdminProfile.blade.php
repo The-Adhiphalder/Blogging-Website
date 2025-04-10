@@ -99,7 +99,7 @@
 
         <div class="admin-details">
             <h1 >Mriganka Adhikary</h1>
-            <h1 style="font-size: 30px; margin-top: 9px">mriganka@gmail.com</h1>
+            <h1 >mriganka@gmail.com</h1>
 
             <form action="">
                 <div class="admin-password">

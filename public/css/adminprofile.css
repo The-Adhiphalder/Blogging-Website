@@ -460,7 +460,7 @@ main .recent_order a{
 }
 
 .main-img-profile-img-lable {
-  margin-left: 29rem;
+  margin-left: 28rem;
   margin-top: 2rem;
   padding-left: 23px;
   padding-right: 23px;
@@ -520,6 +520,7 @@ main .recent_order a{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .admin-password{
