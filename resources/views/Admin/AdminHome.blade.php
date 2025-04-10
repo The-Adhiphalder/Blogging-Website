@@ -30,19 +30,19 @@
         <!-- end top -->
         <div class="sidebar">
 
-          <a href="#" class="active">
+          <a href="/dashboard" class="active">
             <span class="material-symbols-sharp">grid_view </span>
             <h3>Dashboard</h3>
           </a>
-          <a href="admin_user.html">
+          <a href="/adminuser">
             <span class="material-symbols-sharp">person_outline </span>
             <h3>Users</h3>
           </a>
-          <a href="admin_post.html">
+          <a href="/adminpost">
             <span class="material-symbols-sharp">insights </span>
             <h3>Posts</h3>
           </a>
-          <a href="#">
+          <a href="/admincommunity">
             <span class="material-symbols-sharp">receipt_long </span>
             <h3>Communities</h3>
           </a>

@@ -1128,8 +1128,8 @@ body.dark-theme {
   border-radius: 17px; */
 
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
   flex-shrink: 0;
   border-radius: 50%;

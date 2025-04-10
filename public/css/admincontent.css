@@ -441,6 +441,7 @@ Right Side
   border: 1px solid #333;
   border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 4rem;
 }
 
 .post-wall:hover{
@@ -517,6 +518,68 @@ Right Side
 }
 
 
+.main-user-comments{
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 8px;
+  margin-bottom: 2rem;
+}
+
+.main-user-comments-button{
+  width: 98%;
+  height: 2.5rem;
+  background: none;
+  padding-left: 19px;
+  border: 0.3px solid #5c5c5e;
+  border-radius: 27px;
+  cursor: pointer;
+}
+
+.main-user-comments-zero-div{
+  font-size: 23px;
+  margin-top: 8px;
+  /* margin-bottom: 8px; */
+  margin-bottom: -13px;
+}
+
+.main-user-comments-first-div{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.main-user-comments-first-div img{
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  background: #333334;
+  border-radius: 17px;
+}
+
+.main-user-comments-first-div div{
+  font-size: 14px;
+  font-weight: 600;
+  color: #868998;
+}
+
+.main-user-comments-first-div-user-name{
+  transition: all 0.5s ease-out;
+}
+
+.main-user-comments-first-div-user-name:hover{
+  color: #878ed8;
+}
+
+.main-user-comments-second-div{
+  font-size: 14px;
+  color: #868998;
+  margin-left: 33px;
+  /* margin-top: 10px; */
+}
+
+
+
 
 /*----------------------------------------*\
   # SECTION POST-WALL 2
@@ -557,7 +620,7 @@ Right Side
 
 .post-para{
     position: relative;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
     margin-left: 25px;
     margin-top: 10px;
     padding-bottom: 8px;
